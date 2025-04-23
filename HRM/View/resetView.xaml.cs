@@ -19,23 +19,30 @@ namespace WPF_reset.View
     /// </summary>
     public partial class resetView : Window
     {
-       
-        public void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        //public resetView()
+        //{
+        //    InitializeComponent();
+        //}
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (e.LeftButton == MouseButtonState.Pressed)
-            {
-                DragMove();
-            }
+            if (e.ChangedButton == MouseButton.Left)
+                this.DragMove();
         }
 
         private void btnMinimize_Click(object sender, RoutedEventArgs e)
         {
-            WindowState = WindowState.Minimized;
+            this.WindowState = WindowState.Minimized;
         }
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
-            Application.Current.Shutdown();
+            this.Close();
+        }
+
+        private void btnLogIn_Click(object sender, RoutedEventArgs e)
+        {
+            // Add logic for resetting the password here  
         }
     }
 }
