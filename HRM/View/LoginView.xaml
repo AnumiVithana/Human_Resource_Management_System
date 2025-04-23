@@ -74,7 +74,8 @@
                             FontFamily="Berlin Sans FB"
                             Cursor="Hand"
                             Grid.Column="1"
-                            Click="btnMinimize_Click">
+                            Click="btnMinimize_Click"
+                  >
 
                         <Button.Style>
                             <Style TargetType="Button">
@@ -89,11 +90,12 @@
 
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
-                                <Border Width="20" Height="20"
-                                        CornerRadius="10"
-                                        Background="{TemplateBinding Background}">
+                                <Border Background="{TemplateBinding Background}"
+                                        Width="20" Height="20"
+                                        CornerRadius="10">
                                     <ContentPresenter VerticalAlignment="Center"
-                              HorizontalAlignment="Center"/>
+                                                      HorizontalAlignment="Center"/>
+
                                 </Border>
                             </ControlTemplate>
                         </Button.Template>
@@ -214,7 +216,7 @@
                                 </Style.Triggers>
                             </Style>
                         </Button.Style>
-
+                           
                         <Button.Template>
                             <ControlTemplate TargetType="{x:Type Button}">
                                 <Border Width="150" Height="40"
@@ -237,13 +239,23 @@
                                FontSize="12"
                                FontWeight="Medium"
                                FontFamily="Montserrat"/>
-                        <TextBlock Text="Reset"
+                        
+                        <Button Content="Reset"
                                Foreground="White"
                                FontSize="12"
+                                Background="Transparent"
                                FontWeight="Medium"
                                FontFamily="Montserrat"
+                                BorderBrush="Transparent"
                                Cursor="Hand"
-                               Margin="8,0,0,0"/>
+                               Margin="8,0,0,0"
+                            
+                               Click="Button_Click_1">
+
+                            
+
+
+                        </Button>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal"
@@ -255,13 +267,17 @@
                                FontSize="12"
                                FontWeight="Medium"
                                FontFamily="Montserrat"/>
-                        <TextBlock Text="Register"
+                        <Button Content="Register"
                                Foreground="White"
                                FontSize="12"
+                             
+                                Background="Transparent"
+                                BorderBrush="Transparent"
                                FontWeight="Medium"
                                FontFamily="Montserrat"
                                Cursor="Hand"
-                               Margin="8,0,0,0"/>
+                               Margin="8,0,0,0"
+                                Click="Button_Click_2"/>
                     </StackPanel>
 
 

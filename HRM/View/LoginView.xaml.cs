@@ -100,9 +100,29 @@ namespace HRM.View
             }            
         }
 
+ 
         //private void txtUser_TextChanged(object sender, TextChangedEventArgs e)
         //{
 
         //}
+
+        //reset 
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        
+        //register
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        
+
+
+
     }
 }

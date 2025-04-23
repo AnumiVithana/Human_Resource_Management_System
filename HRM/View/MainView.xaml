@@ -58,24 +58,60 @@
                                    VerticalAlignment="Center"
                                    Margin="6,0,0,0"/>
                     </StackPanel>
-                    
+
 
 
                     <!--Menu Buttons-->
-                    
-                    
-                    
-                    
-                    
-                    
+                    <RadioButton Style="{StaticResource menuButton}"
+                                 Tag="{StaticResource Button1}"
+                                 IsChecked="True"
+                                 Command="{Binding ShowHomeViewCommand}">
+                        <StackPanel Orientation="Horizontal">
+
+                            <TextBlock Text="Dashboard" Style="{StaticResource menuButtonText}"/>
+                        </StackPanel>
+                    </RadioButton>
+                    <RadioButton Style="{StaticResource menuButton}"
+                                 Tag="{StaticResource Button2}"
+                                 Command="{Binding ShowCustomerViewCommand}">
+                        <StackPanel Orientation="Horizontal">
+
+                            <TextBlock Text="My Department" Style="{StaticResource menuButtonText}"/>
+                        </StackPanel>
+                    </RadioButton>
+
+                    <RadioButton Style="{StaticResource menuButton}"
+             Tag="{StaticResource Button1}"
+             IsChecked="True"
+             Command="{Binding ShowHomeViewCommand}">
+                        <StackPanel Orientation="Horizontal">
+
+                            <TextBlock Text="My Performance" Style="{StaticResource menuButtonText}"/>
+                        </StackPanel>
+                    </RadioButton>
+                    <RadioButton Style="{StaticResource menuButton}"
+             Tag="{StaticResource Button2}"
+             Command="{Binding ShowCustomerViewCommand}">
+                        <StackPanel Orientation="Horizontal">
+
+                            <TextBlock Text="Request a Leave" Style="{StaticResource menuButtonText}"/>
+                        </StackPanel>
+                    </RadioButton>
+
+                    <RadioButton Style="{StaticResource menuButton}"
+Tag="{StaticResource Button1}"
+IsChecked="True"
+Command="{Binding ShowHomeViewCommand}">
+                        <StackPanel Orientation="Horizontal">
+
+                            <TextBlock Text="My Salary" Style="{StaticResource menuButtonText}"/>
+                        </StackPanel>
+                    </RadioButton>
 
 
-                    
-                    
-                    
-                    
-                    
-                    
+
+
+
                 </StackPanel>
 
             </Border>
@@ -89,6 +125,113 @@
                         <GradientStop Color = "{StaticResource Background2}" Offset = "1" />
                     </LinearGradientBrush >
                 </Border.Background >
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <!--Control bar-->
+                        <RowDefinition Height="35"/>
+                        <!--Header/Caption-->
+                        <RowDefinition Height="35"/>
+                        <!--Content section / Child view-->
+                        <RowDefinition Height="*"/>
+
+                    </Grid.RowDefinitions>
+
+                    <!--Control bar-->
+
+                    <StackPanel x:Name ="pnlControlbar"
+                                Grid.Row="0"
+                                Orientation="Horizontal"
+                                FlowDirection="RightToLeft"
+                               
+                                Background="Transparent"
+                                Margin="0,0,5,0"
+                                MouseLeftButtonDown="pnlControlbar_MouseLeftButtonDown"
+                                MouseEnter="pnlControlbar_MouseEnter">
+                
+<!--Minimize/close buttons-->       
+                        
+                    <Grid Grid.ColumnSpan="2">
+                        <Grid.ColumnDefinitions>
+                            
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="25"/>
+                        </Grid.ColumnDefinitions>
+
+                            <Button x:Name="btnClose"                            
+    BorderThickness="0"
+    Content="X"
+    Foreground="White"
+    FontSize="12"
+    FontFamily="Berlin Sans FB"
+    Cursor="Hand"
+    Grid.Column="0"
+    Click="btnClose_Click">
+
+                                <Button.Style>
+                                    <Style TargetType="Button">
+                                        <Setter Property="Background" Value="MediumVioletRed"/>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="Red"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+
+                                <Button.Template>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Width="20" Height="20"
+                CornerRadius="10"
+                Background="{TemplateBinding Background}">
+                                            <ContentPresenter VerticalAlignment="Center"
+                              HorizontalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Button.Template>
+
+                            </Button>
+                            <Button x:Name="btnMinimize"
+                            BorderThickness="0"
+                            Content="-"
+                            Foreground="White"
+                            FontSize="16"
+                            FontFamily="Berlin Sans FB"
+                            Cursor="Hand"
+                            Grid.Column="2"
+                            Click="btnMinimize_Click">
+
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="#28AEED"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#58efec"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Width="20" Height="20"
+                                        CornerRadius="10"
+                                        Background="{TemplateBinding Background}">
+                                        <ContentPresenter VerticalAlignment="Center"
+                              HorizontalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Button.Template>
+
+                        </Button>
+
+                        
+                    </Grid>
+
+
+
+                </StackPanel>
+                </Grid>
             </Border>
 
         </Grid>

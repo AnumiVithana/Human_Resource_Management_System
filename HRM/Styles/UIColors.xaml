@@ -19,6 +19,8 @@
     <!--Button colors-->
     <SolidColorBrush x:Key="Button1" Color="#28AEED"/>
     <SolidColorBrush x:Key="Button2" Color="#58efec"/>
-    
+
+    <SolidColorBrush x:Key="Button3" Color="#08203e"/>
+
 
 </ResourceDictionary>
