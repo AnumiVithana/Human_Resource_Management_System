@@ -45,5 +45,23 @@ namespace HRM.View
             MainView mainWindow = new MainView();
             mainWindow.Show();
         }
+
+        //reset 
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        
+        //register
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        
+
+
     }
 }
