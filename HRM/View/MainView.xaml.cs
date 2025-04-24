@@ -58,6 +58,13 @@ namespace HRM.View
             Application.Current.Shutdown();
         }
 
-        
+        private void RadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            // Assuming CaptionRow and ContentRow are Grid RowDefinitions, you cannot set Visibility directly.  
+            // Instead, you can set their Height to 0 to effectively hide them.  
+            CaptionRow.Height = new GridLength(0); // Hides the CaptionRow  
+            ContentRow.Height = new GridLength(0); // Hides the ContentRow  
+        }
+
     }
 }

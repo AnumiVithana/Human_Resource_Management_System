@@ -91,8 +91,13 @@ namespace HRM.View
             }
             else if (result)
             {
-                MainView mainWindow = new MainView();
+                //MainView mainWindow = new MainView();
+                //mainWindow.Show();
+
+                table mainWindow = new table();
                 mainWindow.Show();
+                this.Close();
+
             }
             else
             {
@@ -110,6 +115,9 @@ namespace HRM.View
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
+            ResetView resetWindow = new ResetView();
+            resetWindow.Show();
+            this.Hide();
 
         }
 
@@ -117,7 +125,9 @@ namespace HRM.View
         //register
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-
+            RegisterView registerView = new RegisterView();
+            registerView.Show();
+            this.Hide();
         }
 
         

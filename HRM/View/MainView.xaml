@@ -73,7 +73,7 @@
                     </RadioButton>
                     <RadioButton Style="{StaticResource menuButton}"
                                  Tag="{StaticResource Button2}"
-                                 Command="{Binding ShowCustomerViewCommand}">
+                                 Command="{Binding ShowCustomerViewCommand}" Checked="RadioButton_Checked">
                         <StackPanel Orientation="Horizontal">
 
                             <TextBlock Text="My Department" Style="{StaticResource menuButtonText}"/>
@@ -131,9 +131,9 @@ Command="{Binding ShowHomeViewCommand}">
                         <!--Control bar-->
                         <RowDefinition Height="35"/>
                         <!--Header/Caption-->
-                        <RowDefinition Height="35"/>
+                        <RowDefinition Height="35" x:Name="CaptionRow"/>
                         <!--Content section / Child view-->
-                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*" x:Name="ContentRow"/>
 
                     </Grid.RowDefinitions>
 
@@ -231,6 +231,12 @@ Command="{Binding ShowHomeViewCommand}">
 
 
                 </StackPanel>
+
+                    <ContentControl Content="this is content"
+                                Grid.Row="2"
+                                Margin=" 25"/>
+
+
                 </Grid>
             </Border>
 

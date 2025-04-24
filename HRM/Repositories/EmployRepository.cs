@@ -214,6 +214,28 @@ namespace HRM.Repositories
             }
         }
 
+        public void ResetPassword(string id , string password)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    string sql = "UPDATE employees SET pw_hash=@pw_hash WHERE id=@id";
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        command.Parameters.AddWithValue("@id", id);
+                        command.Parameters.AddWithValue("@pw_hash", password);
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception: " + ex.ToString());
+            }
+        }
+
 
         //public void DeleteEmploy(int id)
         //{
