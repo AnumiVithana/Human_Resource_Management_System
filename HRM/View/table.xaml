@@ -311,35 +311,37 @@ HorizontalAlignment="Left" Foreground="#121518"/>
 
                     <TextBox x:Name="txtFilter" Style="{StaticResource textboxFilter}"/>
                 </Grid>
-
+                
                 <!--Member Datagrid-->
-                <DataGrid RowHeaderStyle="{DynamicResource DataGridRowHeaderStyle1}" Style="{DynamicResource DataGridStyle2}" CellStyle="{DynamicResource DataGridCellStyle2}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle2}" RowStyle="{DynamicResource DataGridRowStyle2}" Grid.Row="5" x:Name="memberDataGrid">
+                <DataGrid Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" Grid.Row="5" x:Name="memberDataGrid" RowStyle="{DynamicResource DataGridRowStyle1}">
                     <DataGrid.Columns>
-                        <DataGridCheckBoxColumn CanUserResize="False" Width="auto">
+                        <DataGridCheckBoxColumn CanUserResize="False" Width="auto" ElementStyle="{StaticResource CheckBoxStyle1}">
                             <DataGridCheckBoxColumn.HeaderTemplate>
                                 <DataTemplate>
-                                    <CheckBox/>
+                                    <CheckBox Style="{StaticResource CheckBoxStyle1}"/>
                                 </DataTemplate>
                             </DataGridCheckBoxColumn.HeaderTemplate>
                         </DataGridCheckBoxColumn>
 
-                        <DataGridTextColumn Header="#" IsReadOnly="True" CanUserResize="False" Width="auto"/>
+                        <DataGridTextColumn Header="#" IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding Number}"/>
 
                         <DataGridTemplateColumn Header="Member" IsReadOnly="True" Width="*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
-                                        <Border Width="25" Height="25" CornerRadius="50" Margin="0 0 10 0" Background="Red">
-                                            <TextBlock Text="..." VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Margin="0 0 0 1"/>
+                                        <Border Width="25" Height="25" CornerRadius="50" Margin="0 0 10 0" Background="{Binding BgColor}">
+                                            <TextBlock Text="{Binding Character}" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Margin="0 0 0 1"/>
                                         </Border>
+                                        <TextBlock Text="{Binding Name}" VerticalAlignment="Center"/>
                                     </StackPanel>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
 
                         </DataGridTemplateColumn>
-
+                        
                         <DataGridTextColumn Header="#" IsReadOnly="True" CanUserResize="False" Width="auto"/>
 
+                        </DataGridTemplateColumn>
 
 
 
