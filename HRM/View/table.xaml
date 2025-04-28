@@ -277,7 +277,7 @@ HorizontalAlignment="Left" Foreground="#121518"/>
                 <!--Page Title-->
                 <TextBlock Text="Members" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="0 20 0 0"
                HorizontalAlignment="Left" Foreground="#121518"/>
-                <Button Style="{StaticResource addButton}">
+                <Button Style="{StaticResource addButton}" Click="Button_Click_2">
                     <StackPanel Orientation="Horizontal">
                         <Icon:PackIconMaterial Kind="Plus" VerticalAlignment="Center" Width="11" Height="11" Margin="0 1 8 0"/>
                         <TextBlock Text="Add New Member"/>
@@ -299,17 +299,18 @@ HorizontalAlignment="Left" Foreground="#121518"/>
                 <TextBlock Text="Employee" Grid.Row="4" FontSize="18" FontWeight="SemiBold"
                Foreground="#121518" HorizontalAlignment="Left"
                VerticalAlignment="Center"/>
-                <TextBlock Text="Filter by" Grid.Row="4" FontSize="18" FontWeight="SemiBold" Margin="0 0 215 0"
+                <TextBlock Text="Filter by Name" Grid.Row="4" FontSize="18" FontWeight="SemiBold" Margin="0 0 215 0"
                Foreground="#121518" HorizontalAlignment="Right"
                VerticalAlignment="Center"/>
 
                 <!--Filter TeextBox-->
 
                 <Grid Width="200" HorizontalAlignment="Right" Grid.Row="4">
-                    <TextBlock Margin="15 0" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False"
+                    <TextBlock x:Name="txtBlockFilter" Margin="15 0" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False"
                                Panel.ZIndex="1" Text="Search Members ..." Visibility="{Binding ElementName=txtSearch,Path=Text.IsEmpty,Converter={StaticResource BoolToVis}}"/>
 
-                    <TextBox x:Name="txtFilter" Style="{StaticResource textboxFilter}"/>
+                    <TextBox x:Name="txtFilter" Style="{StaticResource textboxFilter}" TextChanged="txtFilter_TextChanged"/>
+
                 </Grid>
 
                 <!--Member Datagrid-->
@@ -348,10 +349,10 @@ HorizontalAlignment="Left" Foreground="#121518"/>
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
-                                        <Button Style="{StaticResource gridEditButton}">
+                                        <Button Style="{StaticResource gridEditButton}" x:Name="employeeEdit">
                                             <Icon:PackIconMaterial Kind="PencilOutline" Style="{StaticResource gridButtonIcon}"/>
                                         </Button>
-                                        <Button Style="{StaticResource gridRemoveButton}" >
+                                        <Button Style="{StaticResource gridRemoveButton}" x:Name="employeeDelete">
                                             <Icon:PackIconMaterial Kind="DeleteOutline" Style="{StaticResource gridButtonIcon}" Margin="0 0 0 0"/>
                                         </Button>
                                     </StackPanel>

@@ -1,6 +1,9 @@
-﻿using System;
+﻿using HRM.Repositories;
+using System;
 using System.Collections.ObjectModel;
+using System.Data;
 using System.Threading.Tasks;
+using System.Web.Configuration;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -21,78 +24,27 @@ namespace HRM.View
 
             var converter = new BrushConverter();
             ObservableCollection<Member> members = new ObservableCollection<Member>();
+            var repo = new EmployRepository();
+            var emplyees = repo.GetEmployees();
+            
 
-            // creaate DataGrid Item Info
-
-            members.Add(new Member { Number = "1", Character = "J", BgColor = (Brush)converter.ConvertFromString("#1098ad"), Name = "James Smith", Position = "Manager", Email = "JamesSmith@gmail.com", Phone = "123-456-789" });
-            members.Add(new Member { Number = "2", Character = "R", BgColor = (Brush)converter.ConvertFromString("#1e88e5"), Name = "Christopher Anderson", Position = "Team Lead",Email = "ChristopherAnderson@gmail.com", Phone = "115-484-487" });
-            members.Add(new Member { Number = "3", Character = "D", BgColor = (Brush)converter.ConvertFromString("#ff8f00"), Name = "Ronald Clark", Position = "Team Lead", Email = "RonaldClark@gmail.com", Phone = "985-784-485" });
-            members.Add(new Member { Number = "4", Character = "G", BgColor = (Brush)converter.ConvertFromString("#ff5252"), Name = "Mary Wright", Position = "Developer", Email = "MaryWright@gmail.com", Phone = "151-658-898" });
-            members.Add(new Member { Number = "5", Character = "L", BgColor = (Brush)converter.ConvertFromString("#0ca678"), Name = "Lisa Mitchell", Position = "Manager", Email = "LisaMitchell@gmail.com", Phone = "326-598-154" });
-            members.Add(new Member { Number = "6", Character = "B", BgColor = (Brush)converter.ConvertFromString("#6741d9"), Name = "Michelle Johnson", Position = "Developer", Email = "MichelleJohnson@gmail.com", Phone = "963-214-145" });
-            members.Add(new Member { Number = "7", Character = "S", BgColor = (Brush)converter.ConvertFromString("#ff6f00"), Name = "John Thomas", Position = "Intern", Email = "JohnThomas@gmail.com", Phone = "454-454-154" });
-            members.Add(new Member { Number = "8", Character = "A", BgColor = (Brush)converter.ConvertFromString("#ff5252"), Name = "Daniel Rodriguez", Position = "Intern", Email = "DanielRodriguez@gmail.com", Phone = "021-154-036" });
-            members.Add(new Member { Number = "9", Character = "f", BgColor = (Brush)converter.ConvertFromString("#1e88e5"), Name = "Anthony Lopez", Position = "Developer", Email = "AnthonyLopez@gmail.com", Phone = "746-412-124" });
-            members.Add(new Member { Number = "10", Character = "S", BgColor = (Brush)converter.ConvertFromString("#0ca678"), Name = "Patricia Perez", Position = "Developer", Email = "PatriciaPerez@gmail.com", Phone = "987-451-326" });
-
-
-            members.Add(new Member { Number = "1", Character = "J", BgColor = (Brush)converter.ConvertFromString("#1098ad"), Name = "James Smith", Position = "Manager", Email = "JamesSmith@gmail.com", Phone = "123-456-789" });
-            members.Add(new Member { Number = "2", Character = "R", BgColor = (Brush)converter.ConvertFromString("#1e88e5"), Name = "Christopher Anderson", Position = "Team Lead", Email = "ChristopherAnderson@gmail.com", Phone = "115-484-487" });
-            members.Add(new Member { Number = "3", Character = "D", BgColor = (Brush)converter.ConvertFromString("#ff8f00"), Name = "Ronald Clark", Position = "Team Lead", Email = "RonaldClark@gmail.com", Phone = "985-784-485" });
-            members.Add(new Member { Number = "4", Character = "G", BgColor = (Brush)converter.ConvertFromString("#ff5252"), Name = "Mary Wright", Position = "Developer", Email = "MaryWright@gmail.com", Phone = "151-658-898" });
-            members.Add(new Member { Number = "5", Character = "L", BgColor = (Brush)converter.ConvertFromString("#0ca678"), Name = "Lisa Mitchell", Position = "Manager", Email = "LisaMitchell@gmail.com", Phone = "326-598-154" });
-            members.Add(new Member { Number = "6", Character = "B", BgColor = (Brush)converter.ConvertFromString("#6741d9"), Name = "Michelle Johnson", Position = "Developer", Email = "MichelleJohnson@gmail.com", Phone = "963-214-145" });
-            members.Add(new Member { Number = "7", Character = "S", BgColor = (Brush)converter.ConvertFromString("#ff6f00"), Name = "John Thomas", Position = "Intern", Email = "JohnThomas@gmail.com", Phone = "454-454-154" });
-            members.Add(new Member { Number = "8", Character = "A", BgColor = (Brush)converter.ConvertFromString("#ff5252"), Name = "Daniel Rodriguez", Position = "Intern", Email = "DanielRodriguez@gmail.com", Phone = "021-154-036" });
-            members.Add(new Member { Number = "9", Character = "f", BgColor = (Brush)converter.ConvertFromString("#1e88e5"), Name = "Anthony Lopez", Position = "Developer", Email = "AnthonyLopez@gmail.com", Phone = "746-412-124" });
-            members.Add(new Member { Number = "10", Character = "S", BgColor = (Brush)converter.ConvertFromString("#0ca678"), Name = "Patricia Perez", Position = "Developer", Email = "PatriciaPerez@gmail.com", Phone = "987-451-326" });
-
-            members.Add(new Member { Number = "1", Character = "J", BgColor = (Brush)converter.ConvertFromString("#1098ad"), Name = "James Smith", Position = "Manager", Email = "JamesSmith@gmail.com", Phone = "123-456-789" });
-            members.Add(new Member { Number = "2", Character = "R", BgColor = (Brush)converter.ConvertFromString("#1e88e5"), Name = "Christopher Anderson", Position = "Team Lead", Email = "ChristopherAnderson@gmail.com", Phone = "115-484-487" });
-            members.Add(new Member { Number = "3", Character = "D", BgColor = (Brush)converter.ConvertFromString("#ff8f00"), Name = "Ronald Clark", Position = "Team Lead", Email = "RonaldClark@gmail.com", Phone = "985-784-485" });
-            members.Add(new Member { Number = "4", Character = "G", BgColor = (Brush)converter.ConvertFromString("#ff5252"), Name = "Mary Wright", Position = "Developer", Email = "MaryWright@gmail.com", Phone = "151-658-898" });
-            members.Add(new Member { Number = "5", Character = "L", BgColor = (Brush)converter.ConvertFromString("#0ca678"), Name = "Lisa Mitchell", Position = "Manager", Email = "LisaMitchell@gmail.com", Phone = "326-598-154" });
-            members.Add(new Member { Number = "6", Character = "B", BgColor = (Brush)converter.ConvertFromString("#6741d9"), Name = "Michelle Johnson", Position = "Developer", Email = "MichelleJohnson@gmail.com", Phone = "963-214-145" });
-            members.Add(new Member { Number = "7", Character = "S", BgColor = (Brush)converter.ConvertFromString("#ff6f00"), Name = "John Thomas", Position = "Intern", Email = "JohnThomas@gmail.com", Phone = "454-454-154" });
-            members.Add(new Member { Number = "8", Character = "A", BgColor = (Brush)converter.ConvertFromString("#ff5252"), Name = "Daniel Rodriguez", Position = "Intern", Email = "DanielRodriguez@gmail.com", Phone = "021-154-036" });
-            members.Add(new Member { Number = "9", Character = "f", BgColor = (Brush)converter.ConvertFromString("#1e88e5"), Name = "Anthony Lopez", Position = "Developer", Email = "AnthonyLopez@gmail.com", Phone = "746-412-124" });
-            members.Add(new Member { Number = "10", Character = "S", BgColor = (Brush)converter.ConvertFromString("#0ca678"), Name = "Patricia Perez", Position = "Developer", Email = "PatriciaPerez@gmail.com", Phone = "987-451-326" });
-
-            members.Add(new Member { Number = "1", Character = "J", BgColor = (Brush)converter.ConvertFromString("#1098ad"), Name = "James Smith", Position = "Manager", Email = "JamesSmith@gmail.com", Phone = "123-456-789" });
-            members.Add(new Member { Number = "2", Character = "R", BgColor = (Brush)converter.ConvertFromString("#1e88e5"), Name = "Christopher Anderson", Position = "Team Lead", Email = "ChristopherAnderson@gmail.com", Phone = "115-484-487" });
-            members.Add(new Member { Number = "3", Character = "D", BgColor = (Brush)converter.ConvertFromString("#ff8f00"), Name = "Ronald Clark", Position = "Team Lead", Email = "RonaldClark@gmail.com", Phone = "985-784-485" });
-            members.Add(new Member { Number = "4", Character = "G", BgColor = (Brush)converter.ConvertFromString("#ff5252"), Name = "Mary Wright", Position = "Developer", Email = "MaryWright@gmail.com", Phone = "151-658-898" });
-            members.Add(new Member { Number = "5", Character = "L", BgColor = (Brush)converter.ConvertFromString("#0ca678"), Name = "Lisa Mitchell", Position = "Manager", Email = "LisaMitchell@gmail.com", Phone = "326-598-154" });
-            members.Add(new Member { Number = "6", Character = "B", BgColor = (Brush)converter.ConvertFromString("#6741d9"), Name = "Michelle Johnson", Position = "Developer", Email = "MichelleJohnson@gmail.com", Phone = "963-214-145" });
-            members.Add(new Member { Number = "7", Character = "S", BgColor = (Brush)converter.ConvertFromString("#ff6f00"), Name = "John Thomas", Position = "Intern", Email = "JohnThomas@gmail.com", Phone = "454-454-154" });
-            members.Add(new Member { Number = "8", Character = "A", BgColor = (Brush)converter.ConvertFromString("#ff5252"), Name = "Daniel Rodriguez", Position = "Intern", Email = "DanielRodriguez@gmail.com", Phone = "021-154-036" });
-            members.Add(new Member { Number = "9", Character = "f", BgColor = (Brush)converter.ConvertFromString("#1e88e5"), Name = "Anthony Lopez", Position = "Developer", Email = "AnthonyLopez@gmail.com", Phone = "746-412-124" });
-            members.Add(new Member { Number = "10", Character = "S", BgColor = (Brush)converter.ConvertFromString("#0ca678"), Name = "Patricia Perez", Position = "Developer", Email = "PatriciaPerez@gmail.com", Phone = "987-451-326" });
-
-            members.Add(new Member { Number = "1", Character = "J", BgColor = (Brush)converter.ConvertFromString("#1098ad"), Name = "James Smith", Position = "Manager", Email = "JamesSmith@gmail.com", Phone = "123-456-789" });
-            members.Add(new Member { Number = "2", Character = "R", BgColor = (Brush)converter.ConvertFromString("#1e88e5"), Name = "Christopher Anderson", Position = "Team Lead", Email = "ChristopherAnderson@gmail.com", Phone = "115-484-487" });
-            members.Add(new Member { Number = "3", Character = "D", BgColor = (Brush)converter.ConvertFromString("#ff8f00"), Name = "Ronald Clark", Position = "Team Lead", Email = "RonaldClark@gmail.com", Phone = "985-784-485" });
-            members.Add(new Member { Number = "4", Character = "G", BgColor = (Brush)converter.ConvertFromString("#ff5252"), Name = "Mary Wright", Position = "Developer", Email = "MaryWright@gmail.com", Phone = "151-658-898" });
-            members.Add(new Member { Number = "5", Character = "L", BgColor = (Brush)converter.ConvertFromString("#0ca678"), Name = "Lisa Mitchell", Position = "Manager", Email = "LisaMitchell@gmail.com", Phone = "326-598-154" });
-            members.Add(new Member { Number = "6", Character = "B", BgColor = (Brush)converter.ConvertFromString("#6741d9"), Name = "Michelle Johnson", Position = "Developer", Email = "MichelleJohnson@gmail.com", Phone = "963-214-145" });
-            members.Add(new Member { Number = "7", Character = "S", BgColor = (Brush)converter.ConvertFromString("#ff6f00"), Name = "John Thomas", Position = "Intern", Email = "JohnThomas@gmail.com", Phone = "454-454-154" });
-            members.Add(new Member { Number = "8", Character = "A", BgColor = (Brush)converter.ConvertFromString("#ff5252"), Name = "Daniel Rodriguez", Position = "Intern", Email = "DanielRodriguez@gmail.com", Phone = "021-154-036" });
-            members.Add(new Member { Number = "9", Character = "f", BgColor = (Brush)converter.ConvertFromString("#1e88e5"), Name = "Anthony Lopez", Position = "Developer", Email = "AnthonyLopez@gmail.com", Phone = "746-412-124" });
-            members.Add(new Member { Number = "10", Character = "S", BgColor = (Brush)converter.ConvertFromString("#0ca678"), Name = "Patricia Perez", Position = "Developer", Email = "PatriciaPerez@gmail.com", Phone = "987-451-326" });
-
-            members.Add(new Member { Number = "1", Character = "J", BgColor = (Brush)converter.ConvertFromString("#1098ad"), Name = "James Smith", Position = "Manager", Email = "JamesSmith@gmail.com", Phone = "123-456-789" });
-            members.Add(new Member { Number = "2", Character = "R", BgColor = (Brush)converter.ConvertFromString("#1e88e5"), Name = "Christopher Anderson", Position = "Team Lead", Email = "ChristopherAnderson@gmail.com", Phone = "115-484-487" });
-            members.Add(new Member { Number = "3", Character = "D", BgColor = (Brush)converter.ConvertFromString("#ff8f00"), Name = "Ronald Clark", Position = "Team Lead", Email = "RonaldClark@gmail.com", Phone = "985-784-485" });
-            members.Add(new Member { Number = "4", Character = "G", BgColor = (Brush)converter.ConvertFromString("#ff5252"), Name = "Mary Wright", Position = "Developer", Email = "MaryWright@gmail.com", Phone = "151-658-898" });
-            members.Add(new Member { Number = "5", Character = "L", BgColor = (Brush)converter.ConvertFromString("#0ca678"), Name = "Lisa Mitchell", Position = "Manager", Email = "LisaMitchell@gmail.com", Phone = "326-598-154" });
-            members.Add(new Member { Number = "6", Character = "B", BgColor = (Brush)converter.ConvertFromString("#6741d9"), Name = "Michelle Johnson", Position = "Developer", Email = "MichelleJohnson@gmail.com", Phone = "963-214-145" });
-            members.Add(new Member { Number = "7", Character = "S", BgColor = (Brush)converter.ConvertFromString("#ff6f00"), Name = "John Thomas", Position = "Intern", Email = "JohnThomas@gmail.com", Phone = "454-454-154" });
-            members.Add(new Member { Number = "8", Character = "A", BgColor = (Brush)converter.ConvertFromString("#ff5252"), Name = "Daniel Rodriguez", Position = "Intern", Email = "DanielRodriguez@gmail.com", Phone = "021-154-036" });
-            members.Add(new Member { Number = "9", Character = "f", BgColor = (Brush)converter.ConvertFromString("#1e88e5"), Name = "Anthony Lopez", Position = "Developer", Email = "AnthonyLopez@gmail.com", Phone = "746-412-124" });
-            members.Add(new Member { Number = "10", Character = "S", BgColor = (Brush)converter.ConvertFromString("#0ca678"), Name = "Patricia Perez", Position = "Developer", Email = "PatriciaPerez@gmail.com", Phone = "987-451-326" });
-
+            foreach (var employ in emplyees)
+            {
+                members.Add(new Member
+                {
+                    Number = employ.id.ToString(), // Convert int to string
+                    Character = employ.first_name[0].ToString(),
+                    BgColor = (Brush)converter.ConvertFromString("#1098ad"),
+                    Name = employ.first_name + " " + employ.last_name, // Use employee's actual name
+                    Position = employ.position,
+                    Email = employ.email,
+                    Phone = employ.contact_no
+                });
+            }
             memberDataGrid.ItemsSource = members;
         }
+
+
 
 
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)
@@ -269,6 +221,48 @@ namespace HRM.View
             this.Close();
 
         }
+
+
+        // Fix for CS0103: The name 'ConvertFromString' does not exist in the current context
+        // Replace the line causing the error with the correct usage of the BrushConverter.
+
+        private void txtFilter_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            txtBlockFilter.Text = "";
+            var repo = new EmployRepository();
+            var emplyees = repo.GetEmployees();
+
+            var converter = new BrushConverter(); // Ensure BrushConverter is instantiated
+            ObservableCollection<Member> members = new ObservableCollection<Member>();
+
+            foreach (var employ in emplyees)
+            {
+                var name = employ.first_name + " " + employ.last_name;
+                // Fix for CS1501: Use string.StartsWith instead of invalid index range comparison
+                if (name.StartsWith(txtFilter.Text, StringComparison.OrdinalIgnoreCase) ||
+                    employ.last_name.Equals(txtFilter.Text, StringComparison.OrdinalIgnoreCase))
+                {
+                    members.Add(new Member
+                    {
+                        Number = employ.id.ToString(), // Convert int to string
+                        Character = employ.first_name[0].ToString(),
+                        BgColor = (Brush)converter.ConvertFromString("#1098ad"), // Correct usage of BrushConverter
+                        Name = employ.first_name + " " + employ.last_name, // Use employee's actual name
+                        Position = employ.position,
+                        Email = employ.email,
+                        Phone = employ.contact_no
+                    });
+                }
+            }
+            memberDataGrid.ItemsSource = members;
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            RegisterView registerView = new RegisterView();
+            registerView.Show();
+            this.Hide();
+        }
     }
 
 
@@ -282,5 +276,9 @@ namespace HRM.View
         public Brush BgColor { get; set; }
 
     }
+
+
+
+
 
 }
