@@ -123,9 +123,9 @@
             </Grid>
 
             <!--Main Section-->
-            
 
-            <Grid Grid.Column="1" Margin="30 20 20 20" x:Name="dashBoardGrid" Visibility="visible">
+
+            <Grid Grid.Column="1" Margin="30 20 20 20" x:Name="dashBoardGrid" Visibility="Hidden">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
@@ -243,7 +243,7 @@ HorizontalAlignment="Left" Foreground="#121518"/>
             </Grid>
 
 
-            <Grid Grid.Column="1" Margin="30 20 20 20" x:Name="membersGrid" Visibility="Hidden">
+            <Grid Grid.Column="1" Margin="30 20 20 20" x:Name="membersGrid" Visibility="Visible">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
@@ -307,11 +307,11 @@ HorizontalAlignment="Left" Foreground="#121518"/>
 
                 <Grid Width="200" HorizontalAlignment="Right" Grid.Row="4">
                     <TextBlock Margin="15 0" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False"
-    Panel.ZIndex="1" Text="Search Members ..." Visibility="{Binding ElementName=txtSearch,Path=Text.IsEmpty,Converter={StaticResource BoolToVis}}"/>
+                               Panel.ZIndex="1" Text="Search Members ..." Visibility="{Binding ElementName=txtSearch,Path=Text.IsEmpty,Converter={StaticResource BoolToVis}}"/>
 
                     <TextBox x:Name="txtFilter" Style="{StaticResource textboxFilter}"/>
                 </Grid>
-                
+
                 <!--Member Datagrid-->
                 <DataGrid Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" Grid.Row="5" x:Name="memberDataGrid" RowStyle="{DynamicResource DataGridRowStyle1}">
                     <DataGrid.Columns>
@@ -338,10 +338,10 @@ HorizontalAlignment="Left" Foreground="#121518"/>
                             </DataGridTemplateColumn.CellTemplate>
 
                         </DataGridTemplateColumn>
-                        
+
                         <DataGridTextColumn Header="#" IsReadOnly="True" CanUserResize="False" Width="auto"/>
 
-                        </DataGridTemplateColumn>
+
 
 
 
@@ -495,9 +495,9 @@ HorizontalAlignment="Left" Foreground="#121518"/>
 
 
 
-
-
         </Grid>
+
+
     </Border>
 
 </Window>
