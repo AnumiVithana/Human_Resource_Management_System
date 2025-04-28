@@ -84,7 +84,7 @@ namespace HRM.View
             var repo = new EmployRepository();
             bool result = repo.SignInEmplyee(employeeName, employeePw);
 
-            if ( employeePw == "")
+            if (employeePw == "")
             {
                 MessageBox.Show("Please enter password");
 
@@ -102,7 +102,7 @@ namespace HRM.View
             else
             {
                 MessageBox.Show("Invalid username or password");
-            }            
+            }
         }
 
  
