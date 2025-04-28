@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 
@@ -26,6 +27,8 @@ namespace HRM.View
         }
 
         private bool IsMaximized = false;
+        private object someGrid;
+
         private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ClickCount == 2) {
@@ -47,7 +50,16 @@ namespace HRM.View
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            mainGrid.Visibility = Visibility.Hidden;
+            dashBoardGrid.Visibility = Visibility.Visible;
+            eventGrid.Visibility = Visibility.Hidden;
+            departmentGrid.Visibility = Visibility.Hidden;
+            membersGrid.Visibility = Visibility.Hidden;
+            performanceGrid.Visibility = Visibility.Hidden;
+            salaryGrid.Visibility = Visibility.Hidden;
+            requestLeaveGrid.Visibility = Visibility.Hidden;
+
+
+
             EventButton.Background = System.Windows.Media.Brushes.Transparent;
             DashBoardButton.Background = System.Windows.Media.Brushes.Transparent;
             MembersButton.Background = System.Windows.Media.Brushes.Transparent;
@@ -61,6 +73,14 @@ namespace HRM.View
 
         private void EventButton_Click(object sender, RoutedEventArgs e)
         {
+            dashBoardGrid.Visibility = Visibility.Hidden;
+            eventGrid.Visibility = Visibility.Visible;
+            departmentGrid.Visibility = Visibility.Hidden;
+            membersGrid.Visibility = Visibility.Hidden;
+            performanceGrid.Visibility = Visibility.Hidden;
+            salaryGrid.Visibility = Visibility.Hidden;
+            requestLeaveGrid.Visibility = Visibility.Hidden;
+
             EventButton.Background = System.Windows.Media.Brushes.White;
             DashBoardButton.Background = System.Windows.Media.Brushes.Transparent;
             MembersButton.Background = System.Windows.Media.Brushes.Transparent;
@@ -72,6 +92,14 @@ namespace HRM.View
 
         private void DepartmentButton_Click(object sender, RoutedEventArgs e)
         {
+            dashBoardGrid.Visibility = Visibility.Hidden;
+            eventGrid.Visibility = Visibility.Hidden;
+            departmentGrid.Visibility = Visibility.Visible;
+            membersGrid.Visibility = Visibility.Hidden;
+            performanceGrid.Visibility = Visibility.Hidden;
+            salaryGrid.Visibility = Visibility.Hidden;
+            requestLeaveGrid.Visibility = Visibility.Hidden;
+
             EventButton.Background = System.Windows.Media.Brushes.Transparent;
             DashBoardButton.Background = System.Windows.Media.Brushes.White;
             MembersButton.Background = System.Windows.Media.Brushes.Transparent;
@@ -83,6 +111,14 @@ namespace HRM.View
 
         private void MembersButton_Click(object sender, RoutedEventArgs e)
         {
+            dashBoardGrid.Visibility = Visibility.Hidden;
+            eventGrid.Visibility = Visibility.Hidden;
+            departmentGrid.Visibility = Visibility.Hidden;
+            membersGrid.Visibility = Visibility.Visible;
+            performanceGrid.Visibility = Visibility.Hidden;
+            salaryGrid.Visibility = Visibility.Hidden;
+            requestLeaveGrid.Visibility = Visibility.Hidden;
+
             EventButton.Background = System.Windows.Media.Brushes.Transparent;
             DashBoardButton.Background = System.Windows.Media.Brushes.Transparent;
             MembersButton.Background = System.Windows.Media.Brushes.White;
@@ -94,6 +130,14 @@ namespace HRM.View
 
         private void PerformanceButton_Click(object sender, RoutedEventArgs e)
         {
+            dashBoardGrid.Visibility = Visibility.Hidden;
+            eventGrid.Visibility = Visibility.Hidden;
+            departmentGrid.Visibility = Visibility.Hidden;
+            membersGrid.Visibility = Visibility.Hidden;
+            performanceGrid.Visibility = Visibility.Visible;
+            salaryGrid.Visibility = Visibility.Hidden;
+            requestLeaveGrid.Visibility = Visibility.Hidden;
+
             EventButton.Background = System.Windows.Media.Brushes.Transparent;
             DashBoardButton.Background = System.Windows.Media.Brushes.Transparent;
             MembersButton.Background = System.Windows.Media.Brushes.Transparent;
@@ -105,6 +149,14 @@ namespace HRM.View
 
         private void SalaryButton_Click(object sender, RoutedEventArgs e)
         {
+            dashBoardGrid.Visibility = Visibility.Hidden;
+            eventGrid.Visibility = Visibility.Hidden;
+            departmentGrid.Visibility = Visibility.Hidden;
+            membersGrid.Visibility = Visibility.Hidden;
+            performanceGrid.Visibility = Visibility.Hidden;
+            salaryGrid.Visibility = Visibility.Visible;
+            requestLeaveGrid.Visibility = Visibility.Hidden;
+
             EventButton.Background = System.Windows.Media.Brushes.Transparent;
             DashBoardButton.Background = System.Windows.Media.Brushes.Transparent;
             MembersButton.Background = System.Windows.Media.Brushes.Transparent;
@@ -116,6 +168,14 @@ namespace HRM.View
 
         private void RequestLeaveButton_Click(object sender, RoutedEventArgs e)
         {
+            dashBoardGrid.Visibility = Visibility.Hidden;
+            eventGrid.Visibility = Visibility.Hidden;
+            departmentGrid.Visibility = Visibility.Hidden;
+            membersGrid.Visibility = Visibility.Hidden;
+            performanceGrid.Visibility = Visibility.Hidden;
+            salaryGrid.Visibility = Visibility.Hidden;
+            requestLeaveGrid.Visibility = Visibility.Visible;
+
             EventButton.Background = System.Windows.Media.Brushes.Transparent;
             DashBoardButton.Background = System.Windows.Media.Brushes.Transparent;
             MembersButton.Background = System.Windows.Media.Brushes.Transparent;

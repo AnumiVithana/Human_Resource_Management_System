@@ -66,6 +66,9 @@ namespace HRM.View
             repository.CreateEmploy(newEmployee);
 
             MessageBox.Show("Employee registered successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+            LoginView logingView = new LoginView();
+            logingView.Show();
+            this.Close();
 
             // Optionally, clear the form
             ClearForm();
