@@ -42,6 +42,7 @@ namespace HRM.View
                 });
             }
             memberDataGrid.ItemsSource = members;
+
         }
 
 
