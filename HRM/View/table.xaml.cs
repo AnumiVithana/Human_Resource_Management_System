@@ -263,6 +263,8 @@ namespace HRM.View
             registerView.Show();
             this.Hide();
         }
+
+
     }
 
 

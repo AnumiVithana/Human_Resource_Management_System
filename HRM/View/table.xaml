@@ -314,7 +314,7 @@ HorizontalAlignment="Left" Foreground="#121518"/>
                 </Grid>
 
                 <!--Member Datagrid-->
-                <DataGrid Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" Grid.Row="5" x:Name="memberDataGrid" RowStyle="{DynamicResource DataGridRowStyle1}">
+                <DataGrid Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" Grid.Row="5" x:Name="memberDataGrid" RowStyle="{DynamicResource DataGridRowStyle1}" SelectionChanged="memberDataGrid_SelectionChanged">
                     <DataGrid.Columns>
                         <DataGridCheckBoxColumn CanUserResize="False" Width="auto" ElementStyle="{StaticResource CheckBoxStyle1}">
                             <DataGridCheckBoxColumn.HeaderTemplate>
