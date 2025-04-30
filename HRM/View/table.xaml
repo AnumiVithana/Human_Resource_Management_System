@@ -243,7 +243,7 @@
                 </Grid>
             </Grid>
             <!-- DashBoard  -->
-                <Grid Grid.Column="1" Margin="30 10 20 20" x:Name="dashBoardGrid" Visibility="Visible">
+            <Grid Grid.Column="1" Margin="30 10 20 20" x:Name="dashBoardGrid" Visibility="Visible">
                 <Grid.RowDefinitions>
 
                     <RowDefinition Height="auto"/>
@@ -944,8 +944,8 @@ HorizontalAlignment="Left" Foreground="#121518"/>
                 </Button>
 -->
 
-                <TextBlock Text="My Profile" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="0 60 0 0"
-HorizontalAlignment="Left" Foreground="#121518"/>
+                <TextBlock Text="My Profile" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="0 60 0 0" 
+                           HorizontalAlignment="Left" Foreground="#121518"/>
 
 
 
@@ -977,20 +977,7 @@ HorizontalAlignment="Left" Foreground="#121518"/>
                     <Button  Content="Edit Details" FontSize ="15" Margin="80,20,0,0" HorizontalAlignment="Center" Width="150" Height="40"  Click="EditDetailsButton_Click" Style="{StaticResource addButton}" />
 
                 </StackPanel>
-
-
-
-
             </Grid>
-
-
-
-
-
-
         </Grid>
-
-
     </Border>
-
 </Window>
