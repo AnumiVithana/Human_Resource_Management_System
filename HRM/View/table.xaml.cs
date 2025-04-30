@@ -24,8 +24,7 @@ namespace HRM.View
         public table()
         {
             InitializeComponent();
-            ShowGreeting("John");
-            ShowDate();
+            
             // ---employee databace info ---
             EmployeeInfo = new EmployeeInfoViewModel
             {
@@ -56,12 +55,26 @@ namespace HRM.View
 
         private Employee LogedEmployee;
 
+        // Fix for CS1002: Missing semicolon  
+        // Fix for CS0103: Undefined 'editDeleteColoumn'
+
         public table(Employee logedEmployee)
         {
             InitializeComponent();
+            LogedEmployee = logedEmployee;
+            ShowGreeting(logedEmployee.first_name);
+            ShowDate();
 
+            // Ensure 'editDeleteColoumn' is defined and accessible
+            if (logedEmployee.position == "Admin")
+            {
+                // Assuming 'editDeleteColoumn' is a UI element like a DataGridColumn
+                editDeleteColoumn.Visibility = Visibility.Visible;
+                dashBoardAdminGrid.Visibility = Visibility.Visible;
+                dashBoardGrid.Visibility = Visibility.Hidden;
+            }
             
-            txtFirstName.Text = logedEmployee.first_name; 
+            txtFirstName.Text = logedEmployee.first_name;
             txtLastName.Text = logedEmployee.last_name;
             txtEmail.Text = logedEmployee.email;
             txtContactNumber.Text = logedEmployee.contact_no;
@@ -73,7 +86,6 @@ namespace HRM.View
             ObservableCollection<Member> members = new ObservableCollection<Member>();
             var repo = new EmployRepository();
             var emplyees = repo.GetEmployees();
-
 
             foreach (var employ in emplyees)
             {
@@ -89,7 +101,6 @@ namespace HRM.View
                 });
             }
             memberDataGrid.ItemsSource = members;
-
         }
 
         
@@ -247,9 +258,6 @@ namespace HRM.View
             MyProfileGrid.Visibility = Visibility.Hidden;
 
             MyProfileButton.Background = System.Windows.Media.Brushes.Transparent;
-
-
-
             EventButton.Background = System.Windows.Media.Brushes.Transparent;
             DashBoardButton.Background = System.Windows.Media.Brushes.Transparent;
             MembersButton.Background = System.Windows.Media.Brushes.Transparent;
@@ -258,7 +266,13 @@ namespace HRM.View
             RequestLeaveButton.Background = System.Windows.Media.Brushes.Transparent;
             DashBoardButton.Background = System.Windows.Media.Brushes.White;
 
-
+            if (LogedEmployee.position == "Admin")
+            {
+                // Assuming 'editDeleteColoumn' is a UI element like a DataGridColumn
+                editDeleteColoumn.Visibility = Visibility.Visible;
+                dashBoardAdminGrid.Visibility = Visibility.Visible;
+                dashBoardGrid.Visibility = Visibility.Hidden;
+            }
         }
 
         private void EventButton_Click(object sender, RoutedEventArgs e)
@@ -271,9 +285,10 @@ namespace HRM.View
             salaryGrid.Visibility = Visibility.Hidden;
             requestLeaveGrid.Visibility = Visibility.Hidden;
             MyProfileGrid.Visibility = Visibility.Hidden;
+            dashBoardAdminGrid.Visibility = Visibility.Hidden;
+
 
             MyProfileButton.Background = System.Windows.Media.Brushes.Transparent;
-
             EventButton.Background = System.Windows.Media.Brushes.White;
             DashBoardButton.Background = System.Windows.Media.Brushes.Transparent;
             MembersButton.Background = System.Windows.Media.Brushes.Transparent;
@@ -293,9 +308,10 @@ namespace HRM.View
             salaryGrid.Visibility = Visibility.Hidden;
             requestLeaveGrid.Visibility = Visibility.Hidden;
             MyProfileGrid.Visibility = Visibility.Hidden;
+            dashBoardAdminGrid.Visibility = Visibility.Hidden;
+
 
             MyProfileButton.Background = System.Windows.Media.Brushes.Transparent;
-
             EventButton.Background = System.Windows.Media.Brushes.Transparent;
             DashBoardButton.Background = System.Windows.Media.Brushes.White;
             MembersButton.Background = System.Windows.Media.Brushes.Transparent;
@@ -315,9 +331,10 @@ namespace HRM.View
             salaryGrid.Visibility = Visibility.Hidden;
             requestLeaveGrid.Visibility = Visibility.Hidden;
             MyProfileGrid.Visibility = Visibility.Hidden;
+            dashBoardAdminGrid.Visibility = Visibility.Hidden;
+
 
             MyProfileButton.Background = System.Windows.Media.Brushes.Transparent;
-
             EventButton.Background = System.Windows.Media.Brushes.Transparent;
             DashBoardButton.Background = System.Windows.Media.Brushes.Transparent;
             MembersButton.Background = System.Windows.Media.Brushes.White;
@@ -337,9 +354,10 @@ namespace HRM.View
             salaryGrid.Visibility = Visibility.Hidden;
             requestLeaveGrid.Visibility = Visibility.Hidden;
             MyProfileGrid.Visibility = Visibility.Hidden;
+            dashBoardAdminGrid.Visibility = Visibility.Hidden;
+
 
             MyProfileButton.Background = System.Windows.Media.Brushes.Transparent;
-
             EventButton.Background = System.Windows.Media.Brushes.Transparent;
             DashBoardButton.Background = System.Windows.Media.Brushes.Transparent;
             MembersButton.Background = System.Windows.Media.Brushes.Transparent;
@@ -359,9 +377,10 @@ namespace HRM.View
             salaryGrid.Visibility = Visibility.Visible;
             requestLeaveGrid.Visibility = Visibility.Hidden;
             MyProfileGrid.Visibility = Visibility.Hidden;
+            dashBoardAdminGrid.Visibility = Visibility.Hidden;
+
 
             MyProfileButton.Background = System.Windows.Media.Brushes.Transparent;
-
             EventButton.Background = System.Windows.Media.Brushes.Transparent;
             DashBoardButton.Background = System.Windows.Media.Brushes.Transparent;
             MembersButton.Background = System.Windows.Media.Brushes.Transparent;
@@ -380,10 +399,11 @@ namespace HRM.View
             performanceGrid.Visibility = Visibility.Hidden;
             salaryGrid.Visibility = Visibility.Hidden;
             requestLeaveGrid.Visibility = Visibility.Visible;
-            MyProfileGrid.Visibility = Visibility.Hidden;   
+            MyProfileGrid.Visibility = Visibility.Hidden;
+            dashBoardAdminGrid.Visibility = Visibility.Hidden;
+
 
             MyProfileButton.Background = System.Windows.Media.Brushes.Transparent;
-
             EventButton.Background = System.Windows.Media.Brushes.Transparent;
             DashBoardButton.Background = System.Windows.Media.Brushes.Transparent;
             MembersButton.Background = System.Windows.Media.Brushes.Transparent;
@@ -405,6 +425,8 @@ namespace HRM.View
             salaryGrid.Visibility = Visibility.Hidden;
             requestLeaveGrid.Visibility = Visibility.Hidden;
             MyProfileGrid.Visibility = Visibility.Visible;
+            dashBoardAdminGrid.Visibility = Visibility.Hidden;
+
 
             EventButton.Background = System.Windows.Media.Brushes.Transparent;
             DashBoardButton.Background = System.Windows.Media.Brushes.Transparent;
@@ -415,7 +437,18 @@ namespace HRM.View
             DashBoardButton.Background = System.Windows.Media.Brushes.Transparent;
             MyProfileButton.Background = System.Windows.Media.Brushes.White;
 
-            
+            var repo = new EmployRepository();
+            LogedEmployee = repo.GetEmploy(LogedEmployee.id);
+
+            txtFirstName.Text = LogedEmployee.first_name;
+            txtLastName.Text = LogedEmployee.last_name;
+            txtEmail.Text = LogedEmployee.email;
+            txtContactNumber.Text = LogedEmployee.contact_no;
+            txtDepartment.Text = LogedEmployee.department;
+            txtPosition.Text = LogedEmployee.position;
+            txtDOB.Text = LogedEmployee.dob;
+            EditProfile editProfile = new EditProfile(LogedEmployee);
+
 
 
         }
@@ -473,6 +506,9 @@ namespace HRM.View
          //edit profile
         private void EditDetailsButton_Click(object sender, RoutedEventArgs e)
         {
+            EditProfile editProfile = new EditProfile(LogedEmployee);
+            editProfile.Show();
+            this.Close();
 
         }
 

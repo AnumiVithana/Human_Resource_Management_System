@@ -593,6 +593,7 @@
                 </StackPanel>
 
                 <Grid />
+                
 
 
 
@@ -777,7 +778,7 @@ HorizontalAlignment="Left" Foreground="#121518"/>
                         <DataGridTextColumn Header="Contact Number" IsReadOnly="True" Width="*" Binding="{Binding Phone}"/>
 
 
-                        <DataGridTemplateColumn Header="Operation" IsReadOnly="True" Width="Auto" Visibility="Visible">
+                        <DataGridTemplateColumn Header="Operation" IsReadOnly="True" Width="Auto" Visibility="Hidden" x:Name="editDeleteColoumn">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" x:Name="operationColom">
