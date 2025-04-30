@@ -20,7 +20,9 @@ namespace HRM.View
     /// </summary>
     public partial class table : Window
     {
-
+        private DateTime? checkInTime = null;
+        private DateTime? checkOutTime = null;
+        public EmployeeInfoViewModel EmployeeInfo { get; set; }
         public table()
         {
             InitializeComponent();
@@ -59,8 +61,10 @@ namespace HRM.View
         public table(Employee logedEmployee)
         {
             InitializeComponent();
+            ShowGreeting(logedEmployee.first_name);
+            ShowDate();
 
-            
+
             txtFirstName.Text = logedEmployee.first_name; 
             txtLastName.Text = logedEmployee.last_name;
             txtEmail.Text = logedEmployee.email;
@@ -119,8 +123,7 @@ namespace HRM.View
         }
         // ----DashBoard employee check button----
 
-        private DateTime? checkInTime = null;
-        private DateTime? checkOutTime = null;
+        
 
         private void btnCheckIn_Click(object sender, RoutedEventArgs e)
         {
@@ -165,39 +168,7 @@ namespace HRM.View
             txtStatus.Text = "Checked out successfully!";
             btnCheckOut.Visibility = Visibility.Collapsed;
         }
-        // ---employee databace info ---
-        public EmployeeInfoViewModel EmployeeInfo { get; set; }
-        public class EmployeeInfoViewModel : INotifyPropertyChanged
-        {
-            private string casualLeave;
-            private string sickLeave;
-            private string annualLeave;
-            private string presentDays;
-            private string absentDays;
-            private string lateDays;
-            private string lastSalary;
-            private string salaryMonth;
-            private string performanceScore;
-            private string lastReviewMonth;
-
-            public string CasualLeave { get => casualLeave; set { casualLeave = value; OnPropertyChanged(); } }
-            public string SickLeave { get => sickLeave; set { sickLeave = value; OnPropertyChanged(); } }
-            public string AnnualLeave { get => annualLeave; set { annualLeave = value; OnPropertyChanged(); } }
-            public string PresentDays { get => presentDays; set { presentDays = value; OnPropertyChanged(); } }
-            public string AbsentDays { get => absentDays; set { absentDays = value; OnPropertyChanged(); } }
-            public string LateDays { get => lateDays; set { lateDays = value; OnPropertyChanged(); } }
-            public string LastSalary { get => lastSalary; set { lastSalary = value; OnPropertyChanged(); } }
-            public string SalaryMonth { get => salaryMonth; set { salaryMonth = value; OnPropertyChanged(); } }
-            public string PerformanceScore { get => performanceScore; set { performanceScore = value; OnPropertyChanged(); } }
-            public string LastReviewMonth { get => lastReviewMonth; set { lastReviewMonth = value; OnPropertyChanged(); } }
-
-            public event PropertyChangedEventHandler PropertyChanged;
-
-            protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
-            {
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
+       
         // ---employee databace info end---
 
 
@@ -611,7 +582,39 @@ namespace HRM.View
 
     }
 
+    // ---employee databace info ---
 
+    public class EmployeeInfoViewModel : INotifyPropertyChanged
+    {
+        private string casualLeave;
+        private string sickLeave;
+        private string annualLeave;
+        private string presentDays;
+        private string absentDays;
+        private string lateDays;
+        private string lastSalary;
+        private string salaryMonth;
+        private string performanceScore;
+        private string lastReviewMonth;
 
-    
+        public string CasualLeave { get => casualLeave; set { casualLeave = value; OnPropertyChanged(); } }
+        public string SickLeave { get => sickLeave; set { sickLeave = value; OnPropertyChanged(); } }
+        public string AnnualLeave { get => annualLeave; set { annualLeave = value; OnPropertyChanged(); } }
+        public string PresentDays { get => presentDays; set { presentDays = value; OnPropertyChanged(); } }
+        public string AbsentDays { get => absentDays; set { absentDays = value; OnPropertyChanged(); } }
+        public string LateDays { get => lateDays; set { lateDays = value; OnPropertyChanged(); } }
+        public string LastSalary { get => lastSalary; set { lastSalary = value; OnPropertyChanged(); } }
+        public string SalaryMonth { get => salaryMonth; set { salaryMonth = value; OnPropertyChanged(); } }
+        public string PerformanceScore { get => performanceScore; set { performanceScore = value; OnPropertyChanged(); } }
+        public string LastReviewMonth { get => lastReviewMonth; set { lastReviewMonth = value; OnPropertyChanged(); } }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
+
+
+}
