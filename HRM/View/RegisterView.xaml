@@ -250,10 +250,10 @@
                         <!-- Position -->
                         <TextBlock Text="Position" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Margin="5" Foreground="White" />
                         <ComboBox x:Name="cbPosition" Grid.Row="4" Grid.Column="1" Margin="0,10,0,10" Height="22">
-                            <ComboBoxItem Content="Manager" />
-                            <ComboBoxItem Content="Team Lead" />
-                            <ComboBoxItem Content="Developer" />
-                            <ComboBoxItem Content="Intern" />
+                            <ComboBoxItem Content="Employee" />
+                            <ComboBoxItem Content="Department Head" />
+                            <ComboBoxItem Content="Admin" />
+                            
                         </ComboBox>
 
                         <!-- Contact Number -->

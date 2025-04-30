@@ -435,14 +435,14 @@ HorizontalAlignment="Left" Foreground="#121518"/>
                         <DataGridTextColumn Header="Email" IsReadOnly="True" Width="*" Binding="{Binding Email}"/>
                         <DataGridTextColumn Header="Contact Number" IsReadOnly="True" Width="*" Binding="{Binding Phone}"/>
 
-                        <!--
-                        <DataGridTemplateColumn Header="Operation" IsReadOnly="True" Width="Auto">
+                        
+                        <DataGridTemplateColumn Header="Operation" IsReadOnly="True" Width="Auto" Visibility="Visible">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" x:Name="operationColom">
                                         <Button Style="{StaticResource gridEditButton}" Click="employeeEdit">
                                         
-                                        <Button Style="{StaticResource gridEditButton}" x:Name="employeeEdit">
+                                        
                                             <Icon:PackIconMaterial Kind="PencilOutline" Style="{StaticResource gridButtonIcon}"/>
                                         </Button>
                                         <Button Style="{StaticResource gridRemoveButton}" Click="employeeDelete">
@@ -453,7 +453,7 @@ HorizontalAlignment="Left" Foreground="#121518"/>
                         </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
 
-                        </DataGridTemplateColumn>-->
+                        </DataGridTemplateColumn>
 
 
 
