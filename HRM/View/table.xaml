@@ -34,7 +34,7 @@
 
                 <!--Menu Icon-->
                 <Button  Margin="20 28 0 35" Style="{StaticResource topButton}">
-                    <Icon:PackIconMaterial Kind="Menu" Width="15" Height="15"/>
+                 <!--   <Icon:PackIconMaterial Kind="Menu" Width="15" Height="15"/> -->
                 </Button>
 
                 <Border Grid.Row="1" Background="#08203e" CornerRadius="0 50 0 30">
@@ -62,7 +62,12 @@
                                 <StackPanel Orientation="Horizontal">
                                     <Icon:PackIconMaterial Kind="HomeVariant" Style="{StaticResource menuButtonIcon}"/>
                                     <TextBlock Text="DashBoard"/>
+                                    
                                 </StackPanel>
+
+                                
+                                    
+                                
                             </Button>
 
                             <Button Style="{StaticResource menuButton}" x:Name="EventButton" Click="EventButton_Click">
@@ -79,11 +84,13 @@
                                 </StackPanel>
                             </Button>
 
-                            <Button Style="{StaticResource menuButton}"  x:Name="MembersButton" Click="MembersButton_Click">
+                            <Button Style="{StaticResource menuButton}"  x:Name="MembersButton" Click="MembersButton_Click"
+>
                                 <StackPanel Orientation="Horizontal">
                                     <Icon:PackIconMaterial Kind="AccountMultiple" Style="{StaticResource menuButtonIcon}" />
                                     <TextBlock Text="Members"/>
                                 </StackPanel>
+                                
                             </Button>
 
                             <Button Style="{StaticResource menuButton}" x:Name="PerformanceButton" Click="PerformanceButton_Click">
@@ -107,6 +114,13 @@
                                 </StackPanel>
                             </Button>
 
+                            <Button Style="{StaticResource menuButton}" x:Name="MyProfileButton" Click="MyProfileButton_Click">
+                                <StackPanel Orientation="Horizontal">
+                                    <Icon:PackIconMaterial Kind="Account" Style="{StaticResource menuButtonIcon}"/>
+                                    <TextBlock Text="My Profile"/>
+                                </StackPanel>
+                            </Button>
+
 
                         </StackPanel>
 
@@ -124,10 +138,114 @@
 
             <!--Main Section-->
 
-
-            <Grid Grid.Column="1" Margin="30 20 20 20" x:Name="dashBoardGrid" Visibility="Hidden">
+            <Grid Grid.Column="1" Margin=" 30,20,20,0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="13*"/>
+                </Grid.RowDefinitions>
+
+
+
+
+                <Grid>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="47*"/>
+                        <ColumnDefinition Width="7*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.ColumnSpan="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="24"/>
+                            <ColumnDefinition Width="25"/>
+                            <ColumnDefinition Width="5"/>
+                        </Grid.ColumnDefinitions>
+
+
+
+                        <Button x:Name="btnMinimize"
+                BorderThickness="0"
+                Content="-"
+                Foreground="White"
+                FontSize="16"
+                FontFamily="Berlin Sans FB"
+                Cursor="Hand"
+                Grid.Column="1"
+                Click="btnMinimize_Click"
+      >
+
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="#28AEED"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#58efec"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Background="{TemplateBinding Background}"
+                            Width="20" Height="20"
+                            CornerRadius="10">
+                                        <ContentPresenter VerticalAlignment="Center"
+                                          HorizontalAlignment="Center"/>
+
+                                    </Border>
+                                </ControlTemplate>
+                            </Button.Template>
+
+                        </Button>
+
+                        <Button x:Name="btnClose"                            
+                BorderThickness="0"
+                Content="X"
+                Foreground="White"
+                FontSize="12"
+                FontFamily="Berlin Sans FB"
+                Cursor="Hand"
+                Grid.Column="2"
+                Click="btnClose_Click" HorizontalAlignment="Right" Width="25">
+
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="MediumVioletRed"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="Red"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Width="20" Height="20"
+                            CornerRadius="10"
+                            Background="{TemplateBinding Background}">
+                                        <ContentPresenter VerticalAlignment="Center"
+                                          HorizontalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Button.Template>
+
+                        </Button>
+                    </Grid>
+
+                </Grid>
+            </Grid>
+
+            <Grid Grid.Column="1" Margin="30 10 20 20" x:Name="dashBoardGrid" Visibility="Visible">
+                <Grid.RowDefinitions>
+                    
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
@@ -135,16 +253,13 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
-                <Grid Width="300" HorizontalAlignment="Left">
-                    <TextBlock Margin="20 0" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False"
-                   Panel.ZIndex="1" Text=" Search here ...." Visibility="{Binding ElementName=txtSearch,Path=Text.IsEmpty,Converter={StaticResource BoolToVis}}"/>
-
-                    <TextBox Style="{StaticResource textboxSearch}"/>
-                    <Icon:PackIconMaterial Kind="Magnify" Width="15" Height="15" VerticalAlignment="Center"
-                               Margin="0 0 15 0" Foreground="#b0b9c6" HorizontalAlignment="Right"/>
-                </Grid>
+                
+                <Grid />
 
 
+                  
+
+<!--
 
                 <Button Style="{StaticResource topButton}" Margin="0 0 20 0" Background="#dcdcdc" HorizontalAlignment="Right">
                     <Icon:PackIconMaterial Kind="Cog"/>
@@ -153,8 +268,8 @@
                     <Icon:PackIconMaterial Kind="Bell"/>
                 </Button>
 
-
-                <TextBlock Text="DashBoard" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="0 20 0 0"
+-->
+                <TextBlock Text="DashBoard" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="0 60 0 0"
                HorizontalAlignment="Left" Foreground="#121518"/>
 
 
@@ -164,36 +279,29 @@
 
             </Grid>
 
-            <Grid Grid.Column="1" Margin="30 20 20 20" x:Name="eventGrid" Visibility="Hidden">
+            <Grid Grid.Column="1" Margin="30 10 20 20" x:Name="eventGrid" Visibility="Hidden">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
+                    
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
-                <Grid Width="300" HorizontalAlignment="Left">
-                    <TextBlock Margin="20 0" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False"
-       Panel.ZIndex="1" Text=" Search here ...." Visibility="{Binding ElementName=txtSearch,Path=Text.IsEmpty,Converter={StaticResource BoolToVis}}"/>
-
-                    <TextBox Style="{StaticResource textboxSearch}"/>
-                    <Icon:PackIconMaterial Kind="Magnify" Width="15" Height="15" VerticalAlignment="Center"
-                   Margin="0 0 15 0" Foreground="#b0b9c6" HorizontalAlignment="Right"/>
-                </Grid>
+                
+                
 
 
-
-                <Button Style="{StaticResource topButton}" Margin="0 0 20 0" Background="#dcdcdc" HorizontalAlignment="Right">
+<!--                <Button Style="{StaticResource topButton}" Margin="0 0 20 0" Background="#dcdcdc" HorizontalAlignment="Right">
                     <Icon:PackIconMaterial Kind="Cog"/>
                 </Button>
                 <Button Style="{StaticResource topButton}" Margin="0 0 55 0" Background="#dcdcdc" HorizontalAlignment="Right">
                     <Icon:PackIconMaterial Kind="Bell"/>
                 </Button>
+-->
 
-
-                <TextBlock Text="Events" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="0 20 0 0"
+                <TextBlock Text="Events" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="0 60 0 0"
    HorizontalAlignment="Left" Foreground="#121518"/>
 
 
@@ -203,9 +311,9 @@
 
             </Grid>
 
-            <Grid Grid.Column="1" Margin="30 20 20 20" x:Name="departmentGrid" Visibility="Hidden">
+            <Grid Grid.Column="1" Margin="30 10 20 20" x:Name="departmentGrid" Visibility="Hidden">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
+                    
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
@@ -213,26 +321,20 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
-                <Grid Width="300" HorizontalAlignment="Left">
-                    <TextBlock Margin="20 0" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False"
-    Panel.ZIndex="1" Text=" Search here ...." Visibility="{Binding ElementName=txtSearch,Path=Text.IsEmpty,Converter={StaticResource BoolToVis}}"/>
+                
+                
 
-                    <TextBox Style="{StaticResource textboxSearch}"/>
-                    <Icon:PackIconMaterial Kind="Magnify" Width="15" Height="15" VerticalAlignment="Center"
-                Margin="0 0 15 0" Foreground="#b0b9c6" HorizontalAlignment="Right"/>
-                </Grid>
-
-
+<!--
 
                 <Button Style="{StaticResource topButton}" Margin="0 0 20 0" Background="#dcdcdc" HorizontalAlignment="Right">
                     <Icon:PackIconMaterial Kind="Cog"/>
                 </Button>
                 <Button Style="{StaticResource topButton}" Margin="0 0 55 0" Background="#dcdcdc" HorizontalAlignment="Right">
                     <Icon:PackIconMaterial Kind="Bell"/>
-                </Button>
+                </Button> -->
 
 
-                <TextBlock Text="Department" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="0 20 0 0"
+                <TextBlock Text="Department" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="0 60 0 0"
 HorizontalAlignment="Left" Foreground="#121518"/>
 
 
@@ -243,9 +345,9 @@ HorizontalAlignment="Left" Foreground="#121518"/>
             </Grid>
 
 
-            <Grid Grid.Column="1" Margin="30 20 20 20" x:Name="membersGrid" Visibility="Visible">
+            <Grid Grid.Column="1" Margin="30 10 20 20" x:Name="membersGrid" Visibility="Hidden">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
+                    
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
@@ -254,58 +356,47 @@ HorizontalAlignment="Left" Foreground="#121518"/>
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
 
-                <!--Search TeextBox-->
 
-                <Grid Width="300" HorizontalAlignment="Left">
-                    <TextBlock Margin="20 0" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False"
-                   Panel.ZIndex="1" Text=" Search here ...." Visibility="{Binding ElementName=txtSearch,Path=Text.IsEmpty,Converter={StaticResource BoolToVis}}"/>
-
-                    <TextBox x:Name="txtSearch" Style="{StaticResource textboxSearch}"/>
-                    <Icon:PackIconMaterial Kind="Magnify" Width="15" Height="15" VerticalAlignment="Center"
-                               Margin="0 0 15 0" Foreground="#b0b9c6" HorizontalAlignment="Right"/>
-                </Grid>
-
-
-                <!--Top Button-->
+                <!--Top Button
                 <Button Style="{StaticResource topButton}" Margin="0 0 20 0" Background="#dcdcdc" HorizontalAlignment="Right">
                     <Icon:PackIconMaterial Kind="Cog"/>
                 </Button>
                 <Button Style="{StaticResource topButton}" Margin="0 0 55 0" Background="#dcdcdc" HorizontalAlignment="Right">
                     <Icon:PackIconMaterial Kind="Bell"/>
-                </Button>
+                </Button> -->
 
                 <!--Page Title-->
-                <TextBlock Text="Members" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="0 20 0 0"
+                <TextBlock Text="Members" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="0 60 0 0"
                HorizontalAlignment="Left" Foreground="#121518"/>
-                <Button Style="{StaticResource addButton}" Click="Button_Click_2">
+                <Button Style="{StaticResource addButton}" Click="Button_Click_2" Margin="0,60,0,0">
                     <StackPanel Orientation="Horizontal">
                         <Icon:PackIconMaterial Kind="Plus" VerticalAlignment="Center" Width="11" Height="11" Margin="0 1 8 0"/>
                         <TextBlock Text="Add New Member"/>
                     </StackPanel>
-                </Button>
+                </Button> 
 
                 <!--Separtor-->
                 <Separator Height="1" Grid.Row="3" Background="#dae2ea" Margin="0 -1 0 10"/>
 
-                <!--Tab button-->
+                <!--Tab button
                 <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0 10 0 0">
-                    <Button Content="Employee" Style="{StaticResource tabButton}" BorderBrush="#133a94"/>
-                    <Button Content="Manager" Style="{StaticResource tabButton}"/>
-                    <Button Content="Internship" Style="{StaticResource tabButton}"/>
+                    <Button Content="Employees" Style="{StaticResource tabButton}" BorderBrush="#133a94" Width="100"/>
+                    <Button Content="Managers" Style="{StaticResource tabButton}" Width="100"/>
+                    <Button Content="Department Heads" Style="{StaticResource tabButton}" Width="150"/>
 
-                </StackPanel>
+                </StackPanel>-->
 
-                <!--Tab Buttons-->
-                <TextBlock Text="Employee" Grid.Row="4" FontSize="18" FontWeight="SemiBold"
-               Foreground="#121518" HorizontalAlignment="Left"
-               VerticalAlignment="Center"/>
-                <TextBlock Text="Filter by Name" Grid.Row="4" FontSize="18" FontWeight="SemiBold" Margin="0 0 215 0"
+                <!--Tab Buttons
+                <TextBlock Text="Employees" Grid.Row="4" FontSize="18" FontWeight="SemiBold"
+               Foreground="#121518" HorizontalAlignment="Left" Margin="0,-400,0,0"
+               VerticalAlignment="Center"/> -->
+                <TextBlock Text="Filter by Name" Grid.Row="4" FontSize="18" FontWeight="SemiBold" Margin="0 -470 215 0"
                Foreground="#121518" HorizontalAlignment="Right"
-               VerticalAlignment="Center"/>
+               VerticalAlignment="Center"/> 
 
                 <!--Filter TeextBox-->
 
-                <Grid Width="200" HorizontalAlignment="Right" Grid.Row="4">
+                <Grid Width="200" HorizontalAlignment="Right" Grid.Row="4" Margin="0,-470,0,0">
                     <TextBlock x:Name="txtBlockFilter" Margin="15 0" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False"
                                Panel.ZIndex="1" Text="Search Members ..." Visibility="{Binding ElementName=txtSearch,Path=Text.IsEmpty,Converter={StaticResource BoolToVis}}"/>
 
@@ -314,19 +405,19 @@ HorizontalAlignment="Left" Foreground="#121518"/>
                 </Grid>
 
                 <!--Member Datagrid-->
-                <DataGrid Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" Grid.Row="5" x:Name="memberDataGrid" RowStyle="{DynamicResource DataGridRowStyle1}">
+                <DataGrid Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}"  Margin="0,-460,0,0" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" Grid.Row="5" x:Name="memberDataGrid" RowStyle="{DynamicResource DataGridRowStyle1}">
                     <DataGrid.Columns>
-                        <DataGridCheckBoxColumn CanUserResize="False" Width="auto" ElementStyle="{StaticResource CheckBoxStyle1}">
-                            <DataGridCheckBoxColumn.HeaderTemplate>
+                        <DataGridCheckBoxColumn CanUserResize="False" Width="auto" ElementStyle="{StaticResource CheckBoxStyle1}" Header="Mark" >
+                        <!--    <DataGridCheckBoxColumn.HeaderTemplate>
                                 <DataTemplate>
                                     <CheckBox Style="{StaticResource CheckBoxStyle1}"/>
                                 </DataTemplate>
-                            </DataGridCheckBoxColumn.HeaderTemplate>
+                            </DataGridCheckBoxColumn.HeaderTemplate> -->
                         </DataGridCheckBoxColumn>
 
-                        <DataGridTextColumn Header="#" IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding Number}"/>
+                        <DataGridTextColumn Header="No." IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding Number}"/>
 
-                        <DataGridTemplateColumn Header="Member" IsReadOnly="True" Width="*">
+                        <DataGridTemplateColumn Header="Employee Name" IsReadOnly="True" Width="*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
@@ -341,32 +432,35 @@ HorizontalAlignment="Left" Foreground="#121518"/>
                         </DataGridTemplateColumn>
 
                         <DataGridTextColumn Header="Position" IsReadOnly="True" Width="*" Binding="{Binding Position}"/>
-                        <DataGridTextColumn Header="Email Address" IsReadOnly="True" Width="*" Binding="{Binding Email}"/>
-                        <DataGridTextColumn Header="Phone Number" IsReadOnly="True" Width="*" Binding="{Binding Phone}"/>
+                        <DataGridTextColumn Header="Email" IsReadOnly="True" Width="*" Binding="{Binding Email}"/>
+                        <DataGridTextColumn Header="Contact Number" IsReadOnly="True" Width="*" Binding="{Binding Phone}"/>
 
-
+                        <!--
                         <DataGridTemplateColumn Header="Operation" IsReadOnly="True" Width="Auto">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" x:Name="operationColom">
                                         <Button Style="{StaticResource gridEditButton}" Click="employeeEdit">
+                                        
+                                        <Button Style="{StaticResource gridEditButton}" x:Name="employeeEdit">
                                             <Icon:PackIconMaterial Kind="PencilOutline" Style="{StaticResource gridButtonIcon}"/>
                                         </Button>
                                         <Button Style="{StaticResource gridRemoveButton}" Click="employeeDelete">
                                             <Icon:PackIconMaterial Kind="DeleteOutline" Style="{StaticResource gridButtonIcon}" Margin="0 0 0 0"/>
                                         </Button>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
+                                        
+                        </StackPanel>
+                        </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
 
-                        </DataGridTemplateColumn>
+                        </DataGridTemplateColumn>-->
 
 
 
                     </DataGrid.Columns>
                 </DataGrid>
 
-                <!--Pagination Section-->
+                <!--Pagination Section
                 <Border Grid.Row="6" HorizontalAlignment="Right" BorderBrush="#dee4ec" BorderThickness="1"
             CornerRadius="5" Padding="5" Background="White" Margin="0 10 10 10">
                     <StackPanel Orientation="Horizontal">
@@ -387,13 +481,13 @@ HorizontalAlignment="Left" Foreground="#121518"/>
 
                     </StackPanel>
 
-                </Border>
+                </Border> -->
 
             </Grid>
 
-            <Grid Grid.Column="1" Margin="30 20 20 20" x:Name="performanceGrid" Visibility="Hidden">
+            <Grid Grid.Column="1" Margin="30 10 20 20" x:Name="performanceGrid" Visibility="Hidden">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
+                    
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
@@ -401,16 +495,9 @@ HorizontalAlignment="Left" Foreground="#121518"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
-                <Grid Width="300" HorizontalAlignment="Left">
-                    <TextBlock Margin="20 0" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False"
-    Panel.ZIndex="1" Text=" Search here ...." Visibility="{Binding ElementName=txtSearch,Path=Text.IsEmpty,Converter={StaticResource BoolToVis}}"/>
+                
 
-                    <TextBox Style="{StaticResource textboxSearch}"/>
-                    <Icon:PackIconMaterial Kind="Magnify" Width="15" Height="15" VerticalAlignment="Center"
-                Margin="0 0 15 0" Foreground="#b0b9c6" HorizontalAlignment="Right"/>
-                </Grid>
-
-
+<!--
 
                 <Button Style="{StaticResource topButton}" Margin="0 0 20 0" Background="#dcdcdc" HorizontalAlignment="Right">
                     <Icon:PackIconMaterial Kind="Cog"/>
@@ -418,9 +505,9 @@ HorizontalAlignment="Left" Foreground="#121518"/>
                 <Button Style="{StaticResource topButton}" Margin="0 0 55 0" Background="#dcdcdc" HorizontalAlignment="Right">
                     <Icon:PackIconMaterial Kind="Bell"/>
                 </Button>
+-->
 
-
-                <TextBlock Text="Performance" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="0 20 0 0"
+                <TextBlock Text="Performance" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="0 60 0 0"
 HorizontalAlignment="Left" Foreground="#121518"/>
 
 
@@ -430,9 +517,9 @@ HorizontalAlignment="Left" Foreground="#121518"/>
 
             </Grid>
 
-            <Grid Grid.Column="1" Margin="30 20 20 20" x:Name="salaryGrid" Visibility="Hidden">
+            <Grid Grid.Column="1" Margin="30 10 20 20" x:Name="salaryGrid" Visibility="Hidden">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
+                    
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
@@ -440,17 +527,10 @@ HorizontalAlignment="Left" Foreground="#121518"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
-                <Grid Width="300" HorizontalAlignment="Left">
-                    <TextBlock Margin="20 0" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False"
-    Panel.ZIndex="1" Text=" Search here ...." Visibility="{Binding ElementName=txtSearch,Path=Text.IsEmpty,Converter={StaticResource BoolToVis}}"/>
-
-                    <TextBox Style="{StaticResource textboxSearch}"/>
-                    <Icon:PackIconMaterial Kind="Magnify" Width="15" Height="15" VerticalAlignment="Center"
-                Margin="0 0 15 0" Foreground="#b0b9c6" HorizontalAlignment="Right"/>
-                </Grid>
+               
 
 
-
+<!--
                 <Button Style="{StaticResource topButton}" Margin="0 0 20 0" Background="#dcdcdc" HorizontalAlignment="Right">
                     <Icon:PackIconMaterial Kind="Cog"/>
                 </Button>
@@ -458,8 +538,8 @@ HorizontalAlignment="Left" Foreground="#121518"/>
                     <Icon:PackIconMaterial Kind="Bell"/>
                 </Button>
 
-
-                <TextBlock Text="Salary" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="0 20 0 0"
+-->
+                <TextBlock Text="Salary" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="0 60 0 0"
 HorizontalAlignment="Left" Foreground="#121518"/>
 
 
@@ -470,9 +550,9 @@ HorizontalAlignment="Left" Foreground="#121518"/>
             </Grid>
 
 
-            <Grid Grid.Column="1" Margin="30 20 20 20" x:Name="requestLeaveGrid" Visibility="Hidden">
+            <Grid Grid.Column="1" Margin="30 10 20 20" x:Name="requestLeaveGrid" Visibility="Hidden">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
+                    
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
@@ -480,26 +560,17 @@ HorizontalAlignment="Left" Foreground="#121518"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
-                <Grid Width="300" HorizontalAlignment="Left">
-                    <TextBlock Margin="20 0" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False"
-    Panel.ZIndex="1" Text=" Search here ...." Visibility="{Binding ElementName=txtSearch,Path=Text.IsEmpty,Converter={StaticResource BoolToVis}}"/>
-
-                    <TextBox Style="{StaticResource textboxSearch}"/>
-                    <Icon:PackIconMaterial Kind="Magnify" Width="15" Height="15" VerticalAlignment="Center"
-                Margin="0 0 15 0" Foreground="#b0b9c6" HorizontalAlignment="Right"/>
-                </Grid>
-
-
-
+                
+<!--
                 <Button Style="{StaticResource topButton}" Margin="0 0 20 0" Background="#dcdcdc" HorizontalAlignment="Right">
                     <Icon:PackIconMaterial Kind="Cog"/>
                 </Button>
                 <Button Style="{StaticResource topButton}" Margin="0 0 55 0" Background="#dcdcdc" HorizontalAlignment="Right">
                     <Icon:PackIconMaterial Kind="Bell"/>
                 </Button>
+-->
 
-
-                <TextBlock Text="Request Leave" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="0 20 0 0"
+                <TextBlock Text="Request Leave" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="0 60 0 0"
 HorizontalAlignment="Left" Foreground="#121518"/>
 
 
@@ -508,6 +579,68 @@ HorizontalAlignment="Left" Foreground="#121518"/>
 
 
             </Grid>
+
+            <Grid Grid.Column="1" Margin="30 10 20 20" x:Name="MyProfileGrid" Visibility="Hidden">
+                <Grid.RowDefinitions>
+                    
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                
+
+
+<!--
+                <Button Style="{StaticResource topButton}" Margin="0 0 20 0" Background="#dcdcdc" HorizontalAlignment="Right">
+                    <Icon:PackIconMaterial Kind="Cog"/>
+                </Button>
+                <Button Style="{StaticResource topButton}" Margin="0 0 55 0" Background="#dcdcdc" HorizontalAlignment="Right">
+                    <Icon:PackIconMaterial Kind="Bell"/>
+                </Button>
+-->
+
+                <TextBlock Text="My Profile" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="0 60 0 0"
+HorizontalAlignment="Left" Foreground="#121518"/>
+
+
+
+                <Separator Height="1" Grid.Row="3" Background="#dae2ea" Margin="0 -1 0 10"/>
+
+                <StackPanel Grid.Row="4" Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0 40 0 0">
+                    <TextBlock Text="First Name:" FontWeight="Bold" Margin="100,20,0,0" FontSize="15" />
+                    <TextBlock x:Name="txtFirstName" Margin="250 -20 0 20" FontSize="15" />
+
+                    <TextBlock Text="Last Name:" FontWeight="Bold" Margin="100,10,0,0" FontSize="15"  />
+                    <TextBlock x:Name="txtLastName" Margin="250 -20 0 20" FontSize="15" />
+
+                    <TextBlock Text="Email:" FontWeight="Bold" Margin="100,10,0,0" FontSize="15" />
+                    <TextBlock x:Name="txtEmail" Margin="250 -20 0 20" FontSize="15"/>
+
+                    <TextBlock Text="Contact Number:" FontWeight="Bold" Margin="100,10,0,0" FontSize="15"  />
+                    <TextBlock x:Name="txtContactNumber" Margin="250 -20 0 20" FontSize="15"/>
+
+                    <TextBlock Text="Department:" FontWeight="Bold" Margin="100,10,0,0" FontSize="15" />
+                    <TextBlock x:Name="txtDepartment" Margin="250 -20 0 20" FontSize="15"/>
+
+                    <TextBlock Text="Position:" FontWeight="Bold" Margin="100,10,0,0" FontSize="15" />
+                    <TextBlock x:Name="txtPosition" Margin="250 -20 0 20" FontSize="15"/>
+
+                    <TextBlock Text="Date of Birth:" FontWeight="Bold" Margin="100,10,0,0" FontSize="15" />
+                    <TextBlock x:Name="txtDOB" Margin="250 -20 0 20" FontSize="15" />
+
+                    <!-- Edit Details Button -->
+                    <Button  Content="Edit Details" FontSize ="15" Margin="80,20,0,0" HorizontalAlignment="Center" Width="150" Height="40"  Click="EditDetailsButton_Click" Style="{StaticResource addButton}" />
+
+                </StackPanel>
+
+                
+
+
+        </Grid>
+
 
 
 

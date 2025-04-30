@@ -19,6 +19,22 @@ namespace HRM.View
     /// </summary>
     public partial class table : Window
     {
+
+        private void btnMinimize_Click(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Minimized;
+        }
+
+        private void btnClose_Click(object sender, RoutedEventArgs e)
+        {
+            LoginView firstWindow = new LoginView();
+            firstWindow.Show();
+            this.Hide();
+        }
+
+        
+
+
         public table()
         {
             InitializeComponent();
@@ -88,6 +104,9 @@ namespace HRM.View
             performanceGrid.Visibility = Visibility.Hidden;
             salaryGrid.Visibility = Visibility.Hidden;
             requestLeaveGrid.Visibility = Visibility.Hidden;
+            MyProfileGrid.Visibility = Visibility.Hidden;
+
+            MyProfileButton.Background = System.Windows.Media.Brushes.Transparent;
 
 
 
@@ -111,6 +130,9 @@ namespace HRM.View
             performanceGrid.Visibility = Visibility.Hidden;
             salaryGrid.Visibility = Visibility.Hidden;
             requestLeaveGrid.Visibility = Visibility.Hidden;
+            MyProfileGrid.Visibility = Visibility.Hidden;
+
+            MyProfileButton.Background = System.Windows.Media.Brushes.Transparent;
 
             EventButton.Background = System.Windows.Media.Brushes.White;
             DashBoardButton.Background = System.Windows.Media.Brushes.Transparent;
@@ -130,6 +152,9 @@ namespace HRM.View
             performanceGrid.Visibility = Visibility.Hidden;
             salaryGrid.Visibility = Visibility.Hidden;
             requestLeaveGrid.Visibility = Visibility.Hidden;
+            MyProfileGrid.Visibility = Visibility.Hidden;
+
+            MyProfileButton.Background = System.Windows.Media.Brushes.Transparent;
 
             EventButton.Background = System.Windows.Media.Brushes.Transparent;
             DashBoardButton.Background = System.Windows.Media.Brushes.White;
@@ -149,6 +174,9 @@ namespace HRM.View
             performanceGrid.Visibility = Visibility.Hidden;
             salaryGrid.Visibility = Visibility.Hidden;
             requestLeaveGrid.Visibility = Visibility.Hidden;
+            MyProfileGrid.Visibility = Visibility.Hidden;
+
+            MyProfileButton.Background = System.Windows.Media.Brushes.Transparent;
 
             EventButton.Background = System.Windows.Media.Brushes.Transparent;
             DashBoardButton.Background = System.Windows.Media.Brushes.Transparent;
@@ -168,6 +196,9 @@ namespace HRM.View
             performanceGrid.Visibility = Visibility.Visible;
             salaryGrid.Visibility = Visibility.Hidden;
             requestLeaveGrid.Visibility = Visibility.Hidden;
+            MyProfileGrid.Visibility = Visibility.Hidden;
+
+            MyProfileButton.Background = System.Windows.Media.Brushes.Transparent;
 
             EventButton.Background = System.Windows.Media.Brushes.Transparent;
             DashBoardButton.Background = System.Windows.Media.Brushes.Transparent;
@@ -187,6 +218,9 @@ namespace HRM.View
             performanceGrid.Visibility = Visibility.Hidden;
             salaryGrid.Visibility = Visibility.Visible;
             requestLeaveGrid.Visibility = Visibility.Hidden;
+            MyProfileGrid.Visibility = Visibility.Hidden;
+
+            MyProfileButton.Background = System.Windows.Media.Brushes.Transparent;
 
             EventButton.Background = System.Windows.Media.Brushes.Transparent;
             DashBoardButton.Background = System.Windows.Media.Brushes.Transparent;
@@ -206,6 +240,9 @@ namespace HRM.View
             performanceGrid.Visibility = Visibility.Hidden;
             salaryGrid.Visibility = Visibility.Hidden;
             requestLeaveGrid.Visibility = Visibility.Visible;
+            MyProfileGrid.Visibility = Visibility.Hidden;   
+
+            MyProfileButton.Background = System.Windows.Media.Brushes.Transparent;
 
             EventButton.Background = System.Windows.Media.Brushes.Transparent;
             DashBoardButton.Background = System.Windows.Media.Brushes.Transparent;
@@ -214,6 +251,30 @@ namespace HRM.View
             SalaryButton.Background = System.Windows.Media.Brushes.Transparent;
             RequestLeaveButton.Background = System.Windows.Media.Brushes.White;
             DashBoardButton.Background = System.Windows.Media.Brushes.Transparent;
+        }
+
+
+        //My Profile Button
+        private void MyProfileButton_Click(object sender, RoutedEventArgs e)
+        {
+            dashBoardGrid.Visibility = Visibility.Hidden;
+            eventGrid.Visibility = Visibility.Hidden;
+            departmentGrid.Visibility = Visibility.Hidden;
+            membersGrid.Visibility = Visibility.Hidden;
+            performanceGrid.Visibility = Visibility.Hidden;
+            salaryGrid.Visibility = Visibility.Hidden;
+            requestLeaveGrid.Visibility = Visibility.Hidden;
+            MyProfileGrid.Visibility = Visibility.Visible;
+
+            EventButton.Background = System.Windows.Media.Brushes.Transparent;
+            DashBoardButton.Background = System.Windows.Media.Brushes.Transparent;
+            MembersButton.Background = System.Windows.Media.Brushes.Transparent;
+            PerformanceButton.Background = System.Windows.Media.Brushes.Transparent;
+            SalaryButton.Background = System.Windows.Media.Brushes.Transparent;
+            RequestLeaveButton.Background = System.Windows.Media.Brushes.Transparent;
+            DashBoardButton.Background = System.Windows.Media.Brushes.Transparent;
+            MyProfileButton.Background = System.Windows.Media.Brushes.White;
+
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -266,112 +327,14 @@ namespace HRM.View
             registerView.Show();
             this.Hide();
         }
-
-        private void employeeEdit(object sender, RoutedEventArgs e)
+         //edit profile
+        private void EditDetailsButton_Click(object sender, RoutedEventArgs e)
         {
-            // Assuming you want to get the selected item from the DataGrid
-            if (memberDataGrid.SelectedItem is Member selectedMember)
-            {
-                int selectedId = int.Parse(selectedMember.Number); // Convert the Number property to an integer
-                                                                   //MessageBox.Show(selectedId.ToString()); // Correctly call ToString() as a method
 
-                
-
-                var repo = new EmployRepository();
-                Employee selectedEmployee = repo.GetEmploy(selectedId);
-
-                EditProfile editProfile = new EditProfile(selectedEmployee);
-                editProfile.Show();
-                this.Close();
-
-                var emplyees = repo.GetEmployees();
-
-                var converter = new BrushConverter(); // Ensure BrushConverter is instantiated
-                ObservableCollection<Member> members = new ObservableCollection<Member>();
-
-                foreach (var employ in emplyees)
-                {
-                    var name = employ.first_name + " " + employ.last_name;
-                    // Fix for CS1501: Use string.StartsWith instead of invalid index range comparison
-                    if (name.StartsWith(txtFilter.Text, StringComparison.OrdinalIgnoreCase) ||
-                        employ.last_name.Equals(txtFilter.Text, StringComparison.OrdinalIgnoreCase))
-                    {
-                        members.Add(new Member
-                        {
-                            Number = employ.id.ToString(), // Convert int to string
-                            Character = employ.first_name[0].ToString(),
-                            BgColor = (Brush)converter.ConvertFromString("#1098ad"), // Correct usage of BrushConverter
-                            Name = employ.first_name + " " + employ.last_name, // Use employee's actual name
-                            Position = employ.position,
-                            Email = employ.email,
-                            Phone = employ.contact_no
-                        });
-                    }
-                }
-                memberDataGrid.ItemsSource = members;
-
-
-
-
-
-            }
-            else
-            {
-                MessageBox.Show("No member is selected.");
-            }
         }
 
-        private void employeeDelete(object sender, RoutedEventArgs e)
-        {
-            // Assuming you want to get the selected item from the DataGrid
-            if (memberDataGrid.SelectedItem is Member selectedMember)
-            {
-                int selectedId = int.Parse(selectedMember.Number); // Convert the Number property to an integer
-
-                // Use MessageBoxResult and MessageBoxButton from System.Windows namespace
-                MessageBoxResult dialogResult = MessageBox.Show(
-                    "Are you sure you want to delete this employee?",
-                    "Delete Confirmation",
-                    MessageBoxButton.YesNo
-                );
-
-                if (dialogResult == MessageBoxResult.No)
-                {
-                    return;
-                }
-
-                var repo = new EmployRepository();
-                repo.DeleteEmploy(selectedId);
-
-
-
-
-                
-                var emplyees = repo.GetEmployees();
-
-                var converter = new BrushConverter(); // Ensure BrushConverter is instantiated
-                ObservableCollection<Member> members = new ObservableCollection<Member>();
-
-                foreach (var employ in emplyees)
-                {
-                    var name = employ.first_name + " " + employ.last_name;
-                    // Fix for CS1501: Use string.StartsWith instead of invalid index range comparison
-                    if (name.StartsWith(txtFilter.Text, StringComparison.OrdinalIgnoreCase) ||
-                        employ.last_name.Equals(txtFilter.Text, StringComparison.OrdinalIgnoreCase))
-                    {
-                        members.Add(new Member
-                        {
-                            Number = employ.id.ToString(), // Convert int to string
-                            Character = employ.first_name[0].ToString(),
-                            BgColor = (Brush)converter.ConvertFromString("#1098ad"), // Correct usage of BrushConverter
-                            Name = employ.first_name + " " + employ.last_name, // Use employee's actual name
-                            Position = employ.position,
-                            Email = employ.email,
-                            Phone = employ.contact_no
-                        });
-                    }
-                }
-                memberDataGrid.ItemsSource = members;
+        
+    }
 
 
 
@@ -394,4 +357,8 @@ namespace HRM.View
         public Brush BgColor { get; set; }
 
     }
-}
+
+
+
+    
+    }
