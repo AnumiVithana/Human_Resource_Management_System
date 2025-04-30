@@ -41,6 +41,33 @@ namespace HRM.View
                 LastReviewMonth = "January 2023"
             };
             DataContext = EmployeeInfo;
+        }
+        private void btnMinimize_Click(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Minimized;
+        }
+
+        private void btnClose_Click(object sender, RoutedEventArgs e)
+        {
+            LoginView firstWindow = new LoginView();
+            firstWindow.Show();
+            this.Hide();
+        }
+
+        private Employee LogedEmployee;
+
+        public table(Employee logedEmployee)
+        {
+            InitializeComponent();
+
+            
+            txtFirstName.Text = logedEmployee.first_name; 
+            txtLastName.Text = logedEmployee.last_name;
+            txtEmail.Text = logedEmployee.email;
+            txtContactNumber.Text = logedEmployee.contact_no;
+            txtDepartment.Text = logedEmployee.department;
+            txtPosition.Text = logedEmployee.position;
+            txtDOB.Text = logedEmployee.dob;
 
             var converter = new BrushConverter();
             ObservableCollection<Member> members = new ObservableCollection<Member>();
@@ -65,18 +92,7 @@ namespace HRM.View
 
         }
 
-        private void btnMinimize_Click(object sender, RoutedEventArgs e)
-        {
-            WindowState = WindowState.Minimized;
-        }
-
-        private void btnClose_Click(object sender, RoutedEventArgs e)
-        {
-            LoginView firstWindow = new LoginView();
-            firstWindow.Show();
-            this.Hide();
-        }
-
+        
 
         // ----DashBoard Admin and employee----
         private void ShowGreeting(string name)
@@ -398,6 +414,9 @@ namespace HRM.View
             RequestLeaveButton.Background = System.Windows.Media.Brushes.Transparent;
             DashBoardButton.Background = System.Windows.Media.Brushes.Transparent;
             MyProfileButton.Background = System.Windows.Media.Brushes.White;
+
+            
+
 
         }
 
