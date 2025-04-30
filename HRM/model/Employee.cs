@@ -18,5 +18,6 @@ namespace HRM.models
         public string contact_no = "";
         public string email = "";
         public string dob = "";
+        public string gender = "";
     }
 }

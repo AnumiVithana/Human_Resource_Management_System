@@ -1,7 +1,9 @@
-﻿using HRM.Repositories;
+﻿using HRM.models;
+using HRM.Repositories;
 using System;
 using System.Collections.ObjectModel;
 using System.Data;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Web.Configuration;
 using System.Windows;
@@ -42,7 +44,7 @@ namespace HRM.View
                 });
             }
             memberDataGrid.ItemsSource = members;
-
+            
         }
 
 
@@ -264,9 +266,124 @@ namespace HRM.View
             registerView.Show();
             this.Hide();
         }
+
+        private void employeeEdit(object sender, RoutedEventArgs e)
+        {
+            // Assuming you want to get the selected item from the DataGrid
+            if (memberDataGrid.SelectedItem is Member selectedMember)
+            {
+                int selectedId = int.Parse(selectedMember.Number); // Convert the Number property to an integer
+                                                                   //MessageBox.Show(selectedId.ToString()); // Correctly call ToString() as a method
+
+                
+
+                var repo = new EmployRepository();
+                Employee selectedEmployee = repo.GetEmploy(selectedId);
+
+                EditProfile editProfile = new EditProfile(selectedEmployee);
+                editProfile.Show();
+                this.Close();
+
+                var emplyees = repo.GetEmployees();
+
+                var converter = new BrushConverter(); // Ensure BrushConverter is instantiated
+                ObservableCollection<Member> members = new ObservableCollection<Member>();
+
+                foreach (var employ in emplyees)
+                {
+                    var name = employ.first_name + " " + employ.last_name;
+                    // Fix for CS1501: Use string.StartsWith instead of invalid index range comparison
+                    if (name.StartsWith(txtFilter.Text, StringComparison.OrdinalIgnoreCase) ||
+                        employ.last_name.Equals(txtFilter.Text, StringComparison.OrdinalIgnoreCase))
+                    {
+                        members.Add(new Member
+                        {
+                            Number = employ.id.ToString(), // Convert int to string
+                            Character = employ.first_name[0].ToString(),
+                            BgColor = (Brush)converter.ConvertFromString("#1098ad"), // Correct usage of BrushConverter
+                            Name = employ.first_name + " " + employ.last_name, // Use employee's actual name
+                            Position = employ.position,
+                            Email = employ.email,
+                            Phone = employ.contact_no
+                        });
+                    }
+                }
+                memberDataGrid.ItemsSource = members;
+
+
+
+
+
+            }
+            else
+            {
+                MessageBox.Show("No member is selected.");
+            }
+        }
+
+        private void employeeDelete(object sender, RoutedEventArgs e)
+        {
+            // Assuming you want to get the selected item from the DataGrid
+            if (memberDataGrid.SelectedItem is Member selectedMember)
+            {
+                int selectedId = int.Parse(selectedMember.Number); // Convert the Number property to an integer
+
+                // Use MessageBoxResult and MessageBoxButton from System.Windows namespace
+                MessageBoxResult dialogResult = MessageBox.Show(
+                    "Are you sure you want to delete this employee?",
+                    "Delete Confirmation",
+                    MessageBoxButton.YesNo
+                );
+
+                if (dialogResult == MessageBoxResult.No)
+                {
+                    return;
+                }
+
+                var repo = new EmployRepository();
+                repo.DeleteEmploy(selectedId);
+
+
+
+
+                
+                var emplyees = repo.GetEmployees();
+
+                var converter = new BrushConverter(); // Ensure BrushConverter is instantiated
+                ObservableCollection<Member> members = new ObservableCollection<Member>();
+
+                foreach (var employ in emplyees)
+                {
+                    var name = employ.first_name + " " + employ.last_name;
+                    // Fix for CS1501: Use string.StartsWith instead of invalid index range comparison
+                    if (name.StartsWith(txtFilter.Text, StringComparison.OrdinalIgnoreCase) ||
+                        employ.last_name.Equals(txtFilter.Text, StringComparison.OrdinalIgnoreCase))
+                    {
+                        members.Add(new Member
+                        {
+                            Number = employ.id.ToString(), // Convert int to string
+                            Character = employ.first_name[0].ToString(),
+                            BgColor = (Brush)converter.ConvertFromString("#1098ad"), // Correct usage of BrushConverter
+                            Name = employ.first_name + " " + employ.last_name, // Use employee's actual name
+                            Position = employ.position,
+                            Email = employ.email,
+                            Phone = employ.contact_no
+                        });
+                    }
+                }
+                memberDataGrid.ItemsSource = members;
+
+
+
+
+
+            }
+            else
+            {
+                MessageBox.Show("No member is selected.");
+            }
+        }
     }
-
-
     public class Member {
         public String Character { get; set; }
         public String Number { get; set; }
@@ -277,9 +394,4 @@ namespace HRM.View
         public Brush BgColor { get; set; }
 
     }
-
-
-
-
-
 }

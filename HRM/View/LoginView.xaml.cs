@@ -130,9 +130,6 @@ namespace HRM.View
             this.Hide();
         }
 
-        
-
-
 
     }
 }
