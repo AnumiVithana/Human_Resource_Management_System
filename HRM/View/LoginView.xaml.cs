@@ -1,4 +1,5 @@
-﻿using HRM.Repositories;
+﻿using HRM.models;
+using HRM.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -83,6 +84,7 @@ namespace HRM.View
             string employeePw = txtPass.Password;
             var repo = new EmployRepository();
             bool result = repo.SignInEmplyee(employeeName, employeePw);
+            Employee logedemployee = repo.GetEmployeeByName(employeeName, employeePw);
 
             if (employeePw == "")
             {
@@ -94,7 +96,7 @@ namespace HRM.View
                 //MainView mainWindow = new MainView();
                 //mainWindow.Show();
 
-                table mainWindow = new table();
+                table mainWindow = new table(logedemployee);
                 mainWindow.Show();
                 this.Close();
 

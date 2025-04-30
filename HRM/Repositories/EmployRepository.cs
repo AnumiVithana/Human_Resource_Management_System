@@ -128,6 +128,7 @@ namespace HRM.Repositories
                         command.Parameters.AddWithValue("@email", employ.email);
                         command.Parameters.AddWithValue("@dob", employ.dob);
 
+
                         command.ExecuteNonQuery();
 
                     }
@@ -236,29 +237,6 @@ namespace HRM.Repositories
             }
         }
 
-
-        //public void DeleteEmploy(int id)
-        //{
-        //    try
-        //    {
-        //        using (SqlConnection connection = new SqlConnection(connectionString))
-        //        {
-        //            connection.Open();
-
-        //            string sql = "DeleteEmploy FROM employees WHERE id=@d";
-        //            using (SqlCommand command = new SqlCommand(sql, connection))
-        //            {
-        //                command.Parameters.AddWithValue("@id", id);
-
-        //                command.ExecuteNonQuery();
-        //            }
-        //        }
-        //    }catch (Exception ex)
-        //    {
-        //        Console.WriteLine("Exception: " + ex.ToString());
-        //    }
-        //}
-
         public void DeleteEmploy(int id)
         {
             try
@@ -314,6 +292,54 @@ namespace HRM.Repositories
 
             return false; // Ensure a return value for all code paths
         }
+
+
+        public Employee GetEmployeeByName(string userName, string password)
+        {
+            string[] parts = userName.Split(' ');
+
+            string firstName = parts[0].ToLower();
+            string lastName = parts.Length > 1 ? parts[1].ToLower() : "";
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    string sql = "SELECT * FROM employees WHERE first_name=@firstName AND last_name=@lastName AND pw_hash=@pw_hash";
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        command.Parameters.AddWithValue("@firstName", firstName);
+                        command.Parameters.AddWithValue("@lastName", lastName);
+                        command.Parameters.AddWithValue("@pw_hash", password);
+                        using (SqlDataReader reader = command.ExecuteReader())
+                            if (reader.Read())
+                            {
+                                Employee employ = new Employee();
+                                employ.id = reader.GetInt32(0);
+                                employ.first_name = reader.GetString(1);
+                                employ.last_name = reader.GetString(2);
+                                employ.pw_hash = reader.GetString(3);
+                                employ.department = reader.GetString(4);
+                                employ.position = reader.GetString(5);
+                                employ.contact_no = reader.GetString(6);
+                                employ.email = reader.GetString(7);
+                                employ.dob = reader.GetString(8);
+
+                                return employ;
+
+                            }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception: " + ex.ToString());
+            }
+
+            return null;
+        }
+
+
 
 
 

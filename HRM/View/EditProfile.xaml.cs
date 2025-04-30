@@ -103,7 +103,7 @@ namespace HRM.View
             EmployRepository repository = new EmployRepository();
             repository.UpdateEmploy(editEmployee);
 
-            table table = new table();
+            table table = new table(selectedEmployee);
             table.Show();
 
             this.Close();

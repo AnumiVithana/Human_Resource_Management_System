@@ -32,12 +32,20 @@ namespace HRM.View
             this.Hide();
         }
 
-        
+        private Employee LogedEmployee;
 
-
-        public table()
+        public table(Employee logedEmployee)
         {
             InitializeComponent();
+
+            
+            txtFirstName.Text = logedEmployee.first_name; 
+            txtLastName.Text = logedEmployee.last_name;
+            txtEmail.Text = logedEmployee.email;
+            txtContactNumber.Text = logedEmployee.contact_no;
+            txtDepartment.Text = logedEmployee.department;
+            txtPosition.Text = logedEmployee.position;
+            txtDOB.Text = logedEmployee.dob;
 
 
             var converter = new BrushConverter();
@@ -274,6 +282,9 @@ namespace HRM.View
             RequestLeaveButton.Background = System.Windows.Media.Brushes.Transparent;
             DashBoardButton.Background = System.Windows.Media.Brushes.Transparent;
             MyProfileButton.Background = System.Windows.Media.Brushes.White;
+
+            
+
 
         }
 
