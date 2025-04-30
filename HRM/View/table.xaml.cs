@@ -1,4 +1,5 @@
-﻿using HRM.Repositories;
+﻿using HRM.models;
+using HRM.Repositories;
 using System;
 using System.Collections.ObjectModel;
 using System.Data;
@@ -17,6 +18,22 @@ namespace HRM.View
     /// </summary>
     public partial class table : Window
     {
+
+        private void btnMinimize_Click(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Minimized;
+        }
+
+        private void btnClose_Click(object sender, RoutedEventArgs e)
+        {
+            LoginView firstWindow = new LoginView();
+            firstWindow.Show();
+            this.Hide();
+        }
+
+        
+
+
         public table()
         {
             InitializeComponent();
@@ -86,6 +103,9 @@ namespace HRM.View
             performanceGrid.Visibility = Visibility.Hidden;
             salaryGrid.Visibility = Visibility.Hidden;
             requestLeaveGrid.Visibility = Visibility.Hidden;
+            MyProfileGrid.Visibility = Visibility.Hidden;
+
+            MyProfileButton.Background = System.Windows.Media.Brushes.Transparent;
 
 
 
@@ -109,6 +129,9 @@ namespace HRM.View
             performanceGrid.Visibility = Visibility.Hidden;
             salaryGrid.Visibility = Visibility.Hidden;
             requestLeaveGrid.Visibility = Visibility.Hidden;
+            MyProfileGrid.Visibility = Visibility.Hidden;
+
+            MyProfileButton.Background = System.Windows.Media.Brushes.Transparent;
 
             EventButton.Background = System.Windows.Media.Brushes.White;
             DashBoardButton.Background = System.Windows.Media.Brushes.Transparent;
@@ -128,6 +151,9 @@ namespace HRM.View
             performanceGrid.Visibility = Visibility.Hidden;
             salaryGrid.Visibility = Visibility.Hidden;
             requestLeaveGrid.Visibility = Visibility.Hidden;
+            MyProfileGrid.Visibility = Visibility.Hidden;
+
+            MyProfileButton.Background = System.Windows.Media.Brushes.Transparent;
 
             EventButton.Background = System.Windows.Media.Brushes.Transparent;
             DashBoardButton.Background = System.Windows.Media.Brushes.White;
@@ -147,6 +173,9 @@ namespace HRM.View
             performanceGrid.Visibility = Visibility.Hidden;
             salaryGrid.Visibility = Visibility.Hidden;
             requestLeaveGrid.Visibility = Visibility.Hidden;
+            MyProfileGrid.Visibility = Visibility.Hidden;
+
+            MyProfileButton.Background = System.Windows.Media.Brushes.Transparent;
 
             EventButton.Background = System.Windows.Media.Brushes.Transparent;
             DashBoardButton.Background = System.Windows.Media.Brushes.Transparent;
@@ -166,6 +195,9 @@ namespace HRM.View
             performanceGrid.Visibility = Visibility.Visible;
             salaryGrid.Visibility = Visibility.Hidden;
             requestLeaveGrid.Visibility = Visibility.Hidden;
+            MyProfileGrid.Visibility = Visibility.Hidden;
+
+            MyProfileButton.Background = System.Windows.Media.Brushes.Transparent;
 
             EventButton.Background = System.Windows.Media.Brushes.Transparent;
             DashBoardButton.Background = System.Windows.Media.Brushes.Transparent;
@@ -185,6 +217,9 @@ namespace HRM.View
             performanceGrid.Visibility = Visibility.Hidden;
             salaryGrid.Visibility = Visibility.Visible;
             requestLeaveGrid.Visibility = Visibility.Hidden;
+            MyProfileGrid.Visibility = Visibility.Hidden;
+
+            MyProfileButton.Background = System.Windows.Media.Brushes.Transparent;
 
             EventButton.Background = System.Windows.Media.Brushes.Transparent;
             DashBoardButton.Background = System.Windows.Media.Brushes.Transparent;
@@ -204,6 +239,9 @@ namespace HRM.View
             performanceGrid.Visibility = Visibility.Hidden;
             salaryGrid.Visibility = Visibility.Hidden;
             requestLeaveGrid.Visibility = Visibility.Visible;
+            MyProfileGrid.Visibility = Visibility.Hidden;   
+
+            MyProfileButton.Background = System.Windows.Media.Brushes.Transparent;
 
             EventButton.Background = System.Windows.Media.Brushes.Transparent;
             DashBoardButton.Background = System.Windows.Media.Brushes.Transparent;
@@ -212,6 +250,30 @@ namespace HRM.View
             SalaryButton.Background = System.Windows.Media.Brushes.Transparent;
             RequestLeaveButton.Background = System.Windows.Media.Brushes.White;
             DashBoardButton.Background = System.Windows.Media.Brushes.Transparent;
+        }
+
+
+        //My Profile Button
+        private void MyProfileButton_Click(object sender, RoutedEventArgs e)
+        {
+            dashBoardGrid.Visibility = Visibility.Hidden;
+            eventGrid.Visibility = Visibility.Hidden;
+            departmentGrid.Visibility = Visibility.Hidden;
+            membersGrid.Visibility = Visibility.Hidden;
+            performanceGrid.Visibility = Visibility.Hidden;
+            salaryGrid.Visibility = Visibility.Hidden;
+            requestLeaveGrid.Visibility = Visibility.Hidden;
+            MyProfileGrid.Visibility = Visibility.Visible;
+
+            EventButton.Background = System.Windows.Media.Brushes.Transparent;
+            DashBoardButton.Background = System.Windows.Media.Brushes.Transparent;
+            MembersButton.Background = System.Windows.Media.Brushes.Transparent;
+            PerformanceButton.Background = System.Windows.Media.Brushes.Transparent;
+            SalaryButton.Background = System.Windows.Media.Brushes.Transparent;
+            RequestLeaveButton.Background = System.Windows.Media.Brushes.Transparent;
+            DashBoardButton.Background = System.Windows.Media.Brushes.Transparent;
+            MyProfileButton.Background = System.Windows.Media.Brushes.White;
+
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -264,8 +326,13 @@ namespace HRM.View
             registerView.Show();
             this.Hide();
         }
+         //edit profile
+        private void EditDetailsButton_Click(object sender, RoutedEventArgs e)
+        {
 
+        }
 
+        
     }
 
 
@@ -282,6 +349,5 @@ namespace HRM.View
 
 
 
-
-
-}
+    
+    }

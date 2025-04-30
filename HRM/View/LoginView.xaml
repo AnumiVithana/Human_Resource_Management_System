@@ -110,7 +110,7 @@
                             FontFamily="Berlin Sans FB"
                             Cursor="Hand"
                             Grid.Column="2"
-                            Click="btnClose_Click">
+                            Click="btnClose_Click" HorizontalAlignment="Right" Width="25">
 
                         <Button.Style>
                             <Style TargetType="Button">
