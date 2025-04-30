@@ -2,6 +2,7 @@
 using HRM.Repositories;
 using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Data;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
@@ -20,31 +21,32 @@ namespace HRM.View
     public partial class table : Window
     {
 
-        private void btnMinimize_Click(object sender, RoutedEventArgs e)
-        {
-            WindowState = WindowState.Minimized;
-        }
-
-        private void btnClose_Click(object sender, RoutedEventArgs e)
-        {
-            LoginView firstWindow = new LoginView();
-            firstWindow.Show();
-            this.Hide();
-        }
-
-        
-
-
         public table()
         {
             InitializeComponent();
-
+            ShowGreeting("John");
+            ShowDate();
+            // ---employee databace info ---
+            EmployeeInfo = new EmployeeInfoViewModel
+            {
+                CasualLeave = "6",
+                SickLeave = "4",
+                AnnualLeave = "15",
+                PresentDays = "18",
+                AbsentDays = "2",
+                LateDays = "3",
+                LastSalary = "Rs. 120,000",
+                SalaryMonth = "March 2023",
+                PerformanceScore = "4.3 / 5",
+                LastReviewMonth = "January 2023"
+            };
+            DataContext = EmployeeInfo;
 
             var converter = new BrushConverter();
             ObservableCollection<Member> members = new ObservableCollection<Member>();
             var repo = new EmployRepository();
             var emplyees = repo.GetEmployees();
-            
+
 
             foreach (var employ in emplyees)
             {
@@ -60,8 +62,130 @@ namespace HRM.View
                 });
             }
             memberDataGrid.ItemsSource = members;
-            
+
         }
+
+        private void btnMinimize_Click(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Minimized;
+        }
+
+        private void btnClose_Click(object sender, RoutedEventArgs e)
+        {
+            LoginView firstWindow = new LoginView();
+            firstWindow.Show();
+            this.Hide();
+        }
+
+
+        // ----DashBoard Admin and employee----
+        private void ShowGreeting(string name)
+        {
+            var hour = DateTime.Now.Hour;
+            string greeting;
+
+            if (hour < 12)
+                greeting = "Good Morning";
+            else if (hour < 18)
+                greeting = "Good Afternoon";
+            else
+                greeting = "Good Evening";
+
+            txtGreeting.Text = $"{greeting}, {name}!";
+            txtGreeting_employee.Text = $"{greeting}, {name}!";
+        }
+
+        private void ShowDate()
+        {
+
+            txtDate.Text = DateTime.Now.ToString("dddd, MMMM dd, yyyy");
+            txtDate_employee.Text = DateTime.Now.ToString("dddd, MMMM dd, yyyy");
+        }
+        // ----DashBoard employee check button----
+
+        private DateTime? checkInTime = null;
+        private DateTime? checkOutTime = null;
+
+        private void btnCheckIn_Click(object sender, RoutedEventArgs e)
+        {
+            checkInTime = DateTime.Now;
+            txtCheckInTime.Text = checkInTime.Value.ToString("hh:mm tt");
+            txtStatus.Text = $"Checked in at {txtCheckInTime.Text}";
+
+            btnCheckIn.Visibility = Visibility.Collapsed;
+            btnCheckOut.Visibility = Visibility.Visible;
+            statusPanel.Visibility = Visibility.Visible;
+        }
+
+        private void btnCheckOut_Click(object sender, RoutedEventArgs e)
+        {
+            // Validation
+            if (chkConfirmWorkday.IsChecked != true)
+            {
+                MessageBox.Show("Please confirm your workday by checking the box.", "Confirmation Required", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtEmployeeNote.Text))
+            {
+                MessageBox.Show("Please enter your notes before checking out.", "Note Required", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            // Check-out logic
+            if (checkInTime == null)
+            {
+                MessageBox.Show("You must check in first!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            DateTime checkOutTime = DateTime.Now;
+            txtCheckOutTime.Text = checkOutTime.ToString("hh:mm tt");
+
+            // Calculate working hours
+            TimeSpan duration = checkOutTime - checkInTime.Value;
+            txtWorkingHours.Text = $"{(int)duration.TotalHours}h {duration.Minutes}m";
+
+            txtStatus.Text = "Checked out successfully!";
+            btnCheckOut.Visibility = Visibility.Collapsed;
+        }
+        // ---employee databace info ---
+        public EmployeeInfoViewModel EmployeeInfo { get; set; }
+        public class EmployeeInfoViewModel : INotifyPropertyChanged
+        {
+            private string casualLeave;
+            private string sickLeave;
+            private string annualLeave;
+            private string presentDays;
+            private string absentDays;
+            private string lateDays;
+            private string lastSalary;
+            private string salaryMonth;
+            private string performanceScore;
+            private string lastReviewMonth;
+
+            public string CasualLeave { get => casualLeave; set { casualLeave = value; OnPropertyChanged(); } }
+            public string SickLeave { get => sickLeave; set { sickLeave = value; OnPropertyChanged(); } }
+            public string AnnualLeave { get => annualLeave; set { annualLeave = value; OnPropertyChanged(); } }
+            public string PresentDays { get => presentDays; set { presentDays = value; OnPropertyChanged(); } }
+            public string AbsentDays { get => absentDays; set { absentDays = value; OnPropertyChanged(); } }
+            public string LateDays { get => lateDays; set { lateDays = value; OnPropertyChanged(); } }
+            public string LastSalary { get => lastSalary; set { lastSalary = value; OnPropertyChanged(); } }
+            public string SalaryMonth { get => salaryMonth; set { salaryMonth = value; OnPropertyChanged(); } }
+            public string PerformanceScore { get => performanceScore; set { performanceScore = value; OnPropertyChanged(); } }
+            public string LastReviewMonth { get => lastReviewMonth; set { lastReviewMonth = value; OnPropertyChanged(); } }
+
+            public event PropertyChangedEventHandler PropertyChanged;
+
+            protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+            {
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+        // ---employee databace info end---
+
+
+
 
 
 
