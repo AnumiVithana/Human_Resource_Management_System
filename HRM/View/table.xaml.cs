@@ -1,4 +1,5 @@
 ﻿using HRM.models;
+using HRM.Model;
 using HRM.Repositories;
 using System;
 using System.Collections.ObjectModel;
@@ -56,9 +57,6 @@ namespace HRM.View
         }
 
         private Employee LogedEmployee;
-
-        // Fix for CS1002: Missing semicolon  
-        // Fix for CS0103: Undefined 'editDeleteColoumn'
 
         public table(Employee logedEmployee)
         {
@@ -145,6 +143,9 @@ namespace HRM.View
             statusPanel.Visibility = Visibility.Visible;
         }
 
+        // Fix for CS0029: Cannot implicitly convert type 'string' to 'int'
+        // Update the 'workedHovers' assignment to parse the string value into an integer.
+
         private void btnCheckOut_Click(object sender, RoutedEventArgs e)
         {
             // Validation
@@ -176,12 +177,38 @@ namespace HRM.View
 
             txtStatus.Text = "Checked out successfully!";
             btnCheckOut.Visibility = Visibility.Collapsed;
+
+
+
+
+
+            var repo = new AttendancePayrollRepository();
+            Attendance attendance = new Attendance
+            {
+                id = repo.GetNextRowId(),
+                date = DateTime.Now.ToString("yyyy-MM-dd"),
+                employeeId = LogedEmployee.id,
+                checkInTime = checkInTime.Value.ToString("hh:mm tt"),
+                checkOutTime = checkOutTime.ToString("hh:mm tt"),
+                workedHovers = (int)duration.TotalHours, // Convert the total hours to an integer
+                description = txtEmployeeNote.Text
+            };
+            repo.CreateAttendancerow(attendance);
+            
+            //Console.WriteLine(attendance.id.GetTypeCode());
+            //Console.WriteLine(attendance.checkOutTime.GetTypeCode());
+            //Console.WriteLine(attendance.checkInTime.GetTypeCode());
+            //Console.WriteLine(attendance.employeeId.GetTypeCode());
+            //Console.WriteLine(attendance.workedHovers.GetTypeCode());
+            //Console.WriteLine(attendance.description.GetTypeCode());
+            //Console.WriteLine(attendance.date.GetTypeCode());
+            
+
+
+
         }
-       
+
         // ---employee databace info end---
-
-
-
 
 
 
