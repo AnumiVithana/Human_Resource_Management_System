@@ -22,6 +22,7 @@ using PdfSharp.Pdf;
 
 namespace HRM.View
 {
+    //------------------------------------------------------------Main Constructor ------------------------------------------------------------
     public partial class table : Window
     {
         private DateTime? checkInTime = null;
@@ -37,6 +38,7 @@ namespace HRM.View
             ShowGreeting(logedEmployee.first_name);
             ShowDate();
             LoadSalaryDetails();
+            LoadLeaveDetails();
 
             if (logedEmployee.position == "Admin")
             {
@@ -74,7 +76,7 @@ namespace HRM.View
             }
             memberDataGrid.ItemsSource = members;
 
-            // ---employee databace info ---
+            // ---------------------employee databace info ------------------------------
             EmployeeInfomatic = new EmployeeInfomation
             {
                 CasualLeave = "6",
@@ -90,6 +92,8 @@ namespace HRM.View
             };
             DataContext = EmployeeInfomatic;
         }
+
+        // ---------------------Buttons min and close ------------------------------
         private void btnMinimize_Click(object sender, RoutedEventArgs e)
         {
             WindowState = WindowState.Minimized;
@@ -105,7 +109,7 @@ namespace HRM.View
 
 
 
-        // ----DashBoard Admin and employee----
+        // ----------------------------------------------------------------DashBoard Admin and employee----------------------------------------------------------------
         private void ShowGreeting(string name)
         {
             var hour = DateTime.Now.Hour;
@@ -128,10 +132,11 @@ namespace HRM.View
             txtDate.Text = DateTime.Now.ToString("dddd, MMMM dd, yyyy");
             txtDate_employee.Text = DateTime.Now.ToString("dddd, MMMM dd, yyyy");
         }
-        // ----DashBoard employee check button----
 
 
 
+
+        // ----------------------------------------------------------------DashBoard employee check button----------------------------------------------------------------
         private void btnCheckIn_Click(object sender, RoutedEventArgs e)
         {
             checkInTime = DateTime.Now;
@@ -177,7 +182,9 @@ namespace HRM.View
         }
 
 
-        // ---employee databace info end---
+
+
+        // ---------------------------------------------------------------employee databace info end---------------------------------------------------------------
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
@@ -209,7 +216,7 @@ namespace HRM.View
 
             }
         }
-
+        // ------------------------------------------------------------ Left site Button clicks ------------------------------------------------------------
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             dashBoardGrid.Visibility = Visibility.Visible;
@@ -377,7 +384,6 @@ namespace HRM.View
             DashBoardButton.Background = System.Windows.Media.Brushes.Transparent;
         }
 
-
         //My Profile Button
         private void MyProfileButton_Click(object sender, RoutedEventArgs e)
         {
@@ -427,8 +433,7 @@ namespace HRM.View
         }
 
 
-        // Fix for CS0103: The name 'ConvertFromString' does not exist in the current context
-        // Replace the line causing the error with the correct usage of the BrushConverter.
+        //------------------------------------------------------------Member------------------------------------------------------------
 
         private void txtFilter_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -467,6 +472,7 @@ namespace HRM.View
             registerView.Show();
             this.Hide();
         }
+
         //edit profile
         private void EditDetailsButton_Click(object sender, RoutedEventArgs e)
         {
@@ -475,7 +481,6 @@ namespace HRM.View
             this.Close();
 
         }
-
 
         // ----- employeee edit button --------
         private void employeeEdit(object sender, RoutedEventArgs e)
@@ -587,6 +592,9 @@ namespace HRM.View
             }
         }
 
+
+
+        //------------------------------------------------------------Salary------------------------------------------------------------
         private void LoadSalaryDetails()
         {
             // Replace with DB values
@@ -665,9 +673,45 @@ namespace HRM.View
         }
 
 
+        //------------------------------------------------------------Reques leave------------------------------------------------------------
 
+        private void LoadLeaveDetails()
+        {
+            LeaveDetails leave = new LeaveDetails
+            {
+                LeavePerMonthSick = "12",
+                LeavePerMonthCasual = "15",
+                LeaveTakenSick = "3",
+                LeaveTakenCasual = "5",
+                RemainingSick = "9",
+                RemainingCasual = "10",
+                SelectedLeaveType = "Sick",
+                SelectedLeaveDate = DateTime.Today,
+                LeaveReason = ""
+            };
+
+            requestLeaveGrid.DataContext = leave; 
+        }
+
+        private void SubmitLeave_Click(object sender, RoutedEventArgs e)
+        {
+            LeaveDetails leave = requestLeaveGrid.DataContext as LeaveDetails;
+
+            if (leave == null)
+            {
+                MessageBox.Show("Leave details not loaded.");
+                return;
+            }
+
+            // Submit leave to database logic here
+            Console.WriteLine($"Leave Request Submitted: {leave.SelectedLeaveType} on {leave.SelectedLeaveDate?.ToShortDateString()} for reason: {leave.LeaveReason}");
+
+            MessageBox.Show("Leave submitted successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
 
     }
+
+    //------------------------------------------------------------ DataBase GET SET ------------------------------------------------------------
     public class Member
     {
         public String Character { get; set; }
@@ -680,7 +724,7 @@ namespace HRM.View
 
     }
 
-    // ---employee databace info ---
+    // --------------------------employee databace info ------------------------
 
     public class EmployeeInfomation : INotifyPropertyChanged
     {
@@ -714,7 +758,7 @@ namespace HRM.View
         }
     }
 
-
+    // -------------------------Salary Database Info-----------------------------------------
     public class SalaryDetails
     {
         public string Month { get; set; }
@@ -726,5 +770,52 @@ namespace HRM.View
         public decimal LeaveDeduction { get; set; }
         public decimal TotalSalary { get; set; }
     }
+    // -------------------------Reques leave Database Info-----------------------------------------
+    //public class RequestLeaveViewModel : INotifyPropertyChanged
+    //{
+    //    private string leavePerMonthSick;
+    //    private string leavePerMonthCasual;
+    //    private string leaveTakenSick;
+    //    private string leaveTakenCasual;
+    //    private string remainingSick;
+    //    private string remainingCasual;
+    //    private string selectedLeaveType;
+    //    private DateTime? selectedLeaveDate;
+    //    private string leaveReason;
+
+    //    public event PropertyChangedEventHandler PropertyChanged;
+    //    public string LeavePerMonthSick{get => leavePerMonthSick;set { leavePerMonthSick = value; OnPropertyChanged(nameof(LeavePerMonthSick)); }}
+    //    public string LeavePerMonthCasual {get => leavePerMonthCasual;set { leavePerMonthCasual = value; OnPropertyChanged(nameof(LeavePerMonthCasual)); }}
+    //    public string LeaveTakenSick{get => leaveTakenSick;set { leaveTakenSick = value; OnPropertyChanged(nameof(LeaveTakenSick)); }}
+    //    public string LeaveTakenCasual{get => leaveTakenCasual;set { leaveTakenCasual = value; OnPropertyChanged(nameof(LeaveTakenCasual)); }}
+    //    public string RemainingSick{get => remainingSick;set { remainingSick = value; OnPropertyChanged(nameof(RemainingSick)); }}
+    //    public string RemainingCasual {get => remainingCasual;set { remainingCasual = value; OnPropertyChanged(nameof(RemainingCasual)); }}
+    //    public string SelectedLeaveType {get => selectedLeaveType;set { selectedLeaveType = value; OnPropertyChanged(nameof(SelectedLeaveType)); } }
+    //    public DateTime? SelectedLeaveDate{get => selectedLeaveDate;set { selectedLeaveDate = value; OnPropertyChanged(nameof(SelectedLeaveDate)); }}
+    //    public string LeaveReason{get => leaveReason;set { leaveReason = value; OnPropertyChanged(nameof(LeaveReason)); }}
+    //    private void OnPropertyChanged(string propertyName)
+    //    {
+    //        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    //    }
+
+
+    public class LeaveDetails
+    {
+        public string LeavePerMonthSick { get; set; }
+        public string LeavePerMonthCasual { get; set; }
+        public string LeaveTakenSick { get; set; }
+        public string LeaveTakenCasual { get; set; }
+        public string RemainingSick { get; set; }
+        public string RemainingCasual { get; set; }
+        public string SelectedLeaveType { get; set; }
+        public DateTime? SelectedLeaveDate { get; set; }
+        public string LeaveReason { get; set; }
+    }
 
 }
+
+
+
+
+
+
