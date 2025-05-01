@@ -30,10 +30,7 @@ namespace HRM.View
         private DateTime? checkOutTime = null;
         public EmployeeInfomation EmployeeInfomatic { get; set; }
         private Employee LogedEmployee;
-<<<<<<< HEAD
 
-=======
->>>>>>> 94914bf092ffac62b475291cf8ebc693d7032317
         public table(Employee logedEmployee)
         {
 
@@ -217,20 +214,12 @@ namespace HRM.View
 
 
         }
-<<<<<<< HEAD
 
-        // ---employee databace info end---
-
-
-
-
-=======
 
 
 
 
         // ---------------------------------------------------------------employee databace info end---------------------------------------------------------------
->>>>>>> 94914bf092ffac62b475291cf8ebc693d7032317
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
