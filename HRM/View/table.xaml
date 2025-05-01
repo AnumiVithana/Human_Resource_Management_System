@@ -72,8 +72,8 @@
 
                             <Button Style="{StaticResource menuButton}" x:Name="EventButton" Click="EventButton_Click">
                                 <StackPanel Orientation="Horizontal">
-                                    <Icon:PackIconMaterial Kind="CalendarClock" Style="{StaticResource menuButtonIcon}"/>
-                                    <TextBlock Text="Events"/>
+                                    <Icon:PackIconMaterial Kind="MessageArrowRightOutline" Style="{StaticResource menuButtonIcon}"/>
+                                    <TextBlock Text="Pending Requests"/>
                                 </StackPanel>
                             </Button>
 
@@ -644,7 +644,7 @@
                 </Button>
 -->
 
-                <TextBlock Text="Events" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="0 60 0 0"
+                <TextBlock Text="Pending Requests" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="0 60 0 0"
    HorizontalAlignment="Left" Foreground="#121518"/>
 
 
