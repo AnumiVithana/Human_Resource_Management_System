@@ -414,7 +414,7 @@
                                         <TextBlock Text=" Present " Grid.Column="1"  Margin="5 0"/>
                                         <TextBlock Text="{Binding PresentDays}" Grid.Column="2" Margin="5"/>
                                     </Grid>
-                                    <Grid Margin="5 2">
+                                    <Grid Margin="5 2" DataContext="{Binding EmployeeInfo}">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="Auto"/>
                                             <ColumnDefinition Width="*"/>
