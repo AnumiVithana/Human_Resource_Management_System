@@ -5,75 +5,54 @@ using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Web.Configuration;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Xml.Linq;
+using System.IO;
+using System.Drawing.Text;
+using PdfSharp.Drawing;
+using PdfSharp.Pdf;
 
 
 namespace HRM.View
 {
-    /// <summary>
-    /// Interaction logic for table.xaml
-    /// </summary>
+    //------------------------------------------------------------Main Constructor ------------------------------------------------------------
     public partial class table : Window
     {
         private DateTime? checkInTime = null;
         private DateTime? checkOutTime = null;
-        public EmployeeInfoViewModel EmployeeInfo { get; set; }
-        public table()
-        {
-            InitializeComponent();
-            
-            // ---employee databace info ---
-            EmployeeInfo = new EmployeeInfoViewModel
-            {
-                CasualLeave = "6",
-                SickLeave = "4",
-                AnnualLeave = "15",
-                PresentDays = "18",
-                AbsentDays = "2",
-                LateDays = "3",
-                LastSalary = "Rs. 120,000",
-                SalaryMonth = "March 2023",
-                PerformanceScore = "4.3 / 5",
-                LastReviewMonth = "January 2023"
-            };
-            DataContext = EmployeeInfo;
-        }
-        private void btnMinimize_Click(object sender, RoutedEventArgs e)
-        {
-            WindowState = WindowState.Minimized;
-        }
-
-        private void btnClose_Click(object sender, RoutedEventArgs e)
-        {
-            LoginView firstWindow = new LoginView();
-            firstWindow.Show();
-            this.Hide();
-        }
-
+        public EmployeeInfomation EmployeeInfomatic { get; set; }
         private Employee LogedEmployee;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 94914bf092ffac62b475291cf8ebc693d7032317
         public table(Employee logedEmployee)
         {
+
+
             InitializeComponent();
             LogedEmployee = logedEmployee;
             ShowGreeting(logedEmployee.first_name);
             ShowDate();
+            LoadSalaryDetails();
+            LoadLeaveDetails();
 
-            // Ensure 'editDeleteColoumn' is defined and accessible
             if (logedEmployee.position == "Admin")
             {
-                // Assuming 'editDeleteColoumn' is a UI element like a DataGridColumn
+
                 editDeleteColoumn.Visibility = Visibility.Visible;
                 dashBoardAdminGrid.Visibility = Visibility.Visible;
                 dashBoardGrid.Visibility = Visibility.Hidden;
             }
-            
+
             txtFirstName.Text = logedEmployee.first_name;
             txtLastName.Text = logedEmployee.last_name;
             txtEmail.Text = logedEmployee.email;
@@ -101,11 +80,41 @@ namespace HRM.View
                 });
             }
             memberDataGrid.ItemsSource = members;
+
+            // ---------------------employee databace info ------------------------------
+            EmployeeInfomatic = new EmployeeInfomation
+            {
+                CasualLeave = "6",
+                SickLeave = "4",
+                AnnualLeave = "15",
+                PresentDays = "18",
+                AbsentDays = "2",
+                LateDays = "3",
+                LastSalary = "Rs. 120,000",
+                SalaryMonth = "March 2023",
+                PerformanceScore = "4.3 / 5",
+                LastReviewMonth = "January 2023"
+            };
+            DataContext = EmployeeInfomatic;
         }
 
-        
+        // ---------------------Buttons min and close ------------------------------
+        private void btnMinimize_Click(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Minimized;
+        }
 
-        // ----DashBoard Admin and employee----
+        private void btnClose_Click(object sender, RoutedEventArgs e)
+        {
+            LoginView firstWindow = new LoginView();
+            firstWindow.Show();
+            this.Hide();
+        }
+
+
+
+
+        // ----------------------------------------------------------------DashBoard Admin and employee----------------------------------------------------------------
         private void ShowGreeting(string name)
         {
             var hour = DateTime.Now.Hour;
@@ -128,10 +137,11 @@ namespace HRM.View
             txtDate.Text = DateTime.Now.ToString("dddd, MMMM dd, yyyy");
             txtDate_employee.Text = DateTime.Now.ToString("dddd, MMMM dd, yyyy");
         }
-        // ----DashBoard employee check button----
 
-        
 
+
+
+        // ----------------------------------------------------------------DashBoard employee check button----------------------------------------------------------------
         private void btnCheckIn_Click(object sender, RoutedEventArgs e)
         {
             checkInTime = DateTime.Now;
@@ -207,15 +217,24 @@ namespace HRM.View
 
 
         }
+<<<<<<< HEAD
 
         // ---employee databace info end---
 
 
 
 
+=======
+
+
+
+
+        // ---------------------------------------------------------------employee databace info end---------------------------------------------------------------
+>>>>>>> 94914bf092ffac62b475291cf8ebc693d7032317
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (e.ChangedButton == MouseButton.Left) { 
+            if (e.ChangedButton == MouseButton.Left)
+            {
                 this.DragMove();
             }
         }
@@ -225,7 +244,8 @@ namespace HRM.View
 
         private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (e.ClickCount == 2) {
+            if (e.ClickCount == 2)
+            {
                 if (IsMaximized)
                 {
                     this.WindowState = WindowState.Normal;
@@ -234,14 +254,15 @@ namespace HRM.View
 
                     IsMaximized = false;
                 }
-                else { 
+                else
+                {
                     this.WindowState = WindowState.Maximized;
                     IsMaximized = true;
                 }
 
             }
         }
-
+        // ------------------------------------------------------------ Left site Button clicks ------------------------------------------------------------
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             dashBoardGrid.Visibility = Visibility.Visible;
@@ -409,7 +430,6 @@ namespace HRM.View
             DashBoardButton.Background = System.Windows.Media.Brushes.Transparent;
         }
 
-
         //My Profile Button
         private void MyProfileButton_Click(object sender, RoutedEventArgs e)
         {
@@ -459,8 +479,7 @@ namespace HRM.View
         }
 
 
-        // Fix for CS0103: The name 'ConvertFromString' does not exist in the current context
-        // Replace the line causing the error with the correct usage of the BrushConverter.
+        //------------------------------------------------------------Member------------------------------------------------------------
 
         private void txtFilter_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -499,7 +518,8 @@ namespace HRM.View
             registerView.Show();
             this.Hide();
         }
-         //edit profile
+
+        //edit profile
         private void EditDetailsButton_Click(object sender, RoutedEventArgs e)
         {
             EditProfile editProfile = new EditProfile(LogedEmployee);
@@ -508,15 +528,12 @@ namespace HRM.View
 
         }
 
-
-
+        // ----- employeee edit button --------
         private void employeeEdit(object sender, RoutedEventArgs e)
         {
-            // Assuming you want to get the selected item from the DataGrid
             if (memberDataGrid.SelectedItem is Member selectedMember)
             {
-                int selectedId = int.Parse(selectedMember.Number); // Convert the Number property to an integer
-                                                                   //MessageBox.Show(selectedId.ToString()); // Correctly call ToString() as a method
+                int selectedId = int.Parse(selectedMember.Number);
 
 
 
@@ -529,22 +546,21 @@ namespace HRM.View
 
                 var emplyees = repo.GetEmployees();
 
-                var converter = new BrushConverter(); // Ensure BrushConverter is instantiated
+                var converter = new BrushConverter();
                 ObservableCollection<Member> members = new ObservableCollection<Member>();
 
                 foreach (var employ in emplyees)
                 {
                     var name = employ.first_name + " " + employ.last_name;
-                    // Fix for CS1501: Use string.StartsWith instead of invalid index range comparison
                     if (name.StartsWith(txtFilter.Text, StringComparison.OrdinalIgnoreCase) ||
                         employ.last_name.Equals(txtFilter.Text, StringComparison.OrdinalIgnoreCase))
                     {
                         members.Add(new Member
                         {
-                            Number = employ.id.ToString(), // Convert int to string
+                            Number = employ.id.ToString(),
                             Character = employ.first_name[0].ToString(),
-                            BgColor = (Brush)converter.ConvertFromString("#1098ad"), // Correct usage of BrushConverter
-                            Name = employ.first_name + " " + employ.last_name, // Use employee's actual name
+                            BgColor = (Brush)converter.ConvertFromString("#1098ad"),
+                            Name = employ.first_name + " " + employ.last_name,
                             Position = employ.position,
                             Email = employ.email,
                             Phone = employ.contact_no
@@ -564,14 +580,14 @@ namespace HRM.View
             }
         }
 
+
+        // ----- employeee delete button --------
         private void employeeDelete(object sender, RoutedEventArgs e)
         {
-            // Assuming you want to get the selected item from the DataGrid
             if (memberDataGrid.SelectedItem is Member selectedMember)
             {
-                int selectedId = int.Parse(selectedMember.Number); // Convert the Number property to an integer
+                int selectedId = int.Parse(selectedMember.Number);
 
-                // Use MessageBoxResult and MessageBoxButton from System.Windows namespace
                 MessageBoxResult dialogResult = MessageBox.Show(
                     "Are you sure you want to delete this employee?",
                     "Delete Confirmation",
@@ -586,28 +602,23 @@ namespace HRM.View
                 var repo = new EmployRepository();
                 repo.DeleteEmploy(selectedId);
 
-
-
-
-
                 var emplyees = repo.GetEmployees();
 
-                var converter = new BrushConverter(); // Ensure BrushConverter is instantiated
+                var converter = new BrushConverter();
                 ObservableCollection<Member> members = new ObservableCollection<Member>();
 
                 foreach (var employ in emplyees)
                 {
                     var name = employ.first_name + " " + employ.last_name;
-                    // Fix for CS1501: Use string.StartsWith instead of invalid index range comparison
                     if (name.StartsWith(txtFilter.Text, StringComparison.OrdinalIgnoreCase) ||
                         employ.last_name.Equals(txtFilter.Text, StringComparison.OrdinalIgnoreCase))
                     {
                         members.Add(new Member
                         {
-                            Number = employ.id.ToString(), // Convert int to string
+                            Number = employ.id.ToString(),
                             Character = employ.first_name[0].ToString(),
-                            BgColor = (Brush)converter.ConvertFromString("#1098ad"), // Correct usage of BrushConverter
-                            Name = employ.first_name + " " + employ.last_name, // Use employee's actual name
+                            BgColor = (Brush)converter.ConvertFromString("#1098ad"),
+                            Name = employ.first_name + " " + employ.last_name,
                             Position = employ.position,
                             Email = employ.email,
                             Phone = employ.contact_no
@@ -629,10 +640,126 @@ namespace HRM.View
 
 
 
+        //------------------------------------------------------------Salary------------------------------------------------------------
+        private void LoadSalaryDetails()
+        {
+            // Replace with DB values
+            SalaryDetails salary = new SalaryDetails
+            {
+                Month = "April 2025",
+                HourRate = 150,
+                ServiceFee = 200,
+                ExtraLeaves = 2,
+                BasicSalary = 24000,
+                OTSalary = 5000,
+                LeaveDeduction = 1000,
+                TotalSalary = 28000
+            };
+
+            salaryGrid.DataContext = salary;
+        }
+
+        [Obsolete]
+        private void GeneratePDF_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                SalaryDetails salary = salaryGrid.DataContext as SalaryDetails;
+
+                if (salary == null)
+                {
+                    MessageBox.Show("Salary details not loaded.");
+                    return;
+                }
+
+                PdfDocument document = new PdfDocument();
+                document.Info.Title = "Payroll Report";
+
+                PdfPage page = document.AddPage();
+                XGraphics gfx = XGraphics.FromPdfPage(page);
+                XFont titleFont = new XFont("Verdana", 20, XFontStyleEx.Regular);
+                XFont labelFont = new XFont("Verdana", 12, XFontStyleEx.Regular);
+                XFont boldFont = new XFont("Verdana", 12, XFontStyleEx.Bold);
+                int y = 50;
+
+                gfx.DrawString("Payroll Report", titleFont, XBrushes.Black, new XRect(0, y, page.Width, 30), XStringFormats.TopCenter);
+                y += 50;
+
+                void DrawRow(string label, string value, bool isBold = false)
+                {
+                    gfx.DrawString(label, isBold ? boldFont : labelFont, XBrushes.Black, new XPoint(50, y));
+                    gfx.DrawString(value, isBold ? boldFont : labelFont, XBrushes.Black, new XPoint(300, y));
+                    y += 25;
+                }
+
+                // Add Salary Details to the PDF
+                DrawRow("Month:", salary.Month);
+                DrawRow("Basic Hour Rate:", salary.HourRate.ToString("C"));
+                DrawRow("Service Fee:", salary.ServiceFee.ToString("C"));
+                DrawRow("No. of Extra Leaves:", salary.ExtraLeaves.ToString());
+                DrawRow("Salary on Basic Hours:", salary.BasicSalary.ToString("C"));
+                DrawRow("Salary on OT Hours:", salary.OTSalary.ToString("C"));
+                DrawRow("Deduction on Extra Leaves:", salary.LeaveDeduction.ToString("C"));
+                DrawRow("Service Fee:", salary.ServiceFee.ToString("C"));
+                DrawRow("Total Salary:", salary.TotalSalary.ToString("C"), isBold: true);
+
+                // Save PDF to Documents Folder
+                string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                string filePath = Path.Combine(folderPath, $"Payroll_{salary.Month.Replace(" ", "_")}.pdf");
+
+                document.Save(filePath);
+                Process.Start(new ProcessStartInfo(filePath) { UseShellExecute = true });
+
+                MessageBox.Show("PDF generated successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error generating PDF:\n" + ex.Message);
+            }
+        }
 
 
-    }        
-    public class Member {
+        //------------------------------------------------------------Reques leave------------------------------------------------------------
+
+        private void LoadLeaveDetails()
+        {
+            LeaveDetails leave = new LeaveDetails
+            {
+                LeavePerMonthSick = "12",
+                LeavePerMonthCasual = "15",
+                LeaveTakenSick = "3",
+                LeaveTakenCasual = "5",
+                RemainingSick = "9",
+                RemainingCasual = "10",
+                SelectedLeaveType = "Sick",
+                SelectedLeaveDate = DateTime.Today,
+                LeaveReason = ""
+            };
+
+            requestLeaveGrid.DataContext = leave; 
+        }
+
+        private void SubmitLeave_Click(object sender, RoutedEventArgs e)
+        {
+            LeaveDetails leave = requestLeaveGrid.DataContext as LeaveDetails;
+
+            if (leave == null)
+            {
+                MessageBox.Show("Leave details not loaded.");
+                return;
+            }
+
+            // Submit leave to database logic here
+            Console.WriteLine($"Leave Request Submitted: {leave.SelectedLeaveType} on {leave.SelectedLeaveDate?.ToShortDateString()} for reason: {leave.LeaveReason}");
+
+            MessageBox.Show("Leave submitted successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+    }
+
+    //------------------------------------------------------------ DataBase GET SET ------------------------------------------------------------
+    public class Member
+    {
         public String Character { get; set; }
         public String Number { get; set; }
         public String Name { get; set; }
@@ -643,9 +770,9 @@ namespace HRM.View
 
     }
 
-    // ---employee databace info ---
+    // --------------------------employee databace info ------------------------
 
-    public class EmployeeInfoViewModel : INotifyPropertyChanged
+    public class EmployeeInfomation : INotifyPropertyChanged
     {
         private string casualLeave;
         private string sickLeave;
@@ -677,5 +804,64 @@ namespace HRM.View
         }
     }
 
+    // -------------------------Salary Database Info-----------------------------------------
+    public class SalaryDetails
+    {
+        public string Month { get; set; }
+        public decimal HourRate { get; set; }
+        public decimal ServiceFee { get; set; }
+        public int ExtraLeaves { get; set; }
+        public decimal BasicSalary { get; set; }
+        public decimal OTSalary { get; set; }
+        public decimal LeaveDeduction { get; set; }
+        public decimal TotalSalary { get; set; }
+    }
+    // -------------------------Reques leave Database Info-----------------------------------------
+    //public class RequestLeaveViewModel : INotifyPropertyChanged
+    //{
+    //    private string leavePerMonthSick;
+    //    private string leavePerMonthCasual;
+    //    private string leaveTakenSick;
+    //    private string leaveTakenCasual;
+    //    private string remainingSick;
+    //    private string remainingCasual;
+    //    private string selectedLeaveType;
+    //    private DateTime? selectedLeaveDate;
+    //    private string leaveReason;
+
+    //    public event PropertyChangedEventHandler PropertyChanged;
+    //    public string LeavePerMonthSick{get => leavePerMonthSick;set { leavePerMonthSick = value; OnPropertyChanged(nameof(LeavePerMonthSick)); }}
+    //    public string LeavePerMonthCasual {get => leavePerMonthCasual;set { leavePerMonthCasual = value; OnPropertyChanged(nameof(LeavePerMonthCasual)); }}
+    //    public string LeaveTakenSick{get => leaveTakenSick;set { leaveTakenSick = value; OnPropertyChanged(nameof(LeaveTakenSick)); }}
+    //    public string LeaveTakenCasual{get => leaveTakenCasual;set { leaveTakenCasual = value; OnPropertyChanged(nameof(LeaveTakenCasual)); }}
+    //    public string RemainingSick{get => remainingSick;set { remainingSick = value; OnPropertyChanged(nameof(RemainingSick)); }}
+    //    public string RemainingCasual {get => remainingCasual;set { remainingCasual = value; OnPropertyChanged(nameof(RemainingCasual)); }}
+    //    public string SelectedLeaveType {get => selectedLeaveType;set { selectedLeaveType = value; OnPropertyChanged(nameof(SelectedLeaveType)); } }
+    //    public DateTime? SelectedLeaveDate{get => selectedLeaveDate;set { selectedLeaveDate = value; OnPropertyChanged(nameof(SelectedLeaveDate)); }}
+    //    public string LeaveReason{get => leaveReason;set { leaveReason = value; OnPropertyChanged(nameof(LeaveReason)); }}
+    //    private void OnPropertyChanged(string propertyName)
+    //    {
+    //        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    //    }
+
+
+    public class LeaveDetails
+    {
+        public string LeavePerMonthSick { get; set; }
+        public string LeavePerMonthCasual { get; set; }
+        public string LeaveTakenSick { get; set; }
+        public string LeaveTakenCasual { get; set; }
+        public string RemainingSick { get; set; }
+        public string RemainingCasual { get; set; }
+        public string SelectedLeaveType { get; set; }
+        public DateTime? SelectedLeaveDate { get; set; }
+        public string LeaveReason { get; set; }
+    }
 
 }
+
+
+
+
+
+

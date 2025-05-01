@@ -62,18 +62,13 @@
                                 <StackPanel Orientation="Horizontal">
                                     <Icon:PackIconMaterial Kind="HomeVariant" Style="{StaticResource menuButtonIcon}"/>
                                     <TextBlock Text="DashBoard"/>
-
                                 </StackPanel>
-
-
-
-
                             </Button>
 
                             <Button Style="{StaticResource menuButton}" x:Name="EventButton" Click="EventButton_Click">
                                 <StackPanel Orientation="Horizontal">
-                                    <Icon:PackIconMaterial Kind="CalendarClock" Style="{StaticResource menuButtonIcon}"/>
-                                    <TextBlock Text="Events"/>
+                                    <Icon:PackIconMaterial Kind="MessageArrowRightOutline" Style="{StaticResource menuButtonIcon}"/>
+                                    <TextBlock Text="Pending Requests"/>
                                 </StackPanel>
                             </Button>
 
@@ -242,8 +237,10 @@
 
                 </Grid>
             </Grid>
-            <!-- DashBoard  -->
-            <Grid Grid.Column="1" Margin="30 10 20 20" x:Name="dashBoardGrid" Visibility="Visible">
+            
+            
+            <!-- ..................................................Employee DashBoard..................................................  -->
+            <Grid Grid.Column="1" Margin="30 10 20 20" x:Name="dashBoardGrid" Visibility="Hidden">
                 <Grid.RowDefinitions>
 
                     <RowDefinition Height="auto"/>
@@ -254,7 +251,7 @@
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
 
-                <Grid />
+                
 
 
                 <!-- Check-in & Check-out time and total hours -->
@@ -414,7 +411,7 @@
                                         <TextBlock Text=" Present " Grid.Column="1"  Margin="5 0"/>
                                         <TextBlock Text="{Binding PresentDays}" Grid.Column="2" Margin="5"/>
                                     </Grid>
-                                    <Grid Margin="5 2">
+                                    <Grid Margin="5 2" DataContext="{Binding EmployeeInfo}">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="Auto"/>
                                             <ColumnDefinition Width="*"/>
@@ -467,6 +464,7 @@
                     </StackPanel>
                 </Grid>
 
+               
 
                 <!--
 
@@ -489,7 +487,7 @@
             </Grid>
 
 
-            <!--Admin Dashboard-->
+            <!--..................................................Admin Dashboard..................................................-->
             <Grid Grid.Column="1" Margin="30 10 20 20" x:Name="dashBoardAdminGrid" Visibility="Hidden">
                 <Grid.RowDefinitions>
 
@@ -618,7 +616,7 @@
 
             </Grid>
 
-            <!--Admin Dashboard end-->
+            <!--..................................................Admin Dashboard end..................................................-->
 
 
             <Grid Grid.Column="1" Margin="30 10 20 20" x:Name="eventGrid" Visibility="Hidden">
@@ -643,7 +641,7 @@
                 </Button>
 -->
 
-                <TextBlock Text="Events" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="0 60 0 0"
+                <TextBlock Text="Pending Requests" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="0 60 0 0"
    HorizontalAlignment="Left" Foreground="#121518"/>
 
 
@@ -686,7 +684,7 @@ HorizontalAlignment="Left" Foreground="#121518"/>
 
             </Grid>
 
-
+            <!--..................................................Member ..................................................-->
             <Grid Grid.Column="1" Margin="30 10 20 20" x:Name="membersGrid" Visibility="Hidden">
                 <Grid.RowDefinitions>
 
@@ -826,8 +824,10 @@ HorizontalAlignment="Left" Foreground="#121518"/>
                 </Border> -->
 
             </Grid>
-
+            
+            <!-- ..................................................perfomance.................................................. -->
             <Grid Grid.Column="1" Margin="30 10 20 20" x:Name="performanceGrid" Visibility="Hidden">
+                
                 <Grid.RowDefinitions>
 
                     <RowDefinition Height="auto"/>
@@ -859,69 +859,211 @@ HorizontalAlignment="Left" Foreground="#121518"/>
 
             </Grid>
 
+
+            <!-- ..................................................Salary page.................................................. -->
             <Grid Grid.Column="1" Margin="30 10 20 20" x:Name="salaryGrid" Visibility="Hidden">
-                <Grid.RowDefinitions>
 
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
+                
+                
+                
+                
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
-                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
+                <!-- Title -->
+                <TextBlock Text="Salary" Grid.Row="2" FontSize="32" FontWeight="SemiBold" Margin="0 50 0 0"
+                            HorizontalAlignment="Left" Foreground="#121518" />
+
+                <Separator Grid.Row="3" Height="1" Background="#dae2ea" Margin="0 0 0 20"/>
+
+                <!-- Salary Details -->
+                <Grid Grid.Row="4" Margin=" 40 40 0 0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!--
+     <Button Style="{StaticResource topButton}" Margin="0 0 20 0" Background="#dcdcdc" HorizontalAlignment="Right">
+         <Icon:PackIconMaterial Kind="Cog"/>
+     </Button>
+     <Button Style="{StaticResource topButton}" Margin="0 0 55 0" Background="#dcdcdc" HorizontalAlignment="Right">
+         <Icon:PackIconMaterial Kind="Bell"/>
+     </Button> -->
+                    
+                    <!-- Fields -->
+                    <TextBlock Text="Month:" Grid.Row="0" Margin="0 5"/>
+                    <TextBlock Text="{Binding Path=Month}" Grid.Row="0" Grid.Column="1" Margin="5 5"/>
+
+                    <TextBlock Text="Basic Hour Rate:" Grid.Row="1" Margin="0 5"/>
+                    <TextBlock Text="{Binding HourRate}" Grid.Row="1" Grid.Column="1" Margin="5 5"/>
+
+                    <TextBlock Text="Service Fee:" Grid.Row="2" Margin="0 5"/>
+                    <TextBlock Text="{Binding ServiceFee}" Grid.Row="2" Grid.Column="1" Margin="5 5"/>
+
+                    <TextBlock Text="No. of Extra Leaves:" Grid.Row="3" Margin="0 5"/>
+                    <TextBlock Text="{Binding ExtraLeaves}" Grid.Row="3" Grid.Column="1" Margin="5 5"/>
+
+                    <TextBlock Text="Salary on Basic Hours:" Grid.Row="4" Margin="0 5"/>
+                    <TextBlock Text="{Binding BasicSalary}" Grid.Row="4" Grid.Column="1" Margin="5 5"/>
+
+                    <TextBlock Text="Salary on OT Hours:" Grid.Row="5" Margin="0 5"/>
+                    <TextBlock Text="{Binding OTSalary}" Grid.Row="5" Grid.Column="1" Margin="5 5"/>
+
+                    <TextBlock Text="Deduction on Extra Leaves:" Grid.Row="6" Margin="0 5"/>
+                    <TextBlock Text="{Binding LeaveDeduction}" Grid.Row="6" Grid.Column="1" Margin="5 5"/>
+
+                    <TextBlock Text="Service Fee:" Grid.Row="7" Margin="0 5"/>
+                    <TextBlock Text="{Binding ServiceFee}" Grid.Row="7" Grid.Column="1" Margin="5 5"/>
+
+                    <TextBlock Text="Total Salary:" FontWeight="Bold" Grid.Row="8" Margin="0 10 0 5"/>
+                    <TextBlock Text="{Binding TotalSalary}" FontWeight="Bold" Grid.Row="8" Grid.Column="1" Margin="5 10 0 5"/>
+                </Grid>
+
+                <!-- Generate PDF Button -->
+                <Button Content="Generate Payroll PDF" Grid.Row="5" Width="200" Height="40"
+            HorizontalAlignment="Left"  Margin=" 40 -500 0 0"
+              Style="{StaticResource addButton}" Click ="GeneratePDF_Click"/>
 
 
-                <!--
-                <Button Style="{StaticResource topButton}" Margin="0 0 20 0" Background="#dcdcdc" HorizontalAlignment="Right">
-                    <Icon:PackIconMaterial Kind="Cog"/>
-                </Button>
-                <Button Style="{StaticResource topButton}" Margin="0 0 55 0" Background="#dcdcdc" HorizontalAlignment="Right">
-                    <Icon:PackIconMaterial Kind="Bell"/>
-                </Button>
 
--->
-                <TextBlock Text="Salary" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="0 60 0 0"
-HorizontalAlignment="Left" Foreground="#121518"/>
-
-
-
-                <Separator Height="1" Grid.Row="3" Background="#dae2ea" Margin="0 -1 0 10"/>
-
-
+               
+                
+                
+                
             </Grid>
 
 
-            <Grid Grid.Column="1" Margin="30 10 20 20" x:Name="requestLeaveGrid" Visibility="Hidden">
+            <!--  ..................................................Reauest leave.................................................. -->
+            <Grid x:Name="requestLeaveGrid" Grid.Column="1" Margin="30 10 20 20" Visibility="Visible">
                 <Grid.RowDefinitions>
-
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
-                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
-                <!--
-                <Button Style="{StaticResource topButton}" Margin="0 0 20 0" Background="#dcdcdc" HorizontalAlignment="Right">
-                    <Icon:PackIconMaterial Kind="Cog"/>
-                </Button>
-                <Button Style="{StaticResource topButton}" Margin="0 0 55 0" Background="#dcdcdc" HorizontalAlignment="Right">
-                    <Icon:PackIconMaterial Kind="Bell"/>
-                </Button>
--->
+                <!-- Title -->
+                <TextBlock Text="Request Leave" Grid.Row="2" FontSize="32" FontWeight="SemiBold" Margin="0 50 0 10" Foreground="#121518"/>
+                <Separator Grid.Row="3" Height="3" Background="#dae2ea" Margin="0 0 0 20"/>
+                <!-- Leave Details Section -->
+                <Grid Grid.Row="4" Margin="0 10 0 0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
 
-                <TextBlock Text="Request Leave" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="0 60 0 0"
-HorizontalAlignment="Left" Foreground="#121518"/>
+                    <!-- Leave Per Month -->
+                    <TextBlock Text="Leave Per Month" FontWeight="Bold" Grid.Row="0" Margin="0 5"/>
+                    <TextBlock Text="               Sick Leave: " Grid.Row="1" Margin="0 5"/>
+                    <TextBlock Text="{Binding LeavePerMonthSick}" Grid.Row="1" Grid.Column="1" Margin="5 5"/>
+
+                    <TextBlock Text="               Casual Leave: " Grid.Row="2" Margin="0 5"/>
+                    <TextBlock Text="{Binding LeavePerMonthCasual}" Grid.Row="2" Grid.Column="1" Margin="5 5"/>
+
+                    <!-- Leave Taken -->
+                    <TextBlock Text="Leave Taken" FontWeight="Bold" Grid.Row="3" Margin="0 5"/>
+                    <TextBlock Text="               Sick Leave: " Grid.Row="4" Margin="0 5"/>
+                    <TextBlock Text="{Binding LeaveTakenSick}" Grid.Row="4" Grid.Column="1" Margin="5 5"/>
+
+                    <TextBlock Text="               Casual Leave: " Grid.Row="5" Margin="0 5"/>
+                    <TextBlock Text="{Binding LeaveTakenCasual}" Grid.Row="5" Grid.Column="1" Margin="5 5"/>
+                    
+                    
+                    <!-- Remaining Leave -->
+                    <TextBlock Text="Remaining Leaves" FontWeight="Bold" Grid.Row="6" Margin="0 10 0 0"/>
+                    <TextBlock Text="               Sick Leave: " Grid.Row="7" Margin="0 5"/>
+                    <TextBlock Text="{Binding RemainingSick}" Grid.Row="7" Grid.Column="1" Margin="5 5"/>
+
+                    <TextBlock Text="               Casual Leave: " Grid.Row="8" Margin="0 5"/>
+                    <TextBlock Text="{Binding RemainingCasual}" Grid.Row="8" Grid.Column="1" Margin="5 5"/>
+                </Grid>
+
+                <TextBlock Text="Leave Taken" TextAlignment="Center" Grid.Row="5" FontSize="14" FontWeight="Bold" Margin="0 5"/>
+                <!-- Leave Request Form -->
+                <Grid Grid.Row="6" Margin="0 10 0 0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
+
+
+                    <TextBlock Text="Leave Type:" Grid.Row="0"/>
+                    <ComboBox x:Name="cmbLeaveType" Width="200" Grid.Row="0" Grid.Column="1" SelectedItem="{Binding SelectedLeaveType}" Style="{StaticResource leaveType}">
+                        <ComboBoxItem Content="Sick"/>
+                        <ComboBoxItem Content="Casual"/>
+                    </ComboBox>
+
+                    <TextBlock Text="Leave Date:" Margin="0 10 0 0" Grid.Row="1"/>
+                    <DatePicker x:Name="leaveDatePicker" Width="200" Grid.Row="1" Grid.Column="1"  SelectedDate="{Binding SelectedLeaveDate}" Style="{StaticResource datePicker}"/>
+
+                    <TextBlock Text="Reason:" Margin="0 10 0 0" Grid.Row="2"/>
+                    <TextBox x:Name="txtReason" Width="400" Height="80" Grid.Row="2" Grid.Column="1"  TextWrapping="Wrap" Text="{Binding LeaveReason}" Style="{StaticResource notesBlock}"/>
+                </Grid>
+
+                <!-- Submit Button -->
+                <Button Grid.Row="7" Content="Send Leave Request" Style="{StaticResource requestButton}" Click="SubmitLeave_Click"  />
+        </Grid>
 
 
 
-                <Separator Height="1" Grid.Row="3" Background="#dae2ea" Margin="0 -1 0 10"/>
-
-
-            </Grid>
-
+        <!-- my Profile -->
             <Grid Grid.Column="1" Margin="30 10 20 20" x:Name="MyProfileGrid" Visibility="Hidden">
                 <Grid.RowDefinitions>
 
