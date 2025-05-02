@@ -78,6 +78,50 @@ namespace HRM.View
             }
             memberDataGrid.ItemsSource = members;
 
+            ObservableCollection<Request> requests = new ObservableCollection<Request>();
+            var Repo = new AttendancePayrollRepository();
+            var leaveRequests = Repo.GetLeaves();
+
+            string status = "";
+
+            foreach (var leave in leaveRequests)
+            {
+                var Employee = repo.GetEmploy(leave.employee_id);
+                if(leave.status == "1")
+                {
+                    status = "Approved";
+                }
+                else if (leave.status == "0")
+                {
+                    status = "Declined";
+                }
+                else if (leave.status == null)
+                {
+                    status = "Pending";
+                }
+                else
+                {
+                    status = "Unknown";
+                }
+
+                requests.Add(new Request
+                    {
+                        No = leave.id,
+                        EmployeeName = Employee.first_name + " " + Employee.last_name,
+                        EmployeePosition = Employee.position,
+                        LeaveDate = leave.dateRequested,
+                        Reason = leave.reason,
+                        State = status,
+                        LeaveType = leave.leave_type
+
+
+
+                    });
+            }
+            RequestDataGrid.ItemsSource = requests;
+
+
+
             // ---------------------employee databace info ------------------------------
             EmployeeInfomatic = new EmployeeInfomation
             {
@@ -804,6 +848,17 @@ namespace HRM.View
         public String Phone { get; set; }
         public Brush BgColor { get; set; }
 
+    }
+
+    public class Request
+    {
+        public int No { get; set; }
+        public String EmployeeName { get; set; }
+        public String EmployeePosition { get; set; }
+        public String LeaveDate { get; set; }
+        public String LeaveType { get; set; }
+        public String Reason { get; set; }
+        public String State { get; set; }
     }
 
     // --------------------------employee databace info ------------------------

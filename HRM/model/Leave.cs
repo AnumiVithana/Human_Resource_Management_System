@@ -12,7 +12,7 @@ namespace HRM.Model
         public int employee_id;
         public string leave_type = "";
         public string reason = "";
-        public Byte status;
+        public string status;
         public string dateRequested = "";
         
      

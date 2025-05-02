@@ -21,7 +21,7 @@ namespace HRM.Repositories
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
-                    string sql = "INSERT INTO attendance (id ,Date, employee_id, CheckInTime, CheckOutTime, WorkedHours, Description)"+ 
+                    string sql = "INSERT INTO attendance (id ,Date, employee_id, CheckInTime, CheckOutTime, WorkedHours, Description)" +
                         "VALUES (@id, @date, @employeeId, @checkInTime, @checkOutTime, @workedHovers, @description)";
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
@@ -32,7 +32,7 @@ namespace HRM.Repositories
                         command.Parameters.AddWithValue("@checkOutTime", attendance.checkOutTime);
                         command.Parameters.AddWithValue("@workedHovers", attendance.workedHovers);
                         command.Parameters.AddWithValue("@description", attendance.description);
-                        
+
                         command.ExecuteNonQuery();
                     }
                 }
@@ -93,5 +93,42 @@ namespace HRM.Repositories
             }
         }
 
+        public List<Leave> GetLeaves()
+        {
+            var leaves = new List<Leave>();
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    string sql = "SELECT * FROM RequestLeave ORDER BY id DESC";
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                var leave = new Leave
+                                {
+                                    id = reader.GetInt32(0),
+                                    employee_id = reader.GetInt32(1),
+                                    leave_type = reader.GetString(2),
+                                    reason = reader.GetString(3),
+                                    status = null,
+                                    dateRequested = reader.GetString(5)
+                                };
+                                leaves.Add(leave);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error retrieving leaves: " + ex.Message);
+            }
+            return leaves;
+
+        }
     }
 }
