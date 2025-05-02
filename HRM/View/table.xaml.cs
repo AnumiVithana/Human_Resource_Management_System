@@ -301,7 +301,7 @@ namespace HRM.View
             EventButton.Background = System.Windows.Media.Brushes.Transparent;
             DashBoardButton.Background = System.Windows.Media.Brushes.Transparent;
             MembersButton.Background = System.Windows.Media.Brushes.Transparent;
-            PerformanceButton.Background = System.Windows.Media.Brushes.Transparent;
+            
             SalaryButton.Background = System.Windows.Media.Brushes.Transparent;
             RequestLeaveButton.Background = System.Windows.Media.Brushes.Transparent;
             DashBoardButton.Background = System.Windows.Media.Brushes.White;
@@ -332,7 +332,7 @@ namespace HRM.View
             EventButton.Background = System.Windows.Media.Brushes.White;
             DashBoardButton.Background = System.Windows.Media.Brushes.Transparent;
             MembersButton.Background = System.Windows.Media.Brushes.Transparent;
-            PerformanceButton.Background = System.Windows.Media.Brushes.Transparent;
+           
             SalaryButton.Background = System.Windows.Media.Brushes.Transparent;
             RequestLeaveButton.Background = System.Windows.Media.Brushes.Transparent;
             DashBoardButton.Background = System.Windows.Media.Brushes.Transparent;
@@ -355,7 +355,7 @@ namespace HRM.View
             EventButton.Background = System.Windows.Media.Brushes.Transparent;
             DashBoardButton.Background = System.Windows.Media.Brushes.White;
             MembersButton.Background = System.Windows.Media.Brushes.Transparent;
-            PerformanceButton.Background = System.Windows.Media.Brushes.Transparent;
+           
             SalaryButton.Background = System.Windows.Media.Brushes.Transparent;
             RequestLeaveButton.Background = System.Windows.Media.Brushes.Transparent;
             DashBoardButton.Background = System.Windows.Media.Brushes.Transparent;
@@ -378,7 +378,7 @@ namespace HRM.View
             EventButton.Background = System.Windows.Media.Brushes.Transparent;
             DashBoardButton.Background = System.Windows.Media.Brushes.Transparent;
             MembersButton.Background = System.Windows.Media.Brushes.White;
-            PerformanceButton.Background = System.Windows.Media.Brushes.Transparent;
+            
             SalaryButton.Background = System.Windows.Media.Brushes.Transparent;
             RequestLeaveButton.Background = System.Windows.Media.Brushes.Transparent;
             DashBoardButton.Background = System.Windows.Media.Brushes.Transparent;
@@ -401,7 +401,7 @@ namespace HRM.View
             EventButton.Background = System.Windows.Media.Brushes.Transparent;
             DashBoardButton.Background = System.Windows.Media.Brushes.Transparent;
             MembersButton.Background = System.Windows.Media.Brushes.Transparent;
-            PerformanceButton.Background = System.Windows.Media.Brushes.White;
+            
             SalaryButton.Background = System.Windows.Media.Brushes.Transparent;
             RequestLeaveButton.Background = System.Windows.Media.Brushes.Transparent;
             DashBoardButton.Background = System.Windows.Media.Brushes.Transparent;
@@ -424,8 +424,7 @@ namespace HRM.View
             EventButton.Background = System.Windows.Media.Brushes.Transparent;
             DashBoardButton.Background = System.Windows.Media.Brushes.Transparent;
             MembersButton.Background = System.Windows.Media.Brushes.Transparent;
-            PerformanceButton.Background = System.Windows.Media.Brushes.Transparent;
-            SalaryButton.Background = System.Windows.Media.Brushes.White;
+            
             RequestLeaveButton.Background = System.Windows.Media.Brushes.Transparent;
             DashBoardButton.Background = System.Windows.Media.Brushes.Transparent;
         }
@@ -447,7 +446,7 @@ namespace HRM.View
             EventButton.Background = System.Windows.Media.Brushes.Transparent;
             DashBoardButton.Background = System.Windows.Media.Brushes.Transparent;
             MembersButton.Background = System.Windows.Media.Brushes.Transparent;
-            PerformanceButton.Background = System.Windows.Media.Brushes.Transparent;
+           
             SalaryButton.Background = System.Windows.Media.Brushes.Transparent;
             RequestLeaveButton.Background = System.Windows.Media.Brushes.White;
             DashBoardButton.Background = System.Windows.Media.Brushes.Transparent;
@@ -470,7 +469,7 @@ namespace HRM.View
             EventButton.Background = System.Windows.Media.Brushes.Transparent;
             DashBoardButton.Background = System.Windows.Media.Brushes.Transparent;
             MembersButton.Background = System.Windows.Media.Brushes.Transparent;
-            PerformanceButton.Background = System.Windows.Media.Brushes.Transparent;
+           
             SalaryButton.Background = System.Windows.Media.Brushes.Transparent;
             RequestLeaveButton.Background = System.Windows.Media.Brushes.Transparent;
             DashBoardButton.Background = System.Windows.Media.Brushes.Transparent;
@@ -540,6 +539,18 @@ namespace HRM.View
             RegisterView registerView = new RegisterView();
             registerView.Show();
             this.Hide();
+
+
+
+        }
+
+
+
+        private void departmentAdd_buttonClick(object sender, RoutedEventArgs e)
+        {
+            AddDepartment addDepartment = new AddDepartment();
+            addDepartment.Show();
+            //this.Close();
         }
 
         //edit profile
@@ -547,7 +558,7 @@ namespace HRM.View
         {
             EditProfile editProfile = new EditProfile(LogedEmployee);
             editProfile.Show();
-            this.Close();
+            //this.Hide();
 
         }
 
