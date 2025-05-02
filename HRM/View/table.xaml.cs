@@ -27,7 +27,7 @@ namespace HRM.View
     public partial class table : Window
     {
         private DateTime? checkInTime = null;
-        private DateTime? checkOutTime = null;
+        //private DateTime? checkOutTime = null;
         public EmployeeInfomation EmployeeInfomatic { get; set; }
         private Employee LogedEmployee;
 
@@ -743,6 +743,22 @@ namespace HRM.View
 
             MessageBox.Show("Leave submitted successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
         }
+
+
+
+
+        // ----------------------------------------------------------------pending request button----------------------------------------------------------------
+
+        private void acceptRequest(object sender, RoutedEventArgs e)
+       {
+            Console.WriteLine("accepted");
+        }
+        private void declineRequest(object sender, RoutedEventArgs e)
+        {
+            Console.WriteLine("decline");
+        }
+
+
 
     }
 
