@@ -131,6 +131,7 @@
     </ApplicationDefinition>
     <Compile Include="Model\Attendance.cs" />
     <Compile Include="Model\Employee.cs" />
+    <Compile Include="Model\Leave.cs" />
     <Compile Include="Repositories\AttendancePayrollRepository.cs" />
     <Compile Include="Repositories\EmployRepository.cs" />
     <Compile Include="View\EditProfile.xaml.cs">

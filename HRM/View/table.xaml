@@ -240,7 +240,7 @@
             
             
             <!-- ..................................................Employee DashBoard..................................................  -->
-            <Grid Grid.Column="1" Margin="30 10 20 20" x:Name="dashBoardGrid" Visibility="Hidden">
+            <Grid Grid.Column="1" Margin="30 10 20 20" x:Name="dashBoardGrid" Visibility="Visible">
                 <Grid.RowDefinitions>
 
                     <RowDefinition Height="auto"/>
@@ -952,7 +952,7 @@ HorizontalAlignment="Left" Foreground="#121518"/>
 
 
             <!--  ..................................................Reauest leave.................................................. -->
-            <Grid x:Name="requestLeaveGrid" Grid.Column="1" Margin="30 10 20 20" Visibility="Visible">
+            <Grid x:Name="requestLeaveGrid" Grid.Column="1" Margin="30 10 20 20" Visibility="Hidden">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -1045,7 +1045,7 @@ HorizontalAlignment="Left" Foreground="#121518"/>
 
 
                     <TextBlock Text="Leave Type:" Grid.Row="0"/>
-                    <ComboBox x:Name="cmbLeaveType" Width="200" Grid.Row="0" Grid.Column="1" SelectedItem="{Binding SelectedLeaveType}" Style="{StaticResource leaveType}">
+                    <ComboBox x:Name="cmbLeaveType" Width="200" Grid.Row="0" Grid.Column="1"  Style="{StaticResource leaveType}">
                         <ComboBoxItem Content="Sick"/>
                         <ComboBoxItem Content="Casual"/>
                     </ComboBox>

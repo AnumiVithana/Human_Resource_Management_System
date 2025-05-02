@@ -192,7 +192,7 @@ namespace HRM.View
             var repo = new AttendancePayrollRepository();
             Attendance attendance = new Attendance
             {
-                id = repo.GetNextRowId(),
+                id = repo.GetNextRowId("attendance"),
                 date = DateTime.Now.ToString("yyyy-MM-dd"),
                 employeeId = LogedEmployee.id,
                 checkInTime = checkInTime.Value.ToString("hh:mm tt"),
@@ -202,16 +202,6 @@ namespace HRM.View
             };
             repo.CreateAttendancerow(attendance);
             
-            //Console.WriteLine(attendance.id.GetTypeCode());
-            //Console.WriteLine(attendance.checkOutTime.GetTypeCode());
-            //Console.WriteLine(attendance.checkInTime.GetTypeCode());
-            //Console.WriteLine(attendance.employeeId.GetTypeCode());
-            //Console.WriteLine(attendance.workedHovers.GetTypeCode());
-            //Console.WriteLine(attendance.description.GetTypeCode());
-            //Console.WriteLine(attendance.date.GetTypeCode());
-            
-
-
 
         }
 
@@ -632,13 +622,39 @@ namespace HRM.View
         //------------------------------------------------------------Salary------------------------------------------------------------
         private void LoadSalaryDetails()
         {
-            // Replace with DB values
+            int hourRate = 150;
+            int serviceFee = 200;
+            int extraLeaves = 2;
+            switch (LogedEmployee.position)
+            {
+                case "Employee":
+                    // Code to execute if variable == value1
+                    hourRate = 150;
+                    serviceFee = 200;
+                    extraLeaves = 2;
+                    break;
+
+                case "Department Head":
+                    hourRate = 150;
+                    serviceFee = 200;
+                    extraLeaves = 2;
+                    // Code to execute if variable == value2
+                    break;
+
+                default:
+                    hourRate = 150;
+                    serviceFee = 200;
+                    extraLeaves = 2;
+                    // Code to execute if no case matches
+                    break;
+            }
+
             SalaryDetails salary = new SalaryDetails
             {
                 Month = "April 2025",
-                HourRate = 150,
-                ServiceFee = 200,
-                ExtraLeaves = 2,
+                HourRate = hourRate,
+                ServiceFee = serviceFee,
+                ExtraLeaves = extraLeaves,
                 BasicSalary = 24000,
                 OTSalary = 5000,
                 LeaveDeduction = 1000,
@@ -742,6 +758,21 @@ namespace HRM.View
             Console.WriteLine($"Leave Request Submitted: {leave.SelectedLeaveType} on {leave.SelectedLeaveDate?.ToShortDateString()} for reason: {leave.LeaveReason}");
 
             MessageBox.Show("Leave submitted successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+
+
+
+            string leaveType = (cmbLeaveType.SelectedItem as ComboBoxItem)?.Content.ToString();
+            Console.WriteLine($"Leave Type: {leaveType}");
+            var repo = new AttendancePayrollRepository();
+            Leave leaveRequest = new Leave
+            {
+                id = repo.GetNextRowId("RequestLeave"),
+                employee_id = LogedEmployee.id,
+                leave_type = leaveType,
+                reason = txtReason.Text,
+                dateRequested = leaveDatePicker.SelectedDate?.ToString("yyyy-MM-dd") // Fix: Use SelectedDate and null-conditional operator
+            };
+            repo.RequestLeave(leaveRequest);
         }
 
     }

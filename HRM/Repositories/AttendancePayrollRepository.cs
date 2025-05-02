@@ -45,14 +45,15 @@ namespace HRM.Repositories
 
         }
 
-        public int GetNextRowId()
+        public int GetNextRowId(string tableName)
         {
             try
             {
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
-                    string sql = "SELECT ISNULL(MAX(id), 0) + 1 FROM Attendance"; // Get the next ID
+
+                    string sql = $"SELECT ISNULL(MAX(id), 0) + 1 FROM {tableName}"; // Use string interpolation to insert table name
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
                         return (int)command.ExecuteScalar();
@@ -63,6 +64,32 @@ namespace HRM.Repositories
             {
                 Console.WriteLine("Exception: " + ex.ToString());
                 return 1; // Default to 1 if there's an error
+            }
+        }
+
+        public void RequestLeave(Leave leave)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    string sql = "INSERT INTO RequestLeave (Id, EmployeeId, LeaveType, Reason, DateRequested) " +
+                        "VALUES (@id, @employeeId, @leaveType, @reason, @dateRequested)";
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        command.Parameters.AddWithValue("@id", leave.id);
+                        command.Parameters.AddWithValue("@employeeId", leave.employee_id);
+                        command.Parameters.AddWithValue("@leaveType", leave.leave_type);
+                        command.Parameters.AddWithValue("@reason", leave.reason);
+                        command.Parameters.AddWithValue("@dateRequested", leave.dateRequested);
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error requesting leave: " + ex.Message);
             }
         }
 
