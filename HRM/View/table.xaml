@@ -88,12 +88,12 @@
 
                             </Button>
 
-                            <Button Style="{StaticResource menuButton}" x:Name="PerformanceButton" Click="PerformanceButton_Click">
+                            <!--<Button Style="{StaticResource menuButton}" x:Name="PerformanceButton" Click="PerformanceButton_Click">
                                 <StackPanel Orientation="Horizontal">
                                     <Icon:PackIconMaterial Kind="Speedometer" Style="{StaticResource menuButtonIcon}"/>
                                     <TextBlock Text="Performance"/>
                                 </StackPanel>
-                            </Button>
+                            </Button>-->
 
                             <Button Style="{StaticResource menuButton}" x:Name="SalaryButton" Click="SalaryButton_Click">
                                 <StackPanel Orientation="Horizontal">
@@ -237,10 +237,10 @@
 
                 </Grid>
             </Grid>
-            
-            
+
+
             <!-- ..................................................Employee DashBoard..................................................  -->
-            <Grid Grid.Column="1" Margin="30 10 20 20" x:Name="dashBoardGrid" Visibility="Hidden">
+            <Grid Grid.Column="1" Margin="30 10 20 20" x:Name="dashBoardGrid" Visibility="Visible">
                 <Grid.RowDefinitions>
 
                     <RowDefinition Height="auto"/>
@@ -251,7 +251,7 @@
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
 
-                
+
 
 
                 <!-- Check-in & Check-out time and total hours -->
@@ -464,7 +464,7 @@
                     </StackPanel>
                 </Grid>
 
-               
+
 
                 <!--
 
@@ -591,7 +591,7 @@
                 </StackPanel>
 
                 <Grid />
-                
+
 
 
 
@@ -619,37 +619,95 @@
             <!--..................................................Admin Dashboard end..................................................-->
 
 
-            <Grid Grid.Column="1" Margin="30 10 20 20" x:Name="eventGrid" Visibility="Hidden">
+
+
+
+            <Grid x:Name="eventGrid" Grid.Column="1" Margin="30 10 20 20" Visibility="Hidden">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
-                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
+                <!-- Title -->
+                <TextBlock Text="Pending Requests" Grid.Row="2" FontSize="32" FontWeight="SemiBold" Margin="0 50 0 10" Foreground="#121518"/>
+                <Separator Grid.Row="3" Height="3" Background="#dae2ea" Margin="0 0 0 20"/>
+
+                <DataGrid Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}"  ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" Grid.Row="5" x:Name="RequestDataGrid" RowStyle="{DynamicResource DataGridRowStyle1}">
+                    <DataGrid.Columns>
+                        <DataGridCheckBoxColumn CanUserResize="False" Width="auto" ElementStyle="{StaticResource CheckBoxStyle1}" Header="Mark" >
+                            <!--    <DataGridCheckBoxColumn.HeaderTemplate>
+    <DataTemplate>
+        <CheckBox Style="{StaticResource CheckBoxStyle1}"/>
+    </DataTemplate>
+</DataGridCheckBoxColumn.HeaderTemplate> -->
+                        </DataGridCheckBoxColumn>
+
+                        <DataGridTextColumn Header="No." IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding Number}"/>
+
+                        <DataGridTemplateColumn Header="Employee Name" IsReadOnly="True" Width="*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Border Width="25" Height="25" CornerRadius="50" Margin="0 0 10 0" Background="{Binding BgColor}">
+                                            <TextBlock Text="{Binding Character}" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Margin="0 0 0 1"/>
+                                        </Border>
+                                        <TextBlock Text="{Binding Name}" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+
+                        </DataGridTemplateColumn>
+
+                        <DataGridTextColumn Header="Position" IsReadOnly="True" Width="*" Binding="{Binding Position}"/>
+                        <DataGridTextColumn Header="Leave Type" IsReadOnly="True" Width="*" Binding="{Binding Position}"/>
+                        <DataGridTextColumn Header="Reason" IsReadOnly="True" Width="*" Binding="{Binding Email}"/>
+
+                        <!-- employee only-->
+                        <DataGridTextColumn Header="Reqest states" IsReadOnly="True" Width="*" Binding="{Binding Email}" Visibility="Hidden"/>
+
+
+                        <!-- addmin only accept request and decline request-->
+                        <DataGridTemplateColumn Header="Operation" IsReadOnly="True" Width="Auto" Visibility="Visible" x:Name="addDeleteColoumn">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" x:Name="operationColom">
+                                        <Button Style="{StaticResource acceptButton}" Click="acceptRequest">
+
+
+                                            <Icon:PackIconMaterial Kind="CheckCircleOutline" Style="{StaticResource gridButtonIcon}"/>
+                                        </Button>
+                                        <Button Style="{StaticResource declineButton}" Click="declineRequest">
+                                            <Icon:PackIconMaterial Kind="CloseCircleOutline" Style="{StaticResource gridButtonIcon}" Margin="0 0 0 0"/>
+                                        </Button>
+
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+
+                        </DataGridTemplateColumn>
 
 
 
-
-                <!--                <Button Style="{StaticResource topButton}" Margin="0 0 20 0" Background="#dcdcdc" HorizontalAlignment="Right">
-                    <Icon:PackIconMaterial Kind="Cog"/>
-                </Button>
-                <Button Style="{StaticResource topButton}" Margin="0 0 55 0" Background="#dcdcdc" HorizontalAlignment="Right">
-                    <Icon:PackIconMaterial Kind="Bell"/>
-                </Button>
--->
-
-                <TextBlock Text="Pending Requests" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="0 60 0 0"
-   HorizontalAlignment="Left" Foreground="#121518"/>
-
-
-
-                <Separator Height="1" Grid.Row="3" Background="#dae2ea" Margin="0 -1 0 10"/>
-
+                    </DataGrid.Columns>
+                </DataGrid>
 
             </Grid>
+
+
+
+
+
+
+
+
 
             <Grid Grid.Column="1" Margin="30 10 20 20" x:Name="departmentGrid" Visibility="Hidden">
                 <Grid.RowDefinitions>
@@ -676,7 +734,7 @@
 
                 <TextBlock Text="Department" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="0 60 0 0"
 HorizontalAlignment="Left" Foreground="#121518"/>
-                <Button Style="{StaticResource addButton}" Click="Button_Click_2" Margin="0,60,0,0" Width=" 200">
+                <Button Style="{StaticResource addButton}" Click="departmentAdd_buttonClick" Margin="0,60,0,0" Width=" 200">
                     <StackPanel Orientation="Horizontal">
                         <Icon:PackIconMaterial Kind="Plus" VerticalAlignment="Center" Width="11" Height="11" Margin="0 1 8 0"/>
                         <TextBlock Text="Add New Department"/>
@@ -685,6 +743,59 @@ HorizontalAlignment="Left" Foreground="#121518"/>
 
 
                 <Separator Height="1" Grid.Row="3" Background="#dae2ea" Margin="0 -1 0 10"/>
+
+
+
+
+                <!--Departments Datagrid-->
+                <DataGrid Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}"  Margin="0,-500,0,0" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" Grid.Row="5" x:Name="departmentDataGrid" RowStyle="{DynamicResource DataGridRowStyle1}">
+                    <DataGrid.Columns>
+                        
+
+                        <DataGridTextColumn Header="No." IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding Number}"/>
+
+                        <DataGridTemplateColumn Header="Department Name" IsReadOnly="True" Width="*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Border Width="25" Height="25" CornerRadius="50" Margin="0 0 10 0" Background="{Binding BgColor}">
+                                            <TextBlock Text="{Binding Character}" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Margin="0 0 0 1"/>
+                                        </Border>
+                                        <TextBlock Text="{Binding Name}" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+
+                        </DataGridTemplateColumn>
+
+                        <DataGridTextColumn Header="No.of Employees" IsReadOnly="True" Width="*" Binding="{Binding Position}"/>
+                        <DataGridTextColumn Header="Email" IsReadOnly="True" Width="*" Binding="{Binding Email}"/>
+                        <DataGridTextColumn Header="Contact Number" IsReadOnly="True" Width="*" Binding="{Binding Phone}"/>
+
+
+                        <DataGridTemplateColumn Header="Operation" IsReadOnly="True" Width="Auto" Visibility="Hidden" x:Name="editDeleteDepartment">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" x:Name="operationColom">
+                                        <Button Style="{StaticResource gridEditButton}" Click="employeeEdit">
+
+
+                                            <Icon:PackIconMaterial Kind="PencilOutline" Style="{StaticResource gridButtonIcon}"/>
+                                        </Button>
+                                        <Button Style="{StaticResource gridRemoveButton}" Click="employeeDelete">
+                                            <Icon:PackIconMaterial Kind="DeleteOutline" Style="{StaticResource gridButtonIcon}" Margin="0 0 0 0"/>
+                                        </Button>
+
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+
+                        </DataGridTemplateColumn>
+
+
+
+                    </DataGrid.Columns>
+                </DataGrid>
 
 
             </Grid>
@@ -829,10 +940,10 @@ HorizontalAlignment="Left" Foreground="#121518"/>
                 </Border> -->
 
             </Grid>
-            
-            <!-- ..................................................perfomance.................................................. -->
+
+            <!--..................................................perfomance.................................................. -->
             <Grid Grid.Column="1" Margin="30 10 20 20" x:Name="performanceGrid" Visibility="Hidden">
-                
+
                 <Grid.RowDefinitions>
 
                     <RowDefinition Height="auto"/>
@@ -844,7 +955,7 @@ HorizontalAlignment="Left" Foreground="#121518"/>
                 </Grid.RowDefinitions>
 
 
-                <!--
+               <!--
 
                 <Button Style="{StaticResource topButton}" Margin="0 0 20 0" Background="#dcdcdc" HorizontalAlignment="Right">
                     <Icon:PackIconMaterial Kind="Cog"/>
@@ -868,10 +979,10 @@ HorizontalAlignment="Left" Foreground="#121518"/>
             <!-- ..................................................Salary page.................................................. -->
             <Grid Grid.Column="1" Margin="30 10 20 20" x:Name="salaryGrid" Visibility="Hidden">
 
-                
-                
-                
-                
+
+
+
+
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -912,7 +1023,7 @@ HorizontalAlignment="Left" Foreground="#121518"/>
      <Button Style="{StaticResource topButton}" Margin="0 0 55 0" Background="#dcdcdc" HorizontalAlignment="Right">
          <Icon:PackIconMaterial Kind="Bell"/>
      </Button> -->
-                    
+
                     <!-- Fields -->
                     <TextBlock Text="Month:" Grid.Row="0" Margin="0 5"/>
                     <TextBlock Text="{Binding Path=Month}" Grid.Row="0" Grid.Column="1" Margin="5 5"/>
@@ -949,10 +1060,10 @@ HorizontalAlignment="Left" Foreground="#121518"/>
 
 
 
-               
-                
-                
-                
+
+
+
+
             </Grid>
 
 
@@ -1013,8 +1124,8 @@ HorizontalAlignment="Left" Foreground="#121518"/>
 
                     <TextBlock Text="               Casual Leaves: " Grid.Row="5" Margin="0 5"/>
                     <TextBlock Text="{Binding LeaveTakenCasual}" Grid.Row="5" Grid.Column="1" Margin="5 5"/>
-                    
-                    
+
+
                     <!-- Remaining Leave -->
                     <TextBlock Text="Remaining Leaves" FontWeight="Bold" Grid.Row="6" Margin="0 10 0 0"/>
                     <TextBlock Text="               Sick Leaves: " Grid.Row="7" Margin="0 5"/>
@@ -1064,91 +1175,14 @@ HorizontalAlignment="Left" Foreground="#121518"/>
 
                 <!-- Submit Button -->
                 <Button Grid.Row="7" Content="Send Leave Request" Style="{StaticResource requestButton}" Click="SubmitLeave_Click" Margin="-20 10 0 0" HorizontalAlignment="Center" />
-        </Grid>
+            </Grid>
 
 
 
 
 
             <!--  ..................................................Reauest  pending leave admin and emloyee.................................................. -->
-            <Grid x:Name="pendingLeaveGrid" Grid.Column="1" Margin="30 10 20 20" Visibility="Visible">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <!-- Title -->
-                <TextBlock Text="Request Leave" Grid.Row="2" FontSize="32" FontWeight="SemiBold" Margin="0 50 0 10" Foreground="#121518"/>
-                <Separator Grid.Row="3" Height="3" Background="#dae2ea" Margin="0 0 0 20"/>
-                
-                <DataGrid Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}"  ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" Grid.Row="5" x:Name="RequestDataGrid" RowStyle="{DynamicResource DataGridRowStyle1}">
-                    <DataGrid.Columns>
-                        <DataGridCheckBoxColumn CanUserResize="False" Width="auto" ElementStyle="{StaticResource CheckBoxStyle1}" Header="Mark" >
-                            <!--    <DataGridCheckBoxColumn.HeaderTemplate>
-                <DataTemplate>
-                    <CheckBox Style="{StaticResource CheckBoxStyle1}"/>
-                </DataTemplate>
-            </DataGridCheckBoxColumn.HeaderTemplate> -->
-                        </DataGridCheckBoxColumn>
 
-                        <DataGridTextColumn Header="No." IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding Number}"/>
-
-                        <DataGridTemplateColumn Header="Employee Name" IsReadOnly="True" Width="*">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Border Width="25" Height="25" CornerRadius="50" Margin="0 0 10 0" Background="{Binding BgColor}">
-                                            <TextBlock Text="{Binding Character}" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Margin="0 0 0 1"/>
-                                        </Border>
-                                        <TextBlock Text="{Binding Name}" VerticalAlignment="Center"/>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-
-                        </DataGridTemplateColumn>
-
-                        <DataGridTextColumn Header="Position" IsReadOnly="True" Width="*" Binding="{Binding Position}"/>
-                        <DataGridTextColumn Header="Leave Type" IsReadOnly="True" Width="*" Binding="{Binding Position}"/>
-                        <DataGridTextColumn Header="Reason" IsReadOnly="True" Width="*" Binding="{Binding Email}"/>
-                        
-                        <!-- employee only-->
-                        <DataGridTextColumn Header="Reqest states" IsReadOnly="True" Width="*" Binding="{Binding Email}" Visibility="Hidden"/>
-
-
-                        <!-- addmin only accept request and decline request-->
-                        <DataGridTemplateColumn Header="Operation" IsReadOnly="True" Width="Auto" Visibility="Visible" x:Name="addDeleteColoumn">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal" x:Name="operationColom">
-                                        <Button Style="{StaticResource acceptButton}" Click="acceptRequest">
-
-
-                                            <Icon:PackIconMaterial Kind="CheckCircleOutline" Style="{StaticResource gridButtonIcon}"/>
-                                        </Button>
-                                        <Button Style="{StaticResource declineButton}" Click="declineRequest">
-                                            <Icon:PackIconMaterial Kind="CloseCircleOutline" Style="{StaticResource gridButtonIcon}" Margin="0 0 0 0"/>
-                                        </Button>
-
-                                    </StackPanel>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-
-                        </DataGridTemplateColumn>
-
-
-
-                    </DataGrid.Columns>
-                </DataGrid>
-
-            </Grid>
 
 
 
