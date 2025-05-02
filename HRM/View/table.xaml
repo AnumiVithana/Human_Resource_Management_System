@@ -488,7 +488,7 @@
 
 
             <!--..................................................Admin Dashboard..................................................-->
-            <Grid Grid.Column="1" Margin="30 10 20 20" x:Name="dashBoardAdminGrid" Visibility="Hidden">
+            <Grid Grid.Column="2" Margin="30 10 20 20" x:Name="dashBoardAdminGrid" Visibility="Hidden">
                 <Grid.RowDefinitions>
 
                     <RowDefinition Height="auto"/>
@@ -676,7 +676,12 @@
 
                 <TextBlock Text="Department" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="0 60 0 0"
 HorizontalAlignment="Left" Foreground="#121518"/>
-
+                <Button Style="{StaticResource addButton}" Click="Button_Click_2" Margin="0,60,0,0" Width=" 200">
+                    <StackPanel Orientation="Horizontal">
+                        <Icon:PackIconMaterial Kind="Plus" VerticalAlignment="Center" Width="11" Height="11" Margin="0 1 8 0"/>
+                        <TextBlock Text="Add New Department"/>
+                    </StackPanel>
+                </Button>
 
 
                 <Separator Height="1" Grid.Row="3" Background="#dae2ea" Margin="0 -1 0 10"/>
@@ -951,8 +956,8 @@ HorizontalAlignment="Left" Foreground="#121518"/>
             </Grid>
 
 
-            <!--  ..................................................Reauest leave.................................................. -->
-            <Grid x:Name="requestLeaveGrid" Grid.Column="1" Margin="30 10 20 20" Visibility="Visible">
+            <!--  ..................................................Request leave.................................................. -->
+            <Grid x:Name="requestLeaveGrid" Grid.Column="1" Margin="30 10 20 20" Visibility="Hidden">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -994,32 +999,32 @@ HorizontalAlignment="Left" Foreground="#121518"/>
                     </Grid.ColumnDefinitions>
 
                     <!-- Leave Per Month -->
-                    <TextBlock Text="Leave Per Month" FontWeight="Bold" Grid.Row="0" Margin="0 5"/>
-                    <TextBlock Text="               Sick Leave: " Grid.Row="1" Margin="0 5"/>
+                    <TextBlock Text="Leaves Per Month" FontWeight="Bold" Grid.Row="0" Margin="0 5"/>
+                    <TextBlock Text="               Sick Leaves: " Grid.Row="1" Margin="0 5"/>
                     <TextBlock Text="{Binding LeavePerMonthSick}" Grid.Row="1" Grid.Column="1" Margin="5 5"/>
 
-                    <TextBlock Text="               Casual Leave: " Grid.Row="2" Margin="0 5"/>
+                    <TextBlock Text="               Casual Leaves: " Grid.Row="2" Margin="0 5"/>
                     <TextBlock Text="{Binding LeavePerMonthCasual}" Grid.Row="2" Grid.Column="1" Margin="5 5"/>
 
                     <!-- Leave Taken -->
-                    <TextBlock Text="Leave Taken" FontWeight="Bold" Grid.Row="3" Margin="0 5"/>
-                    <TextBlock Text="               Sick Leave: " Grid.Row="4" Margin="0 5"/>
+                    <TextBlock Text="Leaves Taken" FontWeight="Bold" Grid.Row="3" Margin="0 5"/>
+                    <TextBlock Text="               Sick Leaves: " Grid.Row="4" Margin="0 5"/>
                     <TextBlock Text="{Binding LeaveTakenSick}" Grid.Row="4" Grid.Column="1" Margin="5 5"/>
 
-                    <TextBlock Text="               Casual Leave: " Grid.Row="5" Margin="0 5"/>
+                    <TextBlock Text="               Casual Leaves: " Grid.Row="5" Margin="0 5"/>
                     <TextBlock Text="{Binding LeaveTakenCasual}" Grid.Row="5" Grid.Column="1" Margin="5 5"/>
                     
                     
                     <!-- Remaining Leave -->
                     <TextBlock Text="Remaining Leaves" FontWeight="Bold" Grid.Row="6" Margin="0 10 0 0"/>
-                    <TextBlock Text="               Sick Leave: " Grid.Row="7" Margin="0 5"/>
+                    <TextBlock Text="               Sick Leaves: " Grid.Row="7" Margin="0 5"/>
                     <TextBlock Text="{Binding RemainingSick}" Grid.Row="7" Grid.Column="1" Margin="5 5"/>
 
-                    <TextBlock Text="               Casual Leave: " Grid.Row="8" Margin="0 5"/>
+                    <TextBlock Text="               Casual Leaves: " Grid.Row="8" Margin="0 5"/>
                     <TextBlock Text="{Binding RemainingCasual}" Grid.Row="8" Grid.Column="1" Margin="5 5"/>
                 </Grid>
 
-                <TextBlock Text="Leave Taken" TextAlignment="Center" Grid.Row="5" FontSize="14" FontWeight="Bold" Margin="0 5"/>
+                <TextBlock Text="Request a Leave"  Grid.Row="5" FontSize="14" FontWeight="Bold" Margin="0 20 0 0"/>
                 <!-- Leave Request Form -->
                 <Grid Grid.Row="6" Margin="0 10 0 0">
                     <Grid.RowDefinitions>
@@ -1044,21 +1049,21 @@ HorizontalAlignment="Left" Foreground="#121518"/>
                     </Grid.ColumnDefinitions>
 
 
-                    <TextBlock Text="Leave Type:" Grid.Row="0"/>
-                    <ComboBox x:Name="cmbLeaveType" Width="200" Grid.Row="0" Grid.Column="1" SelectedItem="{Binding SelectedLeaveType}" Style="{StaticResource leaveType}">
+                    <TextBlock Text="                       Leave Type:" Grid.Row="0" Margin="0 10 0 0"/>
+                    <ComboBox x:Name="cmbLeaveType" Width="200" Grid.Row="0" Grid.Column="1" SelectedItem="{Binding SelectedLeaveType}" Style="{StaticResource leaveType}" HorizontalAlignment= "Left">
                         <ComboBoxItem Content="Sick"/>
                         <ComboBoxItem Content="Casual"/>
                     </ComboBox>
 
-                    <TextBlock Text="Leave Date:" Margin="0 10 0 0" Grid.Row="1"/>
-                    <DatePicker x:Name="leaveDatePicker" Width="200" Grid.Row="1" Grid.Column="1"  SelectedDate="{Binding SelectedLeaveDate}" Style="{StaticResource datePicker}"/>
+                    <TextBlock Text="                       Leave Date:" Margin="0 10 0 0" Grid.Row="1"/>
+                    <DatePicker x:Name="leaveDatePicker" Width="200" Grid.Row="1" Grid.Column="1"  SelectedDate="{Binding SelectedLeaveDate}" Style="{StaticResource datePicker}" HorizontalAlignment="Left"/>
 
-                    <TextBlock Text="Reason:" Margin="0 10 0 0" Grid.Row="2"/>
-                    <TextBox x:Name="txtReason" Width="400" Height="80" Grid.Row="2" Grid.Column="1"  TextWrapping="Wrap" Text="{Binding LeaveReason}" Style="{StaticResource notesBlock}"/>
+                    <TextBlock Text="                       Reason:" Margin="0 10 0 0" Grid.Row="2"/>
+                    <TextBox x:Name="txtReason" Width="400" Height="60" Grid.Row="2" Grid.Column="1"  TextWrapping="Wrap" Text="{Binding LeaveReason}" Style="{StaticResource notesBlock}" HorizontalAlignment="Left"/>
                 </Grid>
 
                 <!-- Submit Button -->
-                <Button Grid.Row="7" Content="Send Leave Request" Style="{StaticResource requestButton}" Click="SubmitLeave_Click"  />
+                <Button Grid.Row="7" Content="Send Leave Request" Style="{StaticResource requestButton}" Click="SubmitLeave_Click" Margin="-20 10 0 0" HorizontalAlignment="Center" />
         </Grid>
 
 
