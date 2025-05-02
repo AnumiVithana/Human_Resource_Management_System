@@ -128,7 +128,29 @@ namespace HRM.Repositories
                 Console.WriteLine("Error retrieving leaves: " + ex.Message);
             }
             return leaves;
+        }
 
+        public void UpdateRequestState(int RequestId , string state)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    string sql = "UPDATE RequestLeave SET Status=@status WHERE Id=@id";
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        command.Parameters.AddWithValue("@id", RequestId);
+                        command.Parameters.AddWithValue("status", state);
+                        command.ExecuteNonQuery();
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception: " + ex.ToString());
+            }
         }
     }
 }

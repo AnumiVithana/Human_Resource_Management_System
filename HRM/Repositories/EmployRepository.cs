@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Security.Cryptography.X509Certificates;
 using HRM.models;
+using HRM.Model;
 
 
 namespace HRM.Repositories
@@ -290,6 +291,49 @@ namespace HRM.Repositories
             }
 
             return false; // Ensure a return value for all code paths
+        }
+
+
+
+
+        public List<Department> GetDepartment()
+        {
+            var departments = new List<Department>();
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    //string sql = "SELECT * FROM employees ORDER BY id DESC";
+                    string sql = "SELECT DepartmentID, Name, EmployeeCount, Email, Contact FROM Department ORDER BY EmployeeID DESC";
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        using (SqlDataReader reader = command.ExecuteReader())
+
+                            while (reader.Read())
+                            {
+                                var department = new Department
+                                {
+
+                                    DepartmentId = reader.GetInt32(0),
+                                    Name = reader.GetString(1),
+                                    EmployeeCount = reader.GetInt32(2),
+                                    Email = reader.GetString(3),
+                                    Contact = reader.GetString(4)
+
+                                };
+                                departments.Add(department);
+
+                            }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception: " + ex.ToString());
+            }
+            return departments;
         }
 
 

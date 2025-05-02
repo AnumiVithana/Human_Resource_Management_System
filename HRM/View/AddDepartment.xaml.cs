@@ -1,4 +1,6 @@
-﻿using System;
+﻿using HRM.Model;
+using HRM.Repositories;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -60,7 +62,41 @@ namespace HRM.View
 
         private void addDepartmentButton_Click(object sender, RoutedEventArgs e)
         {
+            string name = departmentName.Text;
+            string email = departmentEmail.Text;
+            string contact = departmentNumber.Text;
+            int employeeCount = int.Parse(departmentCount.Text);
 
+            if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(email) ||
+                string.IsNullOrWhiteSpace(contact))
+            {
+                MessageBox.Show("Please fill in all fields.", "Validation Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            // Validate email
+            if (!IsValidEmail(email))
+            {
+                MessageBox.Show("Please enter a valid email address.", "Validation Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            AttendancePayrollRepository attendancePayrollRepository = new AttendancePayrollRepository();
+            DepartmentRepository departmentRepository = new DepartmentRepository();
+            Department newDepartment = new Department
+            {
+                DepartmentId = departmentRepository.GetNextEmployId(),
+                Name = name,
+                Email = email,
+                EmployeeCount = employeeCount,
+                Contact = contact
+            };
+            DepartmentRepository repoi = new DepartmentRepository();
+            repoi.CreateDepartment(newDepartment);
+
+            MessageBox.Show("Department created successfully!");
+            MessageBox.Show(attendancePayrollRepository.GetNextRowId("Department").ToString());
+
+            this.Close();
         }
     }
 }

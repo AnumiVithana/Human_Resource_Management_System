@@ -78,6 +78,24 @@ namespace HRM.View
             }
             memberDataGrid.ItemsSource = members;
 
+
+            ObservableCollection<Department222> Departments = new ObservableCollection<Department222>();
+            var reop = new DepartmentRepository();
+            var departmentList = repo.GetDepartment();
+            foreach (var department in departmentList)
+            {
+                Departments.Add(new Department222
+                {
+                    Number = department.DepartmentId,
+                    Name = department.Name,
+                    Email = department.Email,
+                    Position = department.EmployeeCount,
+                    Phone = department.Contact,
+                });
+            }
+            departmentDataGrid.ItemsSource = Departments;
+
+
             ObservableCollection<Request> requests = new ObservableCollection<Request>();
             var Repo = new AttendancePayrollRepository();
             var leaveRequests = Repo.GetLeaves();
@@ -113,15 +131,14 @@ namespace HRM.View
                         Reason = leave.reason,
                         State = status,
                         LeaveType = leave.leave_type
-
+                        
 
 
                     });
             }
             RequestDataGrid.ItemsSource = requests;
 
-
-
+            
             // ---------------------employee databace info ------------------------------
             EmployeeInfomatic = new EmployeeInfomation
             {
@@ -336,6 +353,14 @@ namespace HRM.View
             SalaryButton.Background = System.Windows.Media.Brushes.Transparent;
             RequestLeaveButton.Background = System.Windows.Media.Brushes.Transparent;
             DashBoardButton.Background = System.Windows.Media.Brushes.Transparent;
+
+            if (LogedEmployee.position == "Admin")
+            {
+                addDeleteColoumn.Visibility = Visibility.Visible;
+            }
+          
+          
+
         }
 
         private void DepartmentButton_Click(object sender, RoutedEventArgs e)
@@ -543,7 +568,7 @@ namespace HRM.View
 
 
         }
-
+        
 
 
         private void departmentAdd_buttonClick(object sender, RoutedEventArgs e)
@@ -561,6 +586,111 @@ namespace HRM.View
             //this.Hide();
 
         }
+
+
+
+
+
+
+        // ----------------------------------------------------------------pending request button----------------------------------------------------------------
+
+        private void acceptRequest(object sender, RoutedEventArgs e)
+        {
+            var repo = new EmployRepository();
+            var Repositories = new AttendancePayrollRepository();
+
+
+            if (RequestDataGrid.SelectedItem is Request selectedRequest)
+            {
+                
+                Repositories.UpdateRequestState(selectedRequest.No, "1");
+                ObservableCollection<Request> requests = new ObservableCollection<Request>();
+
+
+
+                
+
+
+
+
+
+
+                //ObservableCollection<Request> requests = new ObservableCollection<Request>();
+                //var Repo = new AttendancePayrollRepository();
+                var leaveRequests = Repositories.GetLeaves();
+
+                //var Repo2 = new EmployRepository();
+                string status = "";
+
+                foreach (var leave3 in leaveRequests)
+                {
+                    var Employee = repo.GetEmploy(leave3.employee_id);
+                    if (leave3.status == "1")
+                    {
+                        status = "Approved";
+                    }
+                    else if (leave3.status == "0")
+                    {
+                        status = "Declined";
+                    }
+                    else if (leave3.status == null)
+                    {
+                        status = "Pending";
+                    }
+                    requests.Add(new Request
+                    {
+                        No = leave3.id,
+                        EmployeeName = Employee.first_name + " " + Employee.last_name,
+                        EmployeePosition = Employee.position,
+                        LeaveDate = leave3.dateRequested,
+                        Reason = leave3.reason,
+                        State = status,
+                        LeaveType = leave3.leave_type
+
+
+
+                    });
+                }
+                RequestDataGrid.ItemsSource = requests;
+
+
+
+
+
+
+
+
+
+
+
+            }
+            else
+            {
+                MessageBox.Show("No member is selected.");
+            }
+
+
+        }
+        private void declineRequest(object sender, RoutedEventArgs e)
+        {
+            var repo = new EmployRepository();
+            var Repositories = new AttendancePayrollRepository();
+
+            if (RequestDataGrid.SelectedItem is Request selectedRequest)
+            {
+                Repositories.UpdateRequestState(selectedRequest.No, "0");
+            }
+            else
+            {
+                MessageBox.Show("No member is selected.");
+            }
+
+        }
+
+
+
+
+
 
         // ----- employeee edit button --------
         private void employeeEdit(object sender, RoutedEventArgs e)
@@ -828,21 +958,58 @@ namespace HRM.View
                 dateRequested = leaveDatePicker.SelectedDate?.ToString("yyyy-MM-dd") // Fix: Use SelectedDate and null-conditional operator
             };
             repo.RequestLeave(leaveRequest);
+
+
+            ObservableCollection<Request> requests = new ObservableCollection<Request>();
+            var Repo = new AttendancePayrollRepository();
+            var leaveRequests = Repo.GetLeaves();
+
+            var Repo2 = new EmployRepository();
+            string status = "";
+
+            foreach (var leave2 in leaveRequests)
+            {
+                var Employee = Repo2.GetEmploy(leave2.employee_id);
+                if (leave2.status == "1")
+                {
+                    status = "Approved";
+                }
+                else if (leave2.status == "0")
+                {
+                    status = "Declined";
+                }
+                else if (leave2.status == null)
+                {
+                    status = "Pending";
+                }
+                else
+                {
+                    status = "Unknown";
+                }
+
+                requests.Add(new Request
+                {
+                    No = leave2.id,
+                    EmployeeName = Employee.first_name + " " + Employee.last_name,
+                    EmployeePosition = Employee.position,
+                    LeaveDate = leave2.dateRequested,
+                    Reason = leave2.reason,
+                    State = status,
+                    LeaveType = leave2.leave_type
+
+
+
+                });
+            }
+            RequestDataGrid.ItemsSource = requests;
+
+
+
         }
 
 
 
 
-        // ----------------------------------------------------------------pending request button----------------------------------------------------------------
-
-        private void acceptRequest(object sender, RoutedEventArgs e)
-       {
-            Console.WriteLine("accepted");
-        }
-        private void declineRequest(object sender, RoutedEventArgs e)
-        {
-            Console.WriteLine("decline");
-        }
 
 
 
@@ -870,6 +1037,20 @@ namespace HRM.View
         public String LeaveType { get; set; }
         public String Reason { get; set; }
         public String State { get; set; }
+        public int EmployeeId { get; set; }
+    }
+
+
+    public class Department222
+    {
+        public int Number { get; set; }
+        public string Name { get; set; }
+        public int Position { get; set; }
+        public string Email { get; set; }
+        public string Phone { get; set; }
+
+
+
     }
 
     // --------------------------employee databace info ------------------------
